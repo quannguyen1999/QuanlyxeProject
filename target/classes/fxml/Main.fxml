@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1320.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MainController">
+   <left>
+      <VBox prefHeight="761.0" prefWidth="292.0" styleClass="sidebar" stylesheets="@../css/application.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="18.0" prefWidth="280.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></HBox>
+            <Label prefHeight="48.0" prefWidth="280.0" text="Danh mục" textFill="WHITE">
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <JFXButton alignment="BASELINE_LEFT" onAction="#btnQuanLyTaiKhoan" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Quản lý tài khoản" textFill="#c3baba">
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" onAction="#btnQuanLyNhanVien" prefHeight="74.0" prefWidth="298.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Quản lý nhân viên" textFill="#c3baba">
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="BASELINE_LEFT" onAction="#btnDangXuat" prefHeight="68.0" prefWidth="315.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Đăng xuất" textFill="#c3baba">
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <top>
+      <HBox alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="1000.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="mnb" prefHeight="39.0" prefWidth="318.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
+              <menus>
+                <Menu mnemonicParsing="false" text="Menu">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#btnThongTinNguoiDung" text="Thông tin người dùng" />
+                        <MenuItem mnemonicParsing="false" styleClass=".menu" text="Giới thiệu" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Thoát" />
+                     </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Trợ giúp">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </MenuBar>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="1360.0" stylesheets="@../css/application.css" text="Ứng dụng quản lý xe máy honda" textFill="#eeeeee">
+               <font>
+                  <Font name="Calibri Light" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <BorderPane fx:id="bd" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

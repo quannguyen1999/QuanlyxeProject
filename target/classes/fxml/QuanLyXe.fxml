@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="675.0" prefWidth="1016.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="1027.0" style="-fx-background-color: #89DBEC;" text="Quản lý xe" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="24.0" />
+         </font>
+      </Label>
+      <BorderPane layoutY="94.0" prefHeight="581.0" prefWidth="1027.0">
+         <bottom>
+            <AnchorPane prefHeight="104.0" prefWidth="1005.0" style="-fx-background-color: #979292;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
+                  <Label layoutX="75.0" layoutY="14.0" text="Tìm theo mã xe">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <JFXButton layoutX="927.0" layoutY="-4.0" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </bottom>
+         <right>
+            <VBox alignment="CENTER" prefHeight="470.0" prefWidth="101.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Thêm" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Xóa" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Hủy" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </right>
+         <center>
+            <TableView prefHeight="470.0" prefWidth="891.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="113.0" text="Mã xe" />
+                <TableColumn prefWidth="117.0" text="tên xe" />
+                  <TableColumn prefWidth="123.0" text="Đơn vị tính" />
+                  <TableColumn prefWidth="151.0" text="Mô tả" />
+                  <TableColumn prefWidth="177.0" text="Nhà sản xuất" />
+                  <TableColumn prefWidth="244.0" text="Thông tin bảo hành" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

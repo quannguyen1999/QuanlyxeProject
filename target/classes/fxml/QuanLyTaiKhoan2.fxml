@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="675.0" prefWidth="1016.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.QuanLyTaiKhoanController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="1027.0" style="-fx-background-color: #95204E;" text="Quản lý tài khoản " textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="24.0" />
+         </font>
+      </Label>
+      <BorderPane layoutY="94.0" prefHeight="581.0" prefWidth="1027.0">
+         <bottom>
+            <AnchorPane prefHeight="104.0" prefWidth="1005.0" style="-fx-background-color: #979292;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
+                  <Label layoutX="75.0" layoutY="14.0" text="Tìm theo mã ">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <JFXButton layoutX="927.0" layoutY="-4.0" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </bottom>
+         <right>
+            <VBox alignment="CENTER" prefHeight="470.0" prefWidth="101.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton onAction="#btnNhapThongTinTaiKhoan" prefHeight="25.0" prefWidth="107.0" text="Thêm" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Xóa" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Hủy" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </right>
+         <center>
+            <TableView prefHeight="470.0" prefWidth="891.0" BorderPane.alignment="CENTER">
+              <columns>
+                  <TableColumn prefWidth="166.0" style="-fx-text-fill: black; -fx-fill: black;" text="UserName" />
+                  <TableColumn prefWidth="196.0" text="Password" />
+                  <TableColumn prefWidth="188.0" text="Loại tài khoản" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

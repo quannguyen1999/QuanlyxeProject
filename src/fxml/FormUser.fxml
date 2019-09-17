@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="bd" prefHeight="591.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.FormUserController">
+   <center>
+      <BorderPane prefHeight="656.0" prefWidth="0.0">
+         <center>
+            <AnchorPane prefHeight="651.0" prefWidth="912.0" style="-fx-background-color: rgb(58,69,88);" styleClass="sidebar" stylesheets="@../../../DeAnQuanLyXe/src/css/application.css">
+               <children>
+                  <ImageView fitHeight="94.0" fitWidth="188.0" layoutX="376.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/demon.PNG" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="236.0" layoutY="147.0" prefHeight="485.0" prefWidth="450.0">
+                     <children>
+                        <HBox prefHeight="76.0" prefWidth="450.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="71.0" prefWidth="450.0" text="Thông tin người dùng" textFill="#ebebeb">
+                                 <font>
+                                    <Font name="Calibri Light" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="100.0" text="Họ tên :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="27.0" prefWidth="231.0" text="Nguyễn Đặng Anh Quân" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Chức vụ :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="24.0" prefWidth="231.0" text="admin" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Địa chỉ :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="24.0" prefWidth="231.0" text="33/16" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Điện thoại :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="24.0" prefWidth="231.0" text="0905360" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Giới tính :" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="24.0" prefWidth="231.0" text="nam" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <JFXButton onAction="#btnDoiMatKhau" prefHeight="75.0" prefWidth="450.0" style="-fx-border-color: white;" text="Đổi mật khẩu" textFill="#c9c8c8">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton onAction="#btnQuayLai" prefHeight="75.0" prefWidth="450.0" style="-fx-border-color: white;" text="Đăng xuất" textFill="#c9c8c8">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton onAction="#btnCLoseWindow" prefHeight="75.0" prefWidth="450.0" style="-fx-border-color: white;" text="Thoát" textFill="#c9c8c8">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="912.0" style="-fx-background-color: rgb(23,35,51);">
+                     <children>
+                        <AnchorPane prefHeight="43.0" prefWidth="929.0">
+                           <children>
+                              <JFXButton layoutY="8.0" onAction="#btnQuayLai" prefHeight="35.0" prefWidth="41.0" text="quiay lại" textFill="#172333" />
+                              <JFXButton layoutX="878.0" layoutY="5.0" onAction="#btnCLoseWindow" text="X" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

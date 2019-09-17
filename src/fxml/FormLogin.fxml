@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="480.0" styleClass="login" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.LoginController">
+   <children>
+      <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="600.0">
+         <children>
+            <JFXButton onAction="#btnHideWindow" text="_" textFill="WHITE">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton onAction="#btnCLoseWindow" text="X" textFill="WHITE">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-user-47%20(1).png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </ImageView>
+            <JFXTextField fx:id="txtUser" alignment="TOP_LEFT" focusColor="WHITE" prefHeight="25.0" prefWidth="304.0" promptText="   Username" style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;" unFocusColor="WHITE">
+               <font>
+                  <Font name="Calibri" size="15.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </JFXTextField>
+         </children>
+         <VBox.margin>
+            <Insets bottom="30.0" top="30.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="36.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-lock-47%20(1).png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </ImageView>
+            <JFXPasswordField fx:id="txtPass" focusColor="WHITE" prefHeight="25.0" prefWidth="308.0" promptText="    Password" style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;" unFocusColor="#fffbfb" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="96.0" prefWidth="609.0">
+               <children>
+                  <JFXButton layoutX="335.0" layoutY="19.0" onAction="#btnLogin" prefHeight="45.0" prefWidth="98.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Đăng nhập" textFill="#ebebeb" />
+                  <JFXButton layoutX="194.0" layoutY="19.0" onAction="#btnHuy" prefHeight="45.0" prefWidth="93.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Hủy" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</VBox>
