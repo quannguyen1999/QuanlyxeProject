@@ -72,6 +72,7 @@ public class LoginController implements Initializable{
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			Main.primaryStage=primaryStage;
 			primaryStage.show();
 		}else if(txtUser.getText().toString().equals("nhanvien") && txtPass.getText().toString().equals("123")) {
@@ -81,6 +82,7 @@ public class LoginController implements Initializable{
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			Main.primaryStage=primaryStage;
 			primaryStage.show();
 		}else if(txtUser.getText().toString().equals("ketoan") && txtPass.getText().toString().equals("123")) {
@@ -90,6 +92,7 @@ public class LoginController implements Initializable{
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
 			Main.primaryStage=primaryStage;
 			primaryStage.show();
 		}else {
