@@ -7,6 +7,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -24,6 +26,13 @@
                         <MenuItem mnemonicParsing="false" text="Giới thiệu" />
                     <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Thoát" />
                   </items>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-menu-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Trợ giúp">
                   <items>
@@ -35,10 +44,10 @@
                   <Insets />
                </HBox.margin>
                <padding>
-                  <Insets top="10.0" />
+                  <Insets left="8.0" top="10.0" />
                </padding>
             </MenuBar>
-            <Label alignment="CENTER" prefHeight="39.0" prefWidth="1129.0" text="Ứng dụng quản lý xe máy honda" textFill="WHITE">
+            <Label alignment="CENTER" prefHeight="39.0" prefWidth="1034.0" text="Ứng dụng quản lý xe máy honda" textFill="WHITE">
                <font>
                   <Font name="Calibri Light" size="24.0" />
                </font>

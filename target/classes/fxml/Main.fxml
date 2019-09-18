@@ -7,6 +7,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -62,14 +64,21 @@
    <top>
       <HBox alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="1000.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar fx:id="mnb" prefHeight="39.0" prefWidth="318.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
+            <MenuBar fx:id="mnb" prefHeight="34.0" prefWidth="563.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
               <menus>
-                <Menu mnemonicParsing="false" text="Menu">
+                <Menu mnemonicParsing="false" text="Hệ thống">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#btnThongTinNguoiDung" text="Thông tin người dùng" />
                         <MenuItem mnemonicParsing="false" styleClass=".menu" text="Giới thiệu" />
                         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Thoát" />
                      </items>
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-menu-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Trợ giúp">
                   <items>
@@ -81,7 +90,7 @@
                   <Insets />
                </HBox.margin>
                <padding>
-                  <Insets top="10.0" />
+                  <Insets top="7.0" />
                </padding>
             </MenuBar>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="1360.0" stylesheets="@../css/application.css" text="Ứng dụng quản lý xe máy honda" textFill="#eeeeee">

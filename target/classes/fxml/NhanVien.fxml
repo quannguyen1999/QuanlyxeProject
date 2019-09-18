@@ -7,6 +7,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +18,7 @@
    <top>
       <HBox prefHeight="45.0" prefWidth="1314.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar prefHeight="30.0" prefWidth="235.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
+            <MenuBar prefHeight="42.0" prefWidth="405.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
               <menus>
                 <Menu mnemonicParsing="false" text="Hệ thống">
                   <items>
@@ -24,6 +26,13 @@
                         <MenuItem mnemonicParsing="false" text="Giới thiệu" />
                     <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Thoát" />
                   </items>
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-menu-48.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Trợ giúp">
                   <items>
