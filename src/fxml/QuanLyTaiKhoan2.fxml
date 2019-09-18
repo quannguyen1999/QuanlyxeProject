@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="675.0" prefWidth="1016.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.QuanLyTaiKhoanController">
+<AnchorPane prefHeight="675.0" prefWidth="1016.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.QuanLyTaiKhoanController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="1027.0" style="-fx-background-color: #95204E;" text="Quản lý tài khoản " textFill="WHITE">
          <font>
