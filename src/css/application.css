@@ -32,7 +32,7 @@
 .menu{
 	-fx-background-color: rgb(23,35,51);
 }
-.label
+.menu .label
 {
     -fx-text-fill: white;
 }

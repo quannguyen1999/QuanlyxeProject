@@ -19,6 +19,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -31,7 +32,7 @@ public class MainController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		makeStageDrageable();
 		try {
-			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyTaiKhoan2.fxml"));
+			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Welcome.fxml"));
 			bd.setCenter(root);
 
 		} catch (IOException e) {
@@ -78,6 +79,8 @@ public class MainController implements Initializable{
 	
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
+			Stage stage = (Stage) mnb.getScene().getWindow();
+			
 			Stage primaryStage=new Stage();
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormUser.fxml"));
 			Scene scene = new Scene(root);
@@ -86,6 +89,9 @@ public class MainController implements Initializable{
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setAlwaysOnTop(true);
 			Main.primaryStage=primaryStage;
+			primaryStage.initOwner(stage);
+			primaryStage.initModality(Modality.APPLICATION_MODAL);
+			
 			primaryStage.showAndWait();
 		} catch (Exception e2) {
 			// TODO: handle exception

@@ -25,7 +25,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="52.0" prefWidth="600.0">
                <children>
-                  <Label text="Thêm tài khoản">
+                  <Label text="Thêm tài khoản" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="24.0" />
                      </font>
@@ -34,7 +34,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="User Name:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="User Name:" textFill="#d7cccc">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -55,7 +55,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Password:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Password:" textFill="#fdfdfd">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -76,7 +76,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Loại tài khoản:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Loại tài khoản:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

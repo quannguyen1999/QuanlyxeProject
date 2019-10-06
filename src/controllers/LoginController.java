@@ -96,7 +96,7 @@ public class LoginController implements Initializable{
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information Dialog");
 			alert.setHeaderText(null);
-			alert.setContentText("Nhập sai thông tin!");
+			alert.setContentText("Thêm thành công");
 			alert.showAndWait();
 		}
 	}
