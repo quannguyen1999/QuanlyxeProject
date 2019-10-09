@@ -26,6 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -45,6 +46,7 @@ public class ThemNhanVien implements Initializable{
 	@FXML JFXTextField txtLuong;
 	@FXML JFXRadioButton rdNam;
 	@FXML JFXRadioButton rdNu;
+	@FXML Label lblTitle;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -103,14 +105,23 @@ public class ThemNhanVien implements Initializable{
 					}
 					
 					if(nv!=null) {
-						int result=qlNV.themNV(nv);
-						if(result==-1) {
-							thongBaoKieuLoi(e, "usename đã có người sử dụng");
-						}else if(result==0) {
-							thongBaoKieuLoi(e, "bị trùng mã");
+						if(lblTitle.getText().toString().equals("Cập nhập nhân viên")) {
+							if(qlNV.suaNV(nv)==true) {
+								((Node) (e.getSource())).getScene().getWindow().hide();
+							}else {
+								thongBaoKieuLoi(e, "sửa không thành công");
+							}
 						}else {
-							((Node) (e.getSource())).getScene().getWindow().hide();
+							int result=qlNV.themNV(nv);
+							if(result==-1) {
+								thongBaoKieuLoi(e, "usename đã có người sử dụng");
+							}else if(result==0) {
+								thongBaoKieuLoi(e, "bị trùng mã");
+							}else {
+								((Node) (e.getSource())).getScene().getWindow().hide();
+							}
 						}
+						
 					}else {
 						thongBaoKieuLoi(e, "thêm không thành công");
 					}

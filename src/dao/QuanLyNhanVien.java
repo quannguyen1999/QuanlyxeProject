@@ -32,7 +32,7 @@ public class QuanLyNhanVien {
 		});
 		return accs;
 	}
-	public static NhanVien timMa(String ma) {
+	public static NhanVien timMa(int ma) {
 		NhanVien accs = null;
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
@@ -83,7 +83,7 @@ public class QuanLyNhanVien {
 		return -1;
 		
 	}
-	public boolean suaNV(Account acc) {
+	public boolean suaNV(NhanVien acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {

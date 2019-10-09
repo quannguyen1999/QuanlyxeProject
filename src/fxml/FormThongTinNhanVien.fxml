@@ -28,7 +28,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="17.0" prefWidth="600.0">
                <children>
-                  <Label text="Thêm nhân viên" textFill="WHITE">
+                  <Label fx:id="lblTitle" text="Thêm nhân viên" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="24.0" />
                      </font>
@@ -40,7 +40,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Nhập mã nhân viên:" textFill="WHITE">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Mã nhân viên:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -61,7 +61,7 @@
             </HBox>
             <HBox prefHeight="26.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Nhập tên tài khoản:" textFill="WHITE">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Tên tài khoản:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

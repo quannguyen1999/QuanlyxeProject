@@ -26,7 +26,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="927.0" layoutY="-4.0" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
+                  <JFXButton layoutX="927.0" layoutY="-4.0" onAction="#btnTim" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -53,7 +53,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
+                  <JFXButton onAction="#btnSuaTaiKhoan" prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>

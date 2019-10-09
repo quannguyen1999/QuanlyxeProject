@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import application.Main;
+import dao.QuanLyAccount;
+import dao.QuanLyNhanVien;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +27,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class AdminController implements Initializable{
+	QuanLyNhanVien qlNV=new QuanLyNhanVien();
+	QuanLyAccount qlACC=new QuanLyAccount();
 	private double xOffset = 0;
 	private double yOffset = 0;
 	@FXML BorderPane bd;
@@ -33,16 +37,15 @@ public class AdminController implements Initializable{
 	@FXML Label lblLogin;
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		makeStageDrageable();
+		qlNV.showTatCaNhanVien();
+		qlACC.showTatCaAccount();
 		try {
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Welcome.fxml"));
 			bd.setCenter(root);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
-
 	}
 	
 	public void ThietLapTenNguoiDangNhap(String tenLogin) {
@@ -92,7 +95,9 @@ public class AdminController implements Initializable{
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.initOwner(stage);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
+			primaryStage.initModality(Modality.APPLICATION_MODAL);
 			primaryStage.setAlwaysOnTop(true);
 			Main.primaryStage=primaryStage;
 			primaryStage.initOwner(stage);

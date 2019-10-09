@@ -31,7 +31,7 @@
       </HBox>
       <AnchorPane prefHeight="90.0" prefWidth="600.0">
          <children>
-            <Label layoutX="184.0" layoutY="14.0" text="Mật khẩu cũ">
+            <Label layoutX="184.0" layoutY="14.0" text="Mật khẩu cũ" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -41,7 +41,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="90.0" prefWidth="600.0">
          <children>
-            <Label layoutX="184.0" layoutY="14.0" text="Mật khẩu mới">
+            <Label layoutX="184.0" layoutY="14.0" text="Mật khẩu mới" textFill="WHITE">
                <font>
                   <Font name="Calibri Light" size="18.0" />
                </font>

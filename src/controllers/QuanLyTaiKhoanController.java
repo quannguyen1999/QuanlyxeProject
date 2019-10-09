@@ -179,7 +179,9 @@ public class QuanLyTaiKhoanController implements Initializable{
 			ctlMain.txtUserName.setEditable(false);
 
 			Stage stage=new Stage();
+			stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
 			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(new Scene(root));
 			Main.primaryStage=stage;
 			stage.show();

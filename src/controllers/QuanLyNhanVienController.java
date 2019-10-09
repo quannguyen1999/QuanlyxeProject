@@ -47,7 +47,7 @@ public class QuanLyNhanVienController implements Initializable{
 	TableColumn<NhanVien, String> colTen;
 	TableColumn<NhanVien, String> colUserName;
 	
-	
+	QuanLyNhanVien qlNV=new QuanLyNhanVien();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -103,7 +103,6 @@ public class QuanLyNhanVienController implements Initializable{
 			stage.setOnHidden(ev->{
 				handleRefersh(e);
 			});
-
 		} catch (Exception e2) {
 			// TODO: handle exception
 			System.out.println(e2.getMessage());
@@ -138,10 +137,78 @@ public class QuanLyNhanVienController implements Initializable{
 			thongBaoKieuLoi(e, "bạn chưa chọn bảng cần xóa");
 		}
 	}
+	public void btnSuaTaiKhoan(ActionEvent e) throws IOException {
+		int result=tbl_view.getSelectionModel().getSelectedIndex();
+
+		if(result!=-1) {
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinNhanVien.fxml"));
+
+			Parent root=loader.load();
+
+			ThemNhanVien ctlMain=loader.getController();
+
+			int colMa=tbl_view.getItems().get(result).getMaNV();
+			String colTen=tbl_view.getItems().get(result).getTenNV();
+			LocalDate colNamSinh=tbl_view.getItems().get(result).getNamSinh();
+			String colDiaChi=tbl_view.getItems().get(result).getDiaChi();
+			String colDienThoai=tbl_view.getItems().get(result).getDienThoai();
+			double colLuong=tbl_view.getItems().get(result).getLuongCoBan();
+			
+			NhanVien nv=qlNV.timMa(colMa);
+			ctlMain.lblTitle.setText("Cập nhập nhân viên");
+			ctlMain.txtMa.setText(String.valueOf(colMa));
+			ctlMain.box.setValue(nv.getAccount().getUserName());
+			ctlMain.txtTen.setText(colTen);
+			ctlMain.txtNamSinh.setValue(colNamSinh);
+			ctlMain.txtDiaChi.setText(colDiaChi);
+			ctlMain.txtDienThoai.setText(colDienThoai);
+			if(nv.getGioiTinh().equals("Nu")) {
+				ctlMain.rdNu.setSelected(true);
+			}else {
+				ctlMain.rdNam.setSelected(true);
+			}
+			ctlMain.txtLuong.setText(String.valueOf(colLuong));
+
+			Stage stage=new Stage();
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.setScene(new Scene(root));
+			Main.primaryStage=stage;
+			stage.show();
+			stage.setOnHidden(ev->{
+				handleRefersh(new ActionEvent());
+			});
+		}else {
+			thongBaoKieuLoi(e,"Bạn chưa chọn bảng cần sửa");
+		}
+
+	}
 	@FXML
 	public void btnHuy(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
+	}
+	
+	@FXML 
+	public void btnTim(ActionEvent e) {
+		NhanVien acc=null;
+		String text=txtMa.getText().trim().toString();
+		if (text.isEmpty()==false) {
+			try {
+				acc=QuanLyNhanVien.timMa(Integer.parseInt(text));
+			} catch (Exception e2) {
+				// TODO: handle exception
+				thongBaoKieuLoi(e, "yêu cầu nhập số");
+			}
+			if(acc!=null) {
+				tbl_view.getItems().clear();
+				tbl_view.getItems().add(acc);
+			}else {
+				thongBaoKieuLoi(e, "không tìm thấy");
+			}
+		}else {
+			handleRefersh(e);
+		}
+
 	}
 
 }
