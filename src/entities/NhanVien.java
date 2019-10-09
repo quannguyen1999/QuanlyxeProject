@@ -8,34 +8,55 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class NhanVien {
-	@Id 
+	@Id
 	private int maNV;
 	private String chucVu;
 	private String diaChi;
-	private double dienThoai;
+	private String dienThoai;
 	private String gioiTinh;
 	private double luongCoBan;
 	private LocalDate namSinh;
 	private String tenNV;
-	
-	@OneToOne (cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "userName")
 	private Account account;
-	
+
 	@OneToMany(mappedBy = "nhanVien")
 	private List<BaoCao> baoCao;
-	
+
 	@OneToMany(mappedBy = "nhanVien")
 	private List<HopDong> hopDong;
 
 	public NhanVien() {
 		super();
 	}
+
+	
+
+	public NhanVien(int maNV, String chucVu, String diaChi, String dienThoai, String gioiTinh, double luongCoBan,
+			LocalDate namSinh, String tenNV, Account account) {
+		super();
+		this.maNV = maNV;
+		this.chucVu = chucVu;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.gioiTinh = gioiTinh;
+		this.luongCoBan = luongCoBan;
+		this.namSinh = namSinh;
+		this.tenNV = tenNV;
+		this.account = account;
+		this.baoCao = baoCao;
+		this.hopDong = hopDong;
+	}
+
+
 
 	public int getMaNV() {
 		return maNV;
@@ -61,11 +82,11 @@ public class NhanVien {
 		this.diaChi = diaChi;
 	}
 
-	public double getDienThoai() {
+	public String getDienThoai() {
 		return dienThoai;
 	}
 
-	public void setDienThoai(double dienThoai) {
+	public void setDienThoai(String dienThoai) {
 		this.dienThoai = dienThoai;
 	}
 
@@ -127,33 +148,9 @@ public class NhanVien {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("NhanVien [maNV=");
-		builder.append(maNV);
-		builder.append(", chucVu=");
-		builder.append(chucVu);
-		builder.append(", diaChi=");
-		builder.append(diaChi);
-		builder.append(", dienThoai=");
-		builder.append(dienThoai);
-		builder.append(", gioiTinh=");
-		builder.append(gioiTinh);
-		builder.append(", luongCoBan=");
-		builder.append(luongCoBan);
-		builder.append(", namSinh=");
-		builder.append(namSinh);
-		builder.append(", tenNV=");
-		builder.append(tenNV);
-		builder.append(", account=");
-		builder.append(account);
-		builder.append(", baoCao=");
-		builder.append(baoCao);
-		builder.append(", hopDong=");
-		builder.append(hopDong);
-		builder.append("]");
-		return builder.toString();
+		return "NhanVien [maNV=" + maNV + ", chucVu=" + chucVu + ", diaChi=" + diaChi + ", dienThoai=" + dienThoai
+				+ ", gioiTinh=" + gioiTinh + ", luongCoBan=" + luongCoBan + ", namSinh=" + namSinh + ", tenNV=" + tenNV
+				+ "]";
 	}
-	
-	
-	
+
 }

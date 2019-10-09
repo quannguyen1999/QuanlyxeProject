@@ -1,7 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/controllers/AdminController.java=UTF-8
+encoding//src/controllers/DangNhap.java=UTF-8
 encoding//src/controllers/KeToanController.java=UTF-8
-encoding//src/controllers/LoginController.java=UTF-8
-encoding//src/controllers/MainController.java=UTF-8
 encoding//src/controllers/NhanVienController.java=UTF-8
 encoding//src/controllers/QuanLyTaiKhoanController.java=UTF-8
+encoding//src/controllers/ThemTaiKhoan.java=UTF-8
 encoding//src/uis/MainClass.java=UTF-8
+encoding/<project>=UTF-8

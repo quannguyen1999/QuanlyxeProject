@@ -10,8 +10,6 @@ public class Account {
 	private String password; 
 	private String loaiTK; 
 	
-	
-
 	public Account(String userName, String password, String loaiTK) {
 		super();
 		this.userName = userName;

@@ -68,7 +68,7 @@
    <left>
       <VBox prefHeight="761.0" prefWidth="292.0" styleClass="sidebar" stylesheets="@../css/application.css" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục">
+            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -88,7 +88,7 @@
                   <Font name="Calibri" size="18.0" />
                </font>
             </JFXButton>
-            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục">
+            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục" textFill="#fdfdfd">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -105,6 +105,29 @@
                   <Font name="Calibri" size="18.0" />
                </font>
             </JFXButton>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="385.0" prefWidth="292.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="298.0" text="Tên người đăng nhập" textFill="#fafafa">
+                     <font>
+                        <Font name="Calibri Light" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lblLogin" prefHeight="28.0" prefWidth="298.0" text="Admin" textFill="#c3baba">
+                     <font>
+                        <Font name="Calibri Light" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </left>

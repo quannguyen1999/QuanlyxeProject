@@ -12,7 +12,7 @@ public class Main extends Application {
 	public static Stage primaryStage=null;
 	public void start(Stage primaryStage) {
 		try {
-			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormLogin.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);

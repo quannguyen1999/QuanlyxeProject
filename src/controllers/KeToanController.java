@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +27,7 @@ public class KeToanController implements Initializable{
 	private double xOffset = 0;
 	private double yOffset = 0;
 	@FXML public BorderPane mainBd;
+	@FXML Label lblLogin;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -38,6 +40,9 @@ public class KeToanController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void ThietLapTenNguoiDangNhap(String tenLogin) {
+		lblLogin.setText(tenLogin);
 	}
 	public void handleExit(ActionEvent e) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -62,7 +67,7 @@ public class KeToanController implements Initializable{
 		primaryStage.show();
 	}
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
-//		mainBd.setDisable(true);
+		//		mainBd.setDisable(true);
 
 		Stage primaryStage=new Stage();
 
@@ -95,14 +100,14 @@ public class KeToanController implements Initializable{
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/BaoCaoThongKe.fxml"));
 		mainBd.setCenter(root);
 	}
-	
-	
-	
+
+
+
 	public void btnHideWindow(ActionEvent e) {
 		Stage stage=(Stage) ((Node)(e.getSource())).getScene().getWindow();  
 		stage.setIconified(true);
 	}
-	
+
 	private void makeStageDrageable() {
 		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {

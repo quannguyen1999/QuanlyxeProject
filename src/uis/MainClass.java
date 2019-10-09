@@ -7,16 +7,21 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import dao.QuanLyAccount;
+import dao.QuanLyNhanVien;
 import entities.Account;
+import entities.NhanVien;
 
 
 public class MainClass {
 	public static void main(String[] args) {
-		List<Account> accs=showTatCaAccount();
+//		List<Account> accs=QuanLyAccount.showTatCaAccount();
+		List<NhanVien> accs=QuanLyNhanVien.showTatCaNhanVien();
 		accs.forEach(t->{
 			System.out.println(t);
 		});
 	}
+	
 	public static List<Account> showTatCaAccount() {
 		List<Account> accs = null;
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();

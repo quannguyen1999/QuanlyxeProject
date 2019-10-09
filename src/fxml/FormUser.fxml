@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bd" prefHeight="591.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FormUserController">
+<BorderPane fx:id="bd" prefHeight="591.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThongTinNguoiDung">
    <center>
       <BorderPane prefHeight="656.0" prefWidth="0.0">
          <center>

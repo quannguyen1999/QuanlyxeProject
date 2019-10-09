@@ -137,6 +137,29 @@
                   <Font name="Calibri" size="18.0" />
                </font>
             </JFXButton>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="292.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="298.0" text="Tên người đăng nhập" textFill="#fafafa">
+                     <font>
+                        <Font name="Calibri Light" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="40.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="lblLogin" prefHeight="28.0" prefWidth="298.0" text="Admin" textFill="#c3baba">
+                     <font>
+                        <Font name="Calibri Light" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="40.0" right="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </left>

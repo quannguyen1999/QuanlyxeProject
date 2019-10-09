@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1320.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1320.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
    <left>
       <VBox prefHeight="761.0" prefWidth="292.0" styleClass="sidebar" stylesheets="@../css/application.css" BorderPane.alignment="CENTER">
          <children>
@@ -55,7 +55,7 @@
                   <Font name="Calibri" size="18.0" />
                </font>
             </JFXButton>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="385.0" prefWidth="292.0">
+            <VBox alignment="BOTTOM_CENTER" prefHeight="382.0" prefWidth="292.0">
                <children>
                   <Label prefHeight="28.0" prefWidth="298.0" text="Tên người đăng nhập" textFill="#fafafa">
                      <font>
@@ -65,7 +65,7 @@
                         <Insets left="40.0" />
                      </padding>
                   </Label>
-                  <Label prefHeight="28.0" prefWidth="298.0" text="Admin" textFill="#c3baba">
+                  <Label fx:id="lblLogin" prefHeight="28.0" prefWidth="298.0" text="Admin" textFill="#c3baba">
                      <font>
                         <Font name="Calibri Light" size="18.0" />
                      </font>
@@ -92,7 +92,6 @@
                 <Menu mnemonicParsing="false" text="Hệ thống">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#btnThongTinNguoiDung" text="Thông tin người dùng" />
-                        <MenuItem mnemonicParsing="false" styleClass=".menu" text="Giới thiệu" />
                         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Thoát" />
                      </items>
                      <graphic>

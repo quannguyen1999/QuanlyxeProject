@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -26,6 +27,7 @@ public class NhanVienController implements Initializable{
 	private double xOffset = 0;
 	private double yOffset = 0;
 	@FXML public BorderPane mainBd;
+	@FXML Label lblLogin;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -39,6 +41,9 @@ public class NhanVienController implements Initializable{
 			e.printStackTrace();
 		}
 		
+	}
+	public void ThietLapTenNguoiDangNhap(String tenLogin) {
+		lblLogin.setText(tenLogin);
 	}
 	public void btnHideWindow(ActionEvent e) {
 		Stage stage=(Stage) ((Node)(e.getSource())).getScene().getWindow();  

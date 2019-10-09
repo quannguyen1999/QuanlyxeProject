@@ -20,13 +20,13 @@
          <bottom>
             <AnchorPane prefHeight="104.0" prefWidth="1005.0" style="-fx-background-color: #979292;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
+                  <TextField fx:id="txtMa" layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
                   <Label layoutX="75.0" layoutY="14.0" text="Tìm theo mã ">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="927.0" layoutY="-4.0" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
+                  <JFXButton layoutX="927.0" layoutY="-4.0" onAction="#btnTim" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Xóa" textFill="WHITE">
+                  <JFXButton onAction="#btnXoaTaiKhoan" prefHeight="25.0" prefWidth="107.0" text="Xóa" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -53,7 +53,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
+                  <JFXButton onAction="#btnSuaTaiKhoan" prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Hủy" textFill="WHITE">
+                  <JFXButton onAction="#btnHuy" prefHeight="25.0" prefWidth="107.0" text="Xóa rỗng" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
