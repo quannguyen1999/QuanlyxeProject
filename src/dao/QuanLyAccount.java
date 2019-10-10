@@ -26,7 +26,6 @@ public class QuanLyAccount {
 		} finally {
 			manager.close();
 		}
-		System.out.println(accs);
 		return accs;
 	}
 	public static List<Account> showTatCaAccount() {
@@ -51,7 +50,7 @@ public class QuanLyAccount {
 		});
 		return accs;
 	}
-	public boolean themAcc(Account acc) {
+	public static boolean themAcc(Account acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
@@ -70,7 +69,7 @@ public class QuanLyAccount {
 		}
 		return true;
 	}
-	public boolean suaAcc(Account acc) {
+	public static boolean suaAcc(Account acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {

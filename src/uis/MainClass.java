@@ -15,11 +15,12 @@ import entities.NhanVien;
 
 public class MainClass {
 	public static void main(String[] args) {
-//		List<Account> accs=QuanLyAccount.showTatCaAccount();
-		List<NhanVien> accs=QuanLyNhanVien.showTatCaNhanVien();
-		accs.forEach(t->{
-			System.out.println(t);
-		});
+		Account acc=new Account("admin", "123", "Admin");
+		if(QuanLyAccount.suaAcc(acc)==true) {
+			System.out.println("ok");
+		}else {
+			System.out.println("false");
+		}
 	}
 	
 	public static List<Account> showTatCaAccount() {

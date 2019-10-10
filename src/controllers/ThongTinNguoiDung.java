@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
+import dao.QuanLyNhanVien;
+import entities.NhanVien;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,13 +17,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import javafx.scene.control.Label;
 public class ThongTinNguoiDung implements Initializable{
 	private double xOffset = 0;
 	private double yOffset = 0;
 	@FXML BorderPane bd;
+	@FXML Label lblHoTen;
+	@FXML Label lblChucVu;
+	@FXML Label lblDiaChi;
+	@FXML Label lblDT;
+	@FXML Label lblGioiTinh;
+	@FXML Label lblUsername;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -51,6 +61,14 @@ public class ThongTinNguoiDung implements Initializable{
 		});
 
 	}
+	public void thietLapFormNguoiDung(NhanVien nv) {
+		lblHoTen.setText(nv.getTenNV());
+		lblChucVu.setText(nv.getChucVu());
+		lblDiaChi.setText(nv.getDiaChi());
+		lblDT.setText(nv.getDienThoai());;
+		lblGioiTinh.setText(nv.getGioiTinh());
+		lblUsername.setText(nv.getAccount().getUserName());
+	}
 	public void btnQuayLai(ActionEvent e) throws IOException {
 //		((Node)(e.getSource())).getScene().getWindow().hide();  
 //
@@ -66,15 +84,17 @@ public class ThongTinNguoiDung implements Initializable{
 	}
 	public void btnDoiMatKhau(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  
-		Stage primaryStage=new Stage();
-		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormDoiMatKhau.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.initStyle(StageStyle.UNDECORATED);
-		primaryStage.setResizable(false);
-		Main.primaryStage=primaryStage;
-		primaryStage.show();
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormDoiMatKhau.fxml"));
+		Parent root=loader.load();
+		DoiMatKhau ctlThongTin=loader.getController();
+		ctlThongTin.thietLapTenNguoiDung(lblUsername.getText().toString());
+		Stage stage=new Stage();
+		stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
+		stage.initStyle(StageStyle.UNDECORATED);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(new Scene(root));
+		Main.primaryStage=stage;
+		stage.show();
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  

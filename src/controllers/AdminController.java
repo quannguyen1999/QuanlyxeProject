@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import application.Main;
 import dao.QuanLyAccount;
 import dao.QuanLyNhanVien;
+import entities.Account;
+import entities.NhanVien;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -42,7 +44,6 @@ public class AdminController implements Initializable{
 		try {
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Welcome.fxml"));
 			bd.setCenter(root);
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +60,6 @@ public class AdminController implements Initializable{
 		if (result.get() == ButtonType.OK){
 			System.exit(0);
 		} else {
-			// ... user chose CANCEL or closed the dialog
 		}
 	}
 	public void btnDangXuat(ActionEvent e) throws IOException {
@@ -85,25 +85,40 @@ public class AdminController implements Initializable{
 		Stage stage=(Stage) ((Node)(e.getSource())).getScene().getWindow();  
 		stage.setIconified(true);
 	}
-	
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
-			Stage stage = (Stage) mnb.getScene().getWindow();
-			
-			Stage primaryStage=new Stage();
-			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormUser.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.initOwner(stage);
-			primaryStage.initStyle(StageStyle.UNDECORATED);
-			primaryStage.initModality(Modality.APPLICATION_MODAL);
-			primaryStage.setAlwaysOnTop(true);
-			Main.primaryStage=primaryStage;
-			primaryStage.initOwner(stage);
-			primaryStage.initModality(Modality.APPLICATION_MODAL);
-			
-			primaryStage.showAndWait();
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
+			Parent root=loader.load();
+			ThongTinNguoiDung ctlThongTin=loader.getController();
+			NhanVien nv=QuanLyNhanVien.timMa2(lblLogin.getText().toString());
+			ctlThongTin.thietLapFormNguoiDung(nv);
+			Stage stage=new Stage();
+			Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
+			stage.initOwner(stageCunrrent);
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setScene(new Scene(root));
+			Main.primaryStage=stage;
+			stage.show();
+//			FXMLLoader loader;
+//			Parent root;
+//			Stage stage;
+//			Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
+//			loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
+//			root=loader.load();
+//			ThongTinNguoiDung ctlThongTin=new ThongTinNguoiDung();
+//			NhanVien nv=QuanLyNhanVien.timMa2(lblLogin.getText().toString());
+//			ctlThongTin.thietLapFormNguoiDung(nv);
+////			System.out.println(nv);
+////			ctlThongTin.lblHoTen.setText(nv.getTenNV());
+////			ctlThongTin.
+//			stage=new Stage();
+//			Main.primaryStage=stage;
+//			stage.initOwner(stageCunrrent);
+//			stage.initStyle(StageStyle.UNDECORATED);
+//			stage.initModality(Modality.APPLICATION_MODAL);
+//			stage.setScene(new Scene(root));
+//			stage.show();
 		} catch (Exception e2) {
 			// TODO: handle exception
 			System.out.println(e2.getMessage());

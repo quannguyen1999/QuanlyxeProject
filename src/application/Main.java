@@ -6,8 +6,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
-
 public class Main extends Application {
 	public static Stage primaryStage=null;
 	public void start(Stage primaryStage) {

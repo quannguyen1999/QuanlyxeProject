@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.hibernate.Query;
+
 import entities.Account;
 import entities.NhanVien;
 
@@ -50,6 +52,30 @@ public class QuanLyNhanVien {
 			manager.close();
 		}
 		System.out.println(accs);
+		return accs;
+	}
+	static NhanVien accs = null;
+	public static NhanVien timMa2(String ma) {
+		
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			javax.persistence.Query query = manager.createQuery("from NhanVien where userName='"+ma+"'");
+			List<?> list=query.getResultList();
+			list.forEach(t->{
+				accs=(NhanVien) t;
+			});
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
 		return accs;
 	}
 	boolean result=false;
