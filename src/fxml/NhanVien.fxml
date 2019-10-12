@@ -18,12 +18,11 @@
    <top>
       <HBox prefHeight="45.0" prefWidth="1314.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar prefHeight="42.0" prefWidth="405.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
+            <MenuBar fx:id="mnb" prefHeight="42.0" prefWidth="405.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
               <menus>
                 <Menu mnemonicParsing="false" text="Hệ thống">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#btnThongTinNguoiDung" text="Thông tin người dùng" />
-                        <MenuItem mnemonicParsing="false" text="Giới thiệu" />
                     <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Thoát" />
                   </items>
                      <graphic>
@@ -52,16 +51,6 @@
                   <Font name="Calibri Light" size="24.0" />
                </font>
             </Label>
-            <JFXButton onAction="#btnHideWindow" text="_" textFill="#f2e1e1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </JFXButton>
-            <JFXButton onAction="#handleExit" text="X" textFill="#f2e1e1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </JFXButton>
          </children>
       </HBox>
    </top>
@@ -80,7 +69,7 @@
                </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
-            <JFXButton alignment="BASELINE_LEFT" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Danh Sách" textFill="#c3baba">
+            <JFXButton alignment="BASELINE_LEFT" onAction="#btnQuanLyXe" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Danh Sách" textFill="#c3baba">
                <padding>
                   <Insets left="40.0" />
                </padding>

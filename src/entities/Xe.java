@@ -17,9 +17,25 @@ public class Xe {
 	private String nhaSX;
 	private String tenXe;
 	private String thongTinBaoHanh;
+	private String mauXe;
+	private String loaiXe;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "xe")
 	private List<CTPhieuXuat> cTPhieuXuat;
+
+	
+	public Xe(String maXe, String donViTinh, String moTa, String nhaSX, String tenXe, String thongTinBaoHanh,
+			String mauXe, String loaiXe) {
+		super();
+		this.maXe = maXe;
+		this.donViTinh = donViTinh;
+		this.moTa = moTa;
+		this.nhaSX = nhaSX;
+		this.tenXe = tenXe;
+		this.thongTinBaoHanh = thongTinBaoHanh;
+		this.mauXe = mauXe;
+		this.loaiXe = loaiXe;
+	}
 
 	public Xe() {
 		super();
@@ -80,6 +96,22 @@ public class Xe {
 	public void setcTPhieuXuat(List<CTPhieuXuat> cTPhieuXuat) {
 		this.cTPhieuXuat = cTPhieuXuat;
 	}
+	
+	public String getMauXe() {
+		return mauXe;
+	}
+
+	public void setMauXe(String mauXe) {
+		this.mauXe = mauXe;
+	}
+	
+	public String getLoaiXe() {
+		return loaiXe;
+	}
+
+	public void setLoaiXe(String loaiXe) {
+		this.loaiXe = loaiXe;
+	}
 
 	@Override
 	public String toString() {
@@ -92,13 +124,19 @@ public class Xe {
 		builder.append(moTa);
 		builder.append(", nhaSX=");
 		builder.append(nhaSX);
+		builder.append(", tenXe=");
+		builder.append(tenXe);
 		builder.append(", thongTinBaoHanh=");
 		builder.append(thongTinBaoHanh);
-		builder.append(", cTPhieuXuat=");
-		builder.append(cTPhieuXuat);
+		builder.append(", mauXe=");
+		builder.append(mauXe);
+		builder.append(", loaiXe=");
+		builder.append(loaiXe);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 	
 }

@@ -25,7 +25,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="52.0" prefWidth="600.0">
                <children>
-                  <Label text="Xuất hàng">
+                  <Label text="Xuất hàng" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="24.0" />
                      </font>
@@ -37,7 +37,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Nhập mã khách hàng:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Nhập mã khách hàng:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -58,7 +58,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Nhập mã nhân viên:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Nhập mã nhân viên:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -79,7 +79,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Mã px:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Mã px:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -100,7 +100,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Ngày xuất:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Ngày xuất:" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

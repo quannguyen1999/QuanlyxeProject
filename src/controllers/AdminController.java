@@ -48,7 +48,7 @@ public class AdminController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void ThietLapTenNguoiDangNhap(String tenLogin) {
 		lblLogin.setText(tenLogin);
 	}
@@ -87,38 +87,31 @@ public class AdminController implements Initializable{
 	}
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
-			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
-			Parent root=loader.load();
-			ThongTinNguoiDung ctlThongTin=loader.getController();
+
 			NhanVien nv=QuanLyNhanVien.timMa2(lblLogin.getText().toString());
-			ctlThongTin.thietLapFormNguoiDung(nv);
-			Stage stage=new Stage();
-			Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
-			stage.initOwner(stageCunrrent);
-			stage.initStyle(StageStyle.UNDECORATED);
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(new Scene(root));
-			Main.primaryStage=stage;
-			stage.show();
-//			FXMLLoader loader;
-//			Parent root;
-//			Stage stage;
-//			Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
-//			loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
-//			root=loader.load();
-//			ThongTinNguoiDung ctlThongTin=new ThongTinNguoiDung();
-//			NhanVien nv=QuanLyNhanVien.timMa2(lblLogin.getText().toString());
-//			ctlThongTin.thietLapFormNguoiDung(nv);
-////			System.out.println(nv);
-////			ctlThongTin.lblHoTen.setText(nv.getTenNV());
-////			ctlThongTin.
-//			stage=new Stage();
-//			Main.primaryStage=stage;
-//			stage.initOwner(stageCunrrent);
-//			stage.initStyle(StageStyle.UNDECORATED);
-//			stage.initModality(Modality.APPLICATION_MODAL);
-//			stage.setScene(new Scene(root));
-//			stage.show();
+			if(nv!=null) {
+				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
+				Parent root=loader.load();
+				ThongTinNguoiDung ctlThongTin=loader.getController();
+				System.out.println(lblLogin.getText().toString());
+				ctlThongTin.thietLapFormNguoiDung(nv);
+				Stage stage=new Stage();
+				Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
+				stage.initOwner(stageCunrrent);
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(new Scene(root));
+				Main.primaryStage=stage;
+				stage.show();
+			}else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("tài khoản chưa cấp thông tin nhân viên");
+				alert.initOwner((Stage) mnb.getScene().getWindow());
+				alert.showAndWait();
+			}
+
 		} catch (Exception e2) {
 			// TODO: handle exception
 			System.out.println(e2.getMessage());

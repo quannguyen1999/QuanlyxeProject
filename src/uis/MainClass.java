@@ -15,12 +15,14 @@ import entities.NhanVien;
 
 public class MainClass {
 	public static void main(String[] args) {
-		Account acc=new Account("admin", "123", "Admin");
-		if(QuanLyAccount.suaAcc(acc)==true) {
-			System.out.println("ok");
-		}else {
-			System.out.println("false");
-		}
+		NhanVien acc=QuanLyNhanVien.timMa2("admin");
+		System.out.println(acc);
+//		Account acc=new Account("admin", "123", "Admin");
+//		if(QuanLyAccount.suaAcc(acc)==true) {
+//			System.out.println("ok");
+//		}else {
+//			System.out.println("false");
+//		}
 	}
 	
 	public static List<Account> showTatCaAccount() {

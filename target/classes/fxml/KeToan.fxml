@@ -18,12 +18,11 @@
    <top>
       <HBox prefHeight="45.0" prefWidth="1314.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar prefHeight="30.0" prefWidth="235.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
+            <MenuBar fx:id="mnb" prefHeight="30.0" prefWidth="235.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
               <menus>
                 <Menu mnemonicParsing="false" text="Hệ thống">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#btnThongTinNguoiDung" text="Thông tin người dùng" />
-                        <MenuItem mnemonicParsing="false" text="Giới thiệu" />
                     <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Thoát" />
                   </items>
                      <graphic>
@@ -68,7 +67,7 @@
    <left>
       <VBox prefHeight="761.0" prefWidth="292.0" styleClass="sidebar" stylesheets="@../css/application.css" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục">
+            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -112,7 +111,7 @@
                   <Font name="Calibri" size="18.0" />
                </font>
             </JFXButton>
-            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục">
+            <Label prefHeight="43.0" prefWidth="292.0" text="Danh mục" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

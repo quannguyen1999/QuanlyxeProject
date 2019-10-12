@@ -111,7 +111,6 @@ public class DangNhap implements Initializable{
 			if(acc!=null) {
 				switch (acc.getLoaiTK()) {
 				case "Ke toan truong":
-
 					break;
 				case "Ke toan":
 					((Node)(e.getSource())).getScene().getWindow().hide();  

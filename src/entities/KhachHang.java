@@ -17,6 +17,15 @@ public class KhachHang {
 	public KhachHang() {
 		super();
 	}
+	
+	public KhachHang(int maKH, String diaChi, String email, String soDT, String tenKH) {
+		super();
+		this.maKH = maKH;
+		this.diaChi = diaChi;
+		this.email = email;
+		this.soDT = soDT;
+		this.tenKH = tenKH;
+	}
 
 	public int getMaKH() {
 		return maKH;

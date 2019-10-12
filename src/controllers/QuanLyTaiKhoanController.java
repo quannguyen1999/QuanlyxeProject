@@ -103,7 +103,6 @@ public class QuanLyTaiKhoanController implements Initializable{
 			});
 
 		} catch (Exception e2) {
-			// TODO: handle exception
 			System.out.println(e2.getMessage());
 		}
 	}

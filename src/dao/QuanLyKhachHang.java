@@ -7,16 +7,17 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import entities.Account;
+import entities.KhachHang;
 
-public class QuanLyAccount {
-	public static Account timMa(String ma) {
-		Account accs = null;
+public class QuanLyKhachHang {
+	public static List<KhachHang> showTatCaKhachHang() {
+		List<KhachHang> accs = null;
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
 			transaction = manager.getTransaction();
 			transaction.begin();
-			accs=manager.find(Account.class, ma);
+			accs=manager.createQuery("select s from KhachHang s",KhachHang.class).getResultList();
 			transaction.commit();
 		} catch (Exception ex) {
 			if (transaction != null) {
@@ -28,26 +29,27 @@ public class QuanLyAccount {
 		}
 		return accs;
 	}
-	public static List<Account> showTatCaAccount() {
-		List<Account> accs = null;
+	public static boolean xoaKH(int acc2) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
 			transaction = manager.getTransaction();
 			transaction.begin();
-			accs=manager.createQuery("select s from Account s",Account.class).getResultList();
+			KhachHang acc=manager.find(KhachHang.class, acc2);//			manager.r
+			manager.remove(acc);
 			transaction.commit();
 		} catch (Exception ex) {
 			if (transaction != null) {
 				transaction.rollback();
 			}
 			ex.printStackTrace();
+			return false;
 		} finally {
 			manager.close();
 		}
-		return accs;
+		return true;
 	}
-	public static boolean themAcc(Account acc) {
+	public static boolean themAcc(KhachHang acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
@@ -66,43 +68,23 @@ public class QuanLyAccount {
 		}
 		return true;
 	}
-	public static boolean suaAcc(Account acc) {
+	public static KhachHang timMa(int ma) {
+		KhachHang accs = null;
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
 			transaction = manager.getTransaction();
 			transaction.begin();
-			manager.merge(acc);
+			accs=manager.find(KhachHang.class, ma);
 			transaction.commit();
 		} catch (Exception ex) {
 			if (transaction != null) {
 				transaction.rollback();
 			}
 			ex.printStackTrace();
-			return false;
 		} finally {
 			manager.close();
 		}
-		return true;
-	}
-	public boolean xoaAcc(String username) {
-		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
-		EntityTransaction transaction = null;
-		try {
-			transaction = manager.getTransaction();
-			transaction.begin();
-			Account acc=manager.find(Account.class, username);//			manager.r
-			manager.remove(acc);
-			transaction.commit();
-		} catch (Exception ex) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			ex.printStackTrace();
-			return false;
-		} finally {
-			manager.close();
-		}
-		return true;
+		return accs;
 	}
 }
