@@ -50,7 +50,7 @@ public class KeToanController implements Initializable{
 		try {
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyXe.fxml"));
 			mainBd.setCenter(root);
-
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -129,11 +129,19 @@ public class ThemKhachHang implements Initializable{
 		}
 		if(stillContunite==true) {
 			KhachHang kh=new KhachHang(Integer.parseInt(ma), diaChi, Email, DienThoai, ten);
-			if(QuanLyKhachHang.themAcc(kh)==true) {
-				((Node)(e.getSource())).getScene().getWindow().hide();  
-			}else{
-				thongBaoKieuLoi(e, "thêm khách hàng không thành công");
-			};
+			if(lblTitle.getText().toString().equals("Cập nhập khách hàng")) {
+				if(QuanLyKhachHang.suaKH(kh)==true) {
+					((Node)(e.getSource())).getScene().getWindow().hide();  
+				}
+			}else {
+				if(QuanLyKhachHang.themAcc(kh)==true) {
+					((Node)(e.getSource())).getScene().getWindow().hide();  
+				}else{
+					thongBaoKieuLoi(e, "thêm khách hàng không thành công");
+				};
+			}
+			
+		
 		}
 
 

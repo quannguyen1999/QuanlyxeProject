@@ -79,6 +79,91 @@ public class QuanLyXeController implements Initializable{
 		colThongTinBaoHanh.setCellValueFactory(new PropertyValueFactory<>("thongTinBaoHanh"));
 
 		UploaderDuLieuLenBang();
+		
+		tbl_view.setOnMouseClicked(ev->{
+			int result=tbl_view.getSelectionModel().getSelectedIndex();
+
+			if(result!=-1) {
+				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinXe.fxml"));
+
+				Parent root = null;
+				try {
+					root = loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				ThemXe ctlMain=loader.getController();
+
+				String maXe=tbl_view.getItems().get(result).getMaXe();
+				String donViTinh=tbl_view.getItems().get(result).getDonViTinh();
+				String moTa=tbl_view.getItems().get(result).getMoTa();
+				String nhaSX=tbl_view.getItems().get(result).getNhaSX();
+				String LoaiXe=tbl_view.getItems().get(result).getLoaiXe();
+				String TenXe=tbl_view.getItems().get(result).getTenXe();
+				String thongTinBaoHanh=tbl_view.getItems().get(result).getThongTinBaoHanh();
+				String loaiXe=tbl_view.getItems().get(result).getLoaiXe();
+				String mauXe=tbl_view.getItems().get(result).getMauXe();
+				ctlMain.lblTitle.setText("Cập nhập tài khoản");
+				ctlMain.txtMaXe.setText(maXe);
+				ctlMain.txtMaXe.setEditable(false);
+				ctlMain.txtDonViTinh.setText(donViTinh);
+				ctlMain.txtMoTa.setText(moTa);
+				ctlMain.txtNhaSX.setText(nhaSX);
+
+				ctlMain.choiceBoxLoaiXe.setValue(loaiXe);
+				ctlMain.choiceBoxMauXe.setValue(mauXe);
+				ctlMain.choiceBoxTenXe.setValue(TenXe);
+				if(loaiXe.equals("Blade-110C")) {
+					if(mauXe.length()==10) {
+						Image image = new Image("/image/Blade-110C_XanhDuong.PNG");
+						ctlMain.img.setImage(image);
+
+					}else {
+						Image image = new Image("/image/Blade-110C_den.PNG");
+						ctlMain.img.setImage(image);
+					}
+				}else if(TenXe.equals("SUPER-CUB")) {
+					Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
+					ctlMain.img.setImage(image);
+				}else if(TenXe.equals("SH-300c")) {
+					if(mauXe.length()==3) {
+						System.out.println("ok");
+						Image image = new Image("/image/SH-300c_den.PNG");
+						ctlMain.img.setImage(image);
+					}else {
+						System.out.println("false");
+						Image image = new Image("/image/SH-300c_trang.PNG");
+						ctlMain.img.setImage(image);
+					}
+				}else if(TenXe.equals("Vision-110C")) {
+					if(mauXe.length()==2) {
+						Image image = new Image("/image/Vision-110C_do.PNG");
+						ctlMain.img.setImage(image);
+					}else if(mauXe.length()==10) {
+						Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
+						ctlMain.img.setImage(image);
+					}else {
+						Image image = new Image("/image/Vision-110C_Vang.PNG");
+						ctlMain.img.setImage(image);
+
+					}
+				}
+				ctlMain.txtThongTinBaoHanh.setText(thongTinBaoHanh);
+
+				Stage stage=new Stage();
+				stage.initOwner(btnThem.getScene().getWindow());
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(new Scene(root));
+				Main.primaryStage=stage;
+				stage.show();
+				stage.setOnHidden(evv->{
+					handleRefersh(new ActionEvent());
+				});
+			}
+		});
 
 	}
 	private void UploaderDuLieuLenBang(){

@@ -61,6 +61,9 @@ public class QuanLyHopDongController implements Initializable{
 		colTienDatThanhToan.setCellValueFactory(new PropertyValueFactory<>("tienDatThanhToan"));
 		colTienPhaiThanhToan.setCellValueFactory(new PropertyValueFactory<>("tienPhaiThanhToan"));
 		
+		tbl_view.setOnMouseClicked(e->{
+			
+		});
 		UploaderDuLieuLenBang();
 	}
 	private void UploaderDuLieuLenBang(){

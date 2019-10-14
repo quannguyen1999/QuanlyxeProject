@@ -20,7 +20,7 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css" />
             <HBox alignment="CENTER" prefHeight="52.0" prefWidth="600.0">
                <children>
-                  <Label text="Phiếu xuất" textFill="WHITE">
+                  <Label fx:id="lblTitle" text="Phiếu xuất" textFill="WHITE">
                      <font>
                         <Font name="Calibri Light" size="24.0" />
                      </font>

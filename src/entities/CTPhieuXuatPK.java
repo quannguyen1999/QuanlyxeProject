@@ -10,7 +10,7 @@ public class CTPhieuXuatPK implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int phieuXuat;
+	private Integer phieuXuat;
 	private String xe;
 	public CTPhieuXuatPK(int phieuXuat, String xe) {
 		super();

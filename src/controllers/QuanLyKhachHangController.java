@@ -2,9 +2,12 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
 
 import application.Main;
 import dao.QuanLyAccount;
@@ -12,6 +15,7 @@ import dao.QuanLyKhachHang;
 import dao.QuanLyXe;
 import entities.Account;
 import entities.KhachHang;
+import entities.NhanVien;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,27 +38,29 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class QuanLyKhachHangController implements Initializable{
-	
-//	private int maKH;
-//	private String diaChi;
-//	private String email;
-//	private String soDT;
-//	private String tenKH;
-	
+
+	//	private int maKH;
+	//	private String diaChi;
+	//	private String email;
+	//	private String soDT;
+	//	private String tenKH;
+
 	@FXML 
 	private BorderPane bd;
-	
+
 	private TableView<KhachHang> tbl_view;
-	
+
 	TableColumn<KhachHang, String> colMaKH;
 	TableColumn<KhachHang, String> colDiaChi;
 	TableColumn<KhachHang, String> colEmail;
 	TableColumn<KhachHang, String> colSoDT;
 	TableColumn<KhachHang, String> colTenKH;
-	
+
 	@FXML 
 	TextField txtMa;
 	
+	@FXML JFXButton btnThem;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -64,7 +70,7 @@ public class QuanLyKhachHangController implements Initializable{
 		colEmail=new TableColumn<KhachHang, String>("Email");
 		colSoDT=new TableColumn<KhachHang, String>("Số điện thoại");
 		colTenKH=new TableColumn<KhachHang, String>("Tên KH");
-		
+
 		tbl_view.getColumns().addAll(colMaKH,colDiaChi,colEmail,colSoDT,colTenKH);
 
 		bd.setCenter(tbl_view);
@@ -74,8 +80,51 @@ public class QuanLyKhachHangController implements Initializable{
 		colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 		colSoDT.setCellValueFactory(new PropertyValueFactory<>("soDT"));
 		colTenKH.setCellValueFactory(new PropertyValueFactory<>("tenKH"));
-		
+
 		UploaderDuLieuLenBang();
+
+		tbl_view.setOnMouseClicked(e->{
+			int result=tbl_view.getSelectionModel().getSelectedIndex();
+			if(result!=-1) {
+				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinKhachHang.fxml"));
+
+				Parent root = null;
+				try {
+					root = loader.load();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				ThemKhachHang ctlMain=loader.getController();
+
+				int colMaKH=tbl_view.getItems().get(result).getMaKH();
+				String diaChi=tbl_view.getItems().get(result).getDiaChi();
+				String email=tbl_view.getItems().get(result).getEmail();
+				String soDT=tbl_view.getItems().get(result).getSoDT();
+				String tenKH=tbl_view.getItems().get(result).getTenKH();
+
+				KhachHang nv=QuanLyKhachHang.timMa(colMaKH);
+				ctlMain.lblTitle.setText("Cập nhập khách hàng");
+				ctlMain.txtMa.setText(String.valueOf(colMaKH));
+				ctlMain.txtDiaChi.setText(diaChi);
+				ctlMain.txtEmail.setText(email);
+				ctlMain.txtDienThoai.setText(soDT);
+				ctlMain.txtTenKH.setText(tenKH);
+				
+				Stage stage=new Stage();
+				stage.initOwner(btnThem.getScene().getWindow());
+				stage.setScene(new Scene(root));
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				Main.primaryStage=stage;
+				stage.show();
+				stage.setOnHidden(evv->{
+					handleRefersh(new ActionEvent());
+				});
+			}
+		});
+
 	}
 	ObservableList<KhachHang> list = null;
 	@SuppressWarnings("unused")
@@ -159,6 +208,6 @@ public class QuanLyKhachHangController implements Initializable{
 			System.out.println(e2.getMessage());
 		}
 	}
-	
+
 
 }

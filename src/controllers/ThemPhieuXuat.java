@@ -43,6 +43,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 public class ThemPhieuXuat implements Initializable{
+	@FXML Label lblTitle;
 	@FXML ImageView img;
 	@FXML ComboBox<String> boxMaXe;
 	@FXML ComboBox<String> boxMaNV;
@@ -188,19 +189,18 @@ public class ThemPhieuXuat implements Initializable{
 							Image image = new Image("/image/Blade-110C_den.PNG");
 							img.setImage(image);
 						}
-					}else if(xe.getTenXe().equals("SUPER-CUB")) {
+					}else if(xe.getTenXe().contentEquals("SUPER-CUB")) {
 						Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
 						img.setImage(image);
-					}else if(xe.getTenXe().equals("SH-300c")) {
+					}else if(xe.getTenXe().contentEquals("SH-300c")) {
 						if(xe.getMauXe().length()==3) {
 							Image image = new Image("/image/SH-300c_den.PNG");
 							img.setImage(image);
 						}else {
-							System.out.println("false");
 							Image image = new Image("/image/SH-300c_trang.PNG");
 							img.setImage(image);
 						}
-					}else if(xe.getTenXe().equals("Vision-110C")) {
+					}else if(xe.getTenXe().contentEquals("Vision-110C")) {
 						if(xe.getMauXe().length()==2) {
 							Image image = new Image("/image/Vision-110C_do.PNG");
 							img.setImage(image);

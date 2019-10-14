@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 
 import application.Main;
 import dao.QuanLyAccount;
@@ -26,6 +27,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -33,6 +36,7 @@ import javafx.stage.StageStyle;
 
 public class QuanLyTaiKhoanController implements Initializable{
 	QuanLyAccount ql=new QuanLyAccount();
+	@FXML JFXButton btnThem;
 	@FXML 
 	private BorderPane bd;
 
@@ -62,6 +66,42 @@ public class QuanLyTaiKhoanController implements Initializable{
 		colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
 		colLoaiTK.setCellValueFactory(new PropertyValueFactory<>("loaiTK"));
 
+		tbl_view.setOnMouseClicked(ev->{
+			int result=tbl_view.getSelectionModel().getSelectedIndex();
+
+			if(result!=-1) {
+				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinTaiKhoan.fxml"));
+
+				Parent root = null;
+				try {
+					root = loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				ThemTaiKhoan ctlMain=loader.getController();
+				String userName=tbl_view.getItems().get(result).getUserName();
+				String password=tbl_view.getItems().get(result).getPassword();
+				String loaiTK=tbl_view.getItems().get(result).getLoaiTK();
+				ctlMain.txtUserName.setText(userName);
+				ctlMain.txtPassword.setText(password);
+				ctlMain.choiceBox.setValue(loaiTK);
+				ctlMain.lblTitle.setText("Cập nhập tài khoản");
+				ctlMain.txtUserName.setEditable(false);
+
+				Stage stage=new Stage();
+				stage.initOwner(btnThem.getScene().getWindow());
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(new Scene(root));
+				Main.primaryStage=stage;
+				stage.show();
+				stage.setOnHidden(evv->{
+					handleRefersh(new ActionEvent());
+				});
+			}
+		});
 		UploaderDuLieuLenBang();
 	}
 
@@ -74,7 +114,31 @@ public class QuanLyTaiKhoanController implements Initializable{
 			tbl_view.getItems().add(t);
 		});
 	}
+	@FXML
+	private void btnKeyPressThem(KeyEvent e) {
+		System.out.println(e.getCode());
+		if(e.getCode()==KeyCode.F1) {
+			try {
+				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinTaiKhoan.fxml"));
+				Parent parent=loader.load();
+				Stage stage=new Stage(StageStyle.DECORATED);
+				stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setScene(new Scene(parent));
+				stage.show();
+				Main.primaryStage=stage;
+				stage.setOnHidden(ev->{
+					tbl_view.getItems().clear();
+					UploaderDuLieuLenBang();
+				});
 
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+		
+	}
 	private ObservableList<Account> refershhAccList(){
 		Account acc=new Account("hope", "success", "asd");
 		list=FXCollections.observableArrayList(acc);
@@ -101,6 +165,8 @@ public class QuanLyTaiKhoanController implements Initializable{
 			stage.setOnHidden(ev->{
 				handleRefersh(e);
 			});
+			
+			
 
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());

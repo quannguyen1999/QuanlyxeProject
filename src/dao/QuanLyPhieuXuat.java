@@ -12,6 +12,25 @@ import entities.NhanVien;
 import entities.PhieuXuat;
 
 public class QuanLyPhieuXuat {
+	public static CTPhieuXuat timMaCTPhieuXuat(int ma) {
+		CTPhieuXuat accs = null;
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			accs=manager.find(CTPhieuXuat.class, ma);
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		return accs;
+	}
 	public static boolean themPhieuXuat(PhieuXuat acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;

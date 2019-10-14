@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+
 import application.Main;
 import dao.QuanLyAccount;
 import dao.QuanLyNhanVien;
@@ -22,6 +25,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -34,6 +38,7 @@ public class AdminController implements Initializable{
 	@FXML BorderPane bd;
 	@FXML MenuBar mnb;
 	@FXML Label lblLogin;
+	
 	private double x, y;
     @FXML
     private void draged(MouseEvent event) {
@@ -56,6 +61,8 @@ public class AdminController implements Initializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	public void ThietLapTenNguoiDangNhap(String tenLogin) {

@@ -65,7 +65,6 @@ public class NhanVienController implements Initializable{
 			QuanLyXeController ctl=loader.getController();
 			ctl.btnThem.setDisable(true);
 			ctl.btnXoa.setDisable(true);
-			ctl.btnSua.setDisable(true);
 			mainBd.setCenter(root);
 		} catch (Exception e2) {
 			// TODO: handle exception

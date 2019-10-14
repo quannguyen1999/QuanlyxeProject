@@ -37,7 +37,7 @@
          <right>
             <VBox alignment="CENTER" prefHeight="470.0" prefWidth="101.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton onAction="#btnNhapThongTinXuatHang" prefHeight="25.0" prefWidth="107.0" text="Thêm" textFill="WHITE">
+                  <JFXButton fx:id="btnThem" onAction="#btnNhapThongTinXuatHang" prefHeight="25.0" prefWidth="107.0" text="Thêm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -46,14 +46,6 @@
                      </VBox.margin>
                   </JFXButton>
                   <JFXButton prefHeight="25.0" prefWidth="107.0" text="Xóa" textFill="WHITE">
-                     <font>
-                        <Font name="Calibri Italic" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                  </JFXButton>
-                  <JFXButton prefHeight="53.0" prefWidth="102.0" text="Xem" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>

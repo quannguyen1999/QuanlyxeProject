@@ -26,7 +26,7 @@ import entities.Xe;
 
 public class MainClass {
 	public static void main(String[] args) {
-		System.out.println(QuanLyHopDong.timMaTheoHopDong(113));
+		System.out.println(QuanLyPhieuXuat.timMaCTPhieuXuat(456));
 //		NhanVien nv=QuanLyNhanVien.timMa(Integer.parseInt("114"));
 //		HopDong hd=new HopDong(113, LocalDate.of(1999,11 ,1), Double.parseDouble("100"), Double.parseDouble("100"), nv);
 //		if(QuanLyHopDong.themHopDong(hd)==true) {

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import application.Main;
 import dao.QuanLyAccount;
 import dao.QuanLyNhanVien;
@@ -36,7 +38,7 @@ public class QuanLyNhanVienController implements Initializable{
 	private TableView<NhanVien> tbl_view;
 	@FXML private BorderPane bd;
 	@FXML TextField txtMa;
-
+	@FXML JFXButton btnThem;
 	TableColumn<NhanVien, String> colMaNV;
 	TableColumn<NhanVien, String> colChucVu;
 	TableColumn<NhanVien, String> colDiaChi;
@@ -76,6 +78,57 @@ public class QuanLyNhanVienController implements Initializable{
 		colLuongCoBan.setCellValueFactory(new PropertyValueFactory<>("luongCoBan"));
 		colNamSinh.setCellValueFactory(new PropertyValueFactory<>("namSinh"));
 		colTen.setCellValueFactory(new PropertyValueFactory<>("tenNV"));
+
+
+		tbl_view.setOnMouseClicked(ev->{
+			int result=tbl_view.getSelectionModel().getSelectedIndex();
+			if(result!=-1) {
+				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinNhanVien.fxml"));
+
+				Parent root = null;
+				try {
+					root = loader.load();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				ThemNhanVien ctlMain=loader.getController();
+
+				int colMa=tbl_view.getItems().get(result).getMaNV();
+				String colTen=tbl_view.getItems().get(result).getTenNV();
+				LocalDate colNamSinh=tbl_view.getItems().get(result).getNamSinh();
+				String colDiaChi=tbl_view.getItems().get(result).getDiaChi();
+				String colDienThoai=tbl_view.getItems().get(result).getDienThoai();
+				double colLuong=tbl_view.getItems().get(result).getLuongCoBan();
+
+				NhanVien nv=qlNV.timMa(colMa);
+				ctlMain.lblTitle.setText("Cập nhập nhân viên");
+				ctlMain.txtMa.setText(String.valueOf(colMa));
+				ctlMain.box.setValue(nv.getAccount().getUserName());
+				ctlMain.txtTen.setText(colTen);
+				ctlMain.txtNamSinh.setValue(colNamSinh);
+				ctlMain.txtDiaChi.setText(colDiaChi);
+				ctlMain.txtDienThoai.setText(colDienThoai);
+				if(nv.getGioiTinh().equals("Nu")) {
+					ctlMain.rdNu.setSelected(true);
+				}else {
+					ctlMain.rdNam.setSelected(true);
+				}
+				ctlMain.txtLuong.setText(String.valueOf(colLuong));
+
+				Stage stage=new Stage();
+				stage.initOwner(btnThem.getScene().getWindow());
+				stage.setScene(new Scene(root));
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				Main.primaryStage=stage;
+				stage.show();
+				stage.setOnHidden(evv->{
+					handleRefersh(new ActionEvent());
+				});
+			}
+		});
 
 		UploaderDuLieuLenBang();
 	}
