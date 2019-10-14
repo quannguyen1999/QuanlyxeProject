@@ -1,26 +1,30 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.List;
-import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import entities.Account;
-import entities.Xe;
+import entities.CTHopDong;
+import entities.HopDong;
+import entities.KhachHang;
+import entities.NhanVien;
 
-public class QuanLyXe {
-	public static Xe timMa(String ma) {
-		Xe accs = null;
+public class QuanLyHopDong {
+	static HopDong hd0 = null;
+	public static HopDong timMaHopDong(int ma) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
 			transaction = manager.getTransaction();
 			transaction.begin();
-			accs=manager.find(Xe.class, ma);
+			javax.persistence.Query query = manager.createQuery("from HopDong where maHopDong='"+ma+"'");
+			List<?> list=query.getResultList();
+			list.forEach(t->{
+				hd0=(HopDong) t;
+			});
 			transaction.commit();
 		} catch (Exception ex) {
 			if (transaction != null) {
@@ -30,16 +34,21 @@ public class QuanLyXe {
 		} finally {
 			manager.close();
 		}
-		return accs;
+		return hd0;
 	}
-	public static List<Xe> showTatCaXe() {
-		List<Xe> accs = null;
+	static CTHopDong hd = null;
+	public static CTHopDong timMaTheoHopDong(int ma) {
+		
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
 			transaction = manager.getTransaction();
 			transaction.begin();
-			accs=manager.createQuery("select s from Xe s",Xe.class).getResultList();
+			javax.persistence.Query query = manager.createQuery("from CTHopDong where maHopDong='"+ma+"'");
+			List<?> list=query.getResultList();
+			list.forEach(t->{
+				hd=(CTHopDong) t;
+			});
 			transaction.commit();
 		} catch (Exception ex) {
 			if (transaction != null) {
@@ -49,15 +58,15 @@ public class QuanLyXe {
 		} finally {
 			manager.close();
 		}
-		return accs;
+		return hd;
 	}
-	public static boolean xoaXe(String username) {
+	public static boolean xoaChiTietHopDong(String maHD) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
 			transaction = manager.getTransaction();
 			transaction.begin();
-			Xe acc=manager.find(Xe.class, username);//			manager.r
+			CTHopDong acc=manager.find(CTHopDong.class, maHD);//			manager.r
 			manager.remove(acc);
 			transaction.commit();
 		} catch (Exception ex) {
@@ -71,8 +80,27 @@ public class QuanLyXe {
 		}
 		return true;
 	}
-	public static boolean themXe(Xe acc) {
-
+	public static boolean xoaHopDong(int maHD) {
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			HopDong acc=manager.find(HopDong.class, maHD);//			manager.r
+			manager.remove(acc);
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			return false;
+		} finally {
+			manager.close();
+		}
+		return true;
+	}
+	public static boolean themHopDong(HopDong acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
@@ -91,8 +119,7 @@ public class QuanLyXe {
 		}
 		return true;
 	}
-	public static boolean capNhapXe(Xe acc) {
-
+	public static boolean themChiTietHopDong(CTHopDong acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
@@ -111,5 +138,23 @@ public class QuanLyXe {
 		}
 		return true;
 	}
-
+	public static List<HopDong> showTatCaHopDong() {
+		List<HopDong> accs = null;
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			accs=manager.createQuery("select s from HopDong s",HopDong.class).getResultList();
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		return accs;
+	}
 }

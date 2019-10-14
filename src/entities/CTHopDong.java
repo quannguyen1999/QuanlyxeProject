@@ -20,6 +20,15 @@ public class CTHopDong {
 	public CTHopDong() {
 		super();
 	}
+	
+	public CTHopDong(String cMND, String diaChiKH, String soDT, String tenKH, HopDong hopDong) {
+		super();
+		CMND = cMND;
+		this.diaChiKH = diaChiKH;
+		this.soDT = soDT;
+		this.tenKH = tenKH;
+		this.hopDong = hopDong;
+	}
 
 	public String getCMND() {
 		return CMND;

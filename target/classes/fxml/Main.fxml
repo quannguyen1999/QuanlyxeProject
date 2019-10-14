@@ -120,6 +120,16 @@
                   <Font name="Calibri Light" size="24.0" />
                </font>
             </Label>
+            <JFXButton onAction="#btnHideWindow" text="_" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton onAction="#btnCLoseWindow" text="X" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
          </children>
       </HBox>
    </top>

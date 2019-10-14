@@ -41,30 +41,29 @@ public class ThemXe implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		makeStageDrageable();
-		System.out.println("Lại thêm");
 		String listTayGa[]= {"SH-300c","Vision-110C"};
 		choiceBoxTenXe.getItems().add("SH-300c");
 		choiceBoxTenXe.getItems().add("Vision-110C");
 		choiceBoxTenXe.setValue("SH-300c");
 
-		String listMauTayGaSH[]= {"Trắng","Đen"};
-		String listMauTayGaVision[]= {"Xanh dương","Đỏ","Vàng"};
-		choiceBoxMauXe.getItems().add("Trắng");
-		choiceBoxMauXe.getItems().add("Đen");
-		choiceBoxMauXe.setValue("Đen");
+		String listMauTayGaSH[]= {"Trang","Den"};
+		String listMauTayGaVision[]= {"Xanh duong","Do","Vang"};
+		choiceBoxMauXe.getItems().add("Trang");
+		choiceBoxMauXe.getItems().add("Den");
+		choiceBoxMauXe.setValue("Den");
 
-		String st[] = { "Xe tay ga", "Xe số"};
+		String st[] = { "Xe tay ga", "Xe so"};
 		choiceBoxLoaiXe.getItems().add("Xe tay ga");
-		choiceBoxLoaiXe.getItems().add("Xe số");
+		choiceBoxLoaiXe.getItems().add("Xe so");
 		choiceBoxLoaiXe.setValue("Xe tay ga");
 
 		String listXeSo[]= {"SUPER-CUB","Blade-110C"};
-		String listMauXeSoSubCub[]= {"Xanh Dương"};
-		String listMauXeBlade[]= {"Đen","Xanh Dương"};
+		String listMauXeSoSubCub[]= {"Xanh duong"};
+		String listMauXeBlade[]= {"Den","Xanh duong"};
 		choiceBoxLoaiXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
-				if(st[new_value.intValue()]=="Xe tay ga") {
+				if(st[new_value.intValue()].contentEquals("Xe tay ga")) {
 					choiceBoxTenXe.getItems().clear();
 					String listTayGa[]= {"SH-300c","Vision-110C"};
 					choiceBoxTenXe.getItems().add("SH-300c");
@@ -72,14 +71,14 @@ public class ThemXe implements Initializable{
 					choiceBoxTenXe.setValue("SH-300c");
 
 					choiceBoxMauXe.getItems().clear();
-					String listMauTayGa[]= {"Trắng","Đen"};
-					choiceBoxMauXe.getItems().add("Trắng");
-					choiceBoxMauXe.getItems().add("Đen");
-					choiceBoxMauXe.setValue("Đen");
+					String listMauTayGa[]= {"Trang","Den"};
+					choiceBoxMauXe.getItems().add("Trang");
+					choiceBoxMauXe.getItems().add("Den");
+					choiceBoxMauXe.setValue("Den");
 
-					Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
+					Image image = new Image("/image/SH-300c_den.PNG");
 					img.setImage(image);
-				}else if(st[new_value.intValue()].length()==5) {
+				}else{
 					choiceBoxTenXe.getItems().clear();
 					choiceBoxMauXe.getItems().clear();
 
@@ -88,8 +87,8 @@ public class ThemXe implements Initializable{
 					choiceBoxTenXe.setValue("SUPER-CUB");
 
 
-					choiceBoxMauXe.getItems().add("Xanh Dương");
-					choiceBoxMauXe.setValue("Xanh Dương");
+					choiceBoxMauXe.getItems().add("Xanh duong");
+					choiceBoxMauXe.setValue("Xanh duong");
 
 					Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
 					img.setImage(image);
@@ -100,31 +99,31 @@ public class ThemXe implements Initializable{
 		choiceBoxTenXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
-				if(choiceBoxLoaiXe.getValue()=="Xe tay ga") {
-					if(listTayGa[new_value.intValue()]=="SH-300c") {
+				if(choiceBoxLoaiXe.getValue().contentEquals("Xe tay ga")) {
+					if(listTayGa[new_value.intValue()].contentEquals("SH-300c")) {
 						choiceBoxMauXe.getItems().clear();
-					}else if(listTayGa[new_value.intValue()]=="Vision-110C") {
+					}else{
 						choiceBoxMauXe.getItems().clear();
-						String listMauTayGaVision[]= {"Xanh Dương","Đỏ","Vàng"};
-						choiceBoxMauXe.getItems().add("Xanh Dương");
-						choiceBoxMauXe.getItems().add("Đỏ");
-						choiceBoxMauXe.getItems().add("Vàng");
-						choiceBoxMauXe.setValue("Đỏ");
+						String listMauTayGaVision[]= {"Xanh duong","Do","Vang"};
+						choiceBoxMauXe.getItems().add("Xanh Duong");
+						choiceBoxMauXe.getItems().add("Do");
+						choiceBoxMauXe.getItems().add("Vang");
+						choiceBoxMauXe.setValue("Do");
 						Image image = new Image("/image/Vision-110C_do.PNG");
 						img.setImage(image);
 					}
-				}else if(choiceBoxLoaiXe.getValue().length()==5) {
-					if(listXeSo[new_value.intValue()]=="Blade-110C") {
+				}else{
+					if(listXeSo[new_value.intValue()].contentEquals("Blade-110C")) {
 						choiceBoxMauXe.getItems().clear();
-						choiceBoxMauXe.getItems().add("Đen");
-						choiceBoxMauXe.getItems().add("Xanh Dương");
-						choiceBoxMauXe.setValue("Đen");
+						choiceBoxMauXe.getItems().add("Den");
+						choiceBoxMauXe.getItems().add("Xanh duong");
+						choiceBoxMauXe.setValue("Den");
 						Image image = new Image("/image/Blade-110C_den.PNG");
 						img.setImage(image);
 					}else {
 						choiceBoxMauXe.getItems().clear();
-						choiceBoxMauXe.getItems().add("Xanh Dương");
-						choiceBoxMauXe.setValue("Xanh Dương");
+						choiceBoxMauXe.getItems().add("Xanh duong");
+						choiceBoxMauXe.setValue("Xanh duong");
 						Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
 						img.setImage(image);
 					}
@@ -134,31 +133,30 @@ public class ThemXe implements Initializable{
 		choiceBoxMauXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
-				if(choiceBoxLoaiXe.getValue()=="Xe tay ga") {
-					if(choiceBoxTenXe.getValue()=="SH-300c") {
-						if(listMauTayGaSH[new_value.intValue()].length()==5) {
+				if(choiceBoxLoaiXe.getValue().contentEquals("Xe tay ga")) {
+					if(choiceBoxTenXe.getValue().contentEquals("SH-300c")) {
+						if(listMauTayGaSH[new_value.intValue()].contentEquals("Trang")) {
 							Image image = new Image("/image/SH-300c_trang.PNG");
 							img.setImage(image);
 						}else {
 							Image image = new Image("/image/SH-300c_den.PNG");
 							img.setImage(image);
 						}
-					}else if(choiceBoxTenXe.getValue()=="Vision-110C") {
-						if(listMauTayGaVision[new_value.intValue()]=="Xanh dương") {
+					}else {
+						if(listMauTayGaVision[new_value.intValue()].contentEquals("Xanh duong")) {
 							Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
 							img.setImage(image);
-						}else if(listMauTayGaVision[new_value.intValue()]=="Đỏ"){
+						}else if(listMauTayGaVision[new_value.intValue()].contentEquals("Do")){
 							Image image = new Image("/image/Vision-110C_do.PNG");
 							img.setImage(image);
-						}else if(listMauTayGaVision[new_value.intValue()]=="Vàng") {
+						}else {
 							Image image = new Image("/image/Vision-110C_Vang.PNG");
 							img.setImage(image);
 						}
 					}
-				}else if(choiceBoxLoaiXe.getValue().length()==5) {
-					if(choiceBoxTenXe.getValue()=="Blade-110C") {
-						System.out.println("là màu:"+listMauXeBlade[new_value.intValue()]);
-						if(listMauXeBlade[new_value.intValue()].equals("Đen")) {
+				}else{
+					if(choiceBoxTenXe.getValue().contentEquals("Blade-110C")) {
+						if(listMauXeBlade[new_value.intValue()].contentEquals("Den")) {
 							Image image = new Image("/image/Blade-110C_den.PNG");
 							img.setImage(image);
 						}else {
@@ -192,14 +190,22 @@ public class ThemXe implements Initializable{
 		String loaiXe=choiceBoxLoaiXe.getValue();
 		String mauXe=choiceBoxMauXe.getValue();
 		String thongTinBaoHanh=txtThongTinBaoHanh.getText().toString();
-
 		Xe xe=new Xe(maXe, donViTinh, moTa, nhaSX, tenXe, thongTinBaoHanh, mauXe, loaiXe);
-		if(QuanLyXe.themXe(xe)==true) {
-			System.out.println(xe);
-			((Node) (e.getSource())).getScene().getWindow().hide();
+		if(lblTitle.getText().toString().equals("Cập nhập tài khoản")) {
+			if(QuanLyXe.capNhapXe(xe)==true) {
+				((Node) (e.getSource())).getScene().getWindow().hide();
+			}else {
+				thongBaoKieuLoi(e, "cập nhập không thành công");
+			}
 		}else {
-			thongBaoKieuLoi(e, "thêm không thành công");
+			if(QuanLyXe.themXe(xe)==true) {
+				System.out.println(xe);
+				((Node) (e.getSource())).getScene().getWindow().hide();
+			}else {
+				thongBaoKieuLoi(e, "thêm không thành công");
+			}
 		}
+		
 	}
 	private void makeStageDrageable() {
 		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {

@@ -146,11 +146,14 @@ public class NhanVien {
 		this.hopDong = hopDong;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "NhanVien [maNV=" + maNV + ", chucVu=" + chucVu + ", diaChi=" + diaChi + ", dienThoai=" + dienThoai
-				+ ", gioiTinh=" + gioiTinh + ", luongCoBan=" + luongCoBan + ", namSinh=" + namSinh + ", tenNV=" + tenNV
-				+ "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append(maNV);
+		return builder.toString();
 	}
 
+	
 }

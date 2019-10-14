@@ -70,17 +70,7 @@ public class KhachHang {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("KhachHang [maKH=");
 		builder.append(maKH);
-		builder.append(", diaChi=");
-		builder.append(diaChi);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", soDT=");
-		builder.append(soDT);
-		builder.append(", tenKH=");
-		builder.append(tenKH);
-		builder.append("]");
 		return builder.toString();
 	}
 	

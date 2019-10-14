@@ -25,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,10 +48,10 @@ public class QuanLyXeController implements Initializable{
 	TableColumn<Xe, String> colTenXe;
 	TableColumn<Xe, String> colMauXe;
 	TableColumn<Xe, String> colThongTinBaoHanh;
-	
+
 	@FXML 
 	TextField txtMa;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		tbl_view=new TableView<Xe>();
@@ -62,10 +63,10 @@ public class QuanLyXeController implements Initializable{
 		colTenXe=new TableColumn<Xe, String>("Tên xe");
 		colThongTinBaoHanh=new TableColumn<Xe, String>("Thông tin bảo hành");
 		colMauXe=new TableColumn<Xe, String>("Màu xe");
-		
-		
+
+
 		tbl_view.getColumns().addAll(colMaXe,colDonViTinh,colMoTa,colNhaSX,colLoaiXe,colTenXe,colThongTinBaoHanh,colMauXe);
-		
+
 		bd.setCenter(tbl_view);
 
 		colMaXe.setCellValueFactory(new PropertyValueFactory<>("maXe"));
@@ -76,9 +77,9 @@ public class QuanLyXeController implements Initializable{
 		colTenXe.setCellValueFactory(new PropertyValueFactory<>("tenXe"));
 		colMauXe.setCellValueFactory(new PropertyValueFactory<>("mauXe"));
 		colThongTinBaoHanh.setCellValueFactory(new PropertyValueFactory<>("thongTinBaoHanh"));
-	
+
 		UploaderDuLieuLenBang();
-		
+
 	}
 	private void UploaderDuLieuLenBang(){
 		List<Xe> accs=QuanLyXe.showTatCaXe();
@@ -116,34 +117,45 @@ public class QuanLyXeController implements Initializable{
 			ctlMain.txtDonViTinh.setText(donViTinh);
 			ctlMain.txtMoTa.setText(moTa);
 			ctlMain.txtNhaSX.setText(nhaSX);
-			
-			
-			
-			if(mauXe.length()==5) {
-				ctlMain.choiceBoxMauXe.getItems().add("Trắng");
-				ctlMain.choiceBoxMauXe.setValue("Trắng");
-			}else if(mauXe.length()==10) {
-				ctlMain.choiceBoxMauXe.getItems().add("Xanh Dương");
-				ctlMain.choiceBoxMauXe.setValue("Xanh Dương");
-			}else {
-				ctlMain.choiceBoxMauXe.getItems().add(mauXe);
-				ctlMain.choiceBoxMauXe.setValue(mauXe);
-			}
-			
-			if(loaiXe.length()==5) {
-				ctlMain.choiceBoxLoaiXe.getItems().add("Xe số");
-				ctlMain.choiceBoxLoaiXe.setValue("Xe số");
-			}else {
-				ctlMain.choiceBoxLoaiXe.getItems().add(loaiXe);
-				ctlMain.choiceBoxLoaiXe.setValue(loaiXe);
-			}
-			
-			ctlMain.choiceBoxTenXe.getItems().add(TenXe);
+
+			ctlMain.choiceBoxLoaiXe.setValue(loaiXe);
+			ctlMain.choiceBoxMauXe.setValue(mauXe);
 			ctlMain.choiceBoxTenXe.setValue(TenXe);
-			
-			ctlMain.choiceBoxLoaiXe.disabledProperty();
-			
-			
+			if(loaiXe.equals("Blade-110C")) {
+				if(mauXe.length()==10) {
+					Image image = new Image("/image/Blade-110C_XanhDuong.PNG");
+					ctlMain.img.setImage(image);
+
+				}else {
+					Image image = new Image("/image/Blade-110C_den.PNG");
+					ctlMain.img.setImage(image);
+				}
+			}else if(TenXe.equals("SUPER-CUB")) {
+				Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
+				ctlMain.img.setImage(image);
+			}else if(TenXe.equals("SH-300c")) {
+				if(mauXe.length()==3) {
+					System.out.println("ok");
+					Image image = new Image("/image/SH-300c_den.PNG");
+					ctlMain.img.setImage(image);
+				}else {
+					System.out.println("false");
+					Image image = new Image("/image/SH-300c_trang.PNG");
+					ctlMain.img.setImage(image);
+				}
+			}else if(TenXe.equals("Vision-110C")) {
+				if(mauXe.length()==2) {
+					Image image = new Image("/image/Vision-110C_do.PNG");
+					ctlMain.img.setImage(image);
+				}else if(mauXe.length()==10) {
+					Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
+					ctlMain.img.setImage(image);
+				}else {
+					Image image = new Image("/image/Vision-110C_Vang.PNG");
+					ctlMain.img.setImage(image);
+
+				}
+			}
 			ctlMain.txtThongTinBaoHanh.setText(thongTinBaoHanh);
 
 			Stage stage=new Stage();
@@ -160,6 +172,7 @@ public class QuanLyXeController implements Initializable{
 			thongBaoKieuLoi(e,"Bạn chưa chọn bảng cần sửa");
 		}
 	}
+
 	public void btnXoaXe(ActionEvent e) {
 		int result=tbl_view.getSelectionModel().getSelectedIndex();
 		if(result!=-1) {
@@ -189,7 +202,7 @@ public class QuanLyXeController implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
-	
+
 	@FXML 
 	public void btnTim(ActionEvent e) {
 		String text=txtMa.getText().trim().toString();

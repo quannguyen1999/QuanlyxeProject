@@ -138,4 +138,7 @@ public class NhanVienController implements Initializable{
 			System.out.println(e2.getMessage());
 		}
 	}
+	public void btnCLoseWindow(ActionEvent e) throws IOException {
+		((Node)(e.getSource())).getScene().getWindow().hide();  
+	}
 }

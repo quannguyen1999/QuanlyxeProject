@@ -3,8 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,12 +16,12 @@
             <Font name="Calibri Bold" size="24.0" />
          </font>
       </Label>
-      <BorderPane layoutY="94.0" prefHeight="581.0" prefWidth="1027.0">
+      <BorderPane fx:id="bd" layoutY="94.0" prefHeight="581.0" prefWidth="1027.0">
          <bottom>
             <AnchorPane prefHeight="104.0" prefWidth="1005.0" style="-fx-background-color: #979292;" BorderPane.alignment="CENTER">
                <children>
                   <TextField layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
-                  <Label layoutX="75.0" layoutY="14.0" text="Tìm theo mã khách hàng">
+                  <Label layoutX="75.0" layoutY="14.0" text="Tìm theo mã phiếu xuất">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -55,7 +53,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
+                  <JFXButton prefHeight="53.0" prefWidth="102.0" text="Xem" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -63,7 +61,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Hủy" textFill="WHITE">
+                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Xóa rỗng" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -74,16 +72,6 @@
                </children>
             </VBox>
          </right>
-         <center>
-            <TableView prefHeight="470.0" prefWidth="891.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="217.0" text="Mã khách hàng" />
-                <TableColumn prefWidth="244.0" text="Mã nhân viên" />
-                  <TableColumn prefWidth="161.0" text="Mã PX" />
-                  <TableColumn prefWidth="303.0" text="Ngày xuất" />
-              </columns>
-            </TableView>
-         </center>
       </BorderPane>
    </children>
 </AnchorPane>

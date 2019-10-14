@@ -44,7 +44,7 @@
             </HBox>
             <HBox prefHeight="33.0" prefWidth="600.0">
                <children>
-                  <JFXTextField prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
+                  <JFXTextField fx:id="txtPX" prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
@@ -112,7 +112,7 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <JFXTextField prefHeight="26.0" prefWidth="298.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
+                  <JFXTextField fx:id="txtDonGiaXuat" prefHeight="26.0" prefWidth="298.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
                      <HBox.margin>
                         <Insets left="30.0" />
                      </HBox.margin>
@@ -141,12 +141,12 @@
             </HBox>
             <HBox prefHeight="40.0" prefWidth="600.0">
                <children>
-                  <JFXDatePicker prefHeight="28.0" prefWidth="275.0">
+                  <JFXDatePicker fx:id="txtNgayXuat" prefHeight="28.0" prefWidth="275.0">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                   </JFXDatePicker>
-                  <JFXTextField prefHeight="26.0" prefWidth="300.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
+                  <JFXTextField fx:id="txtSoLuongXuat" prefHeight="26.0" prefWidth="300.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
                      <HBox.margin>
                         <Insets left="30.0" />
                      </HBox.margin>
@@ -163,7 +163,7 @@
                         <Insets left="130.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok" textFill="WHITE">
+                  <JFXButton onAction="#btnClickOK" prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
@@ -171,7 +171,7 @@
                         <Insets left="40.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="36.0" prefWidth="123.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng" textFill="WHITE">
+                  <JFXButton onAction="#btnXoaRong" prefHeight="36.0" prefWidth="123.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
@@ -237,7 +237,7 @@
                                                 <Insets left="20.0" right="20.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label fx:id="lblTenXe" text="Label" textFill="#fcfcff">
+                                          <Label fx:id="lblTenXe" textFill="#fcfcff">
                                              <font>
                                                 <Font name="Calibri Light Italic" size="18.0" />
                                              </font>
@@ -257,7 +257,7 @@
                                                 <Insets left="20.0" right="20.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label fx:id="lblMauXe" text="lbl" textFill="#fcfcff">
+                                          <Label fx:id="lblMauXe" textFill="#fcfcff">
                                              <font>
                                                 <Font name="Calibri Light Italic" size="18.0" />
                                              </font>
@@ -277,7 +277,7 @@
                                                 <Insets left="20.0" right="20.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label fx:id="lblBH" text="Label" textFill="#fcfcff">
+                                          <Label fx:id="lblBH" textFill="#fcfcff">
                                              <font>
                                                 <Font name="Calibri Light Italic" size="18.0" />
                                              </font>
@@ -297,7 +297,7 @@
                                                 <Insets left="20.0" right="20.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label fx:id="lblLoaiXe" text="Label" textFill="#fcfcff">
+                                          <Label fx:id="lblLoaiXe" textFill="#fcfcff">
                                              <font>
                                                 <Font name="Calibri Light Italic" size="18.0" />
                                              </font>
@@ -317,7 +317,7 @@
                                                 <Insets left="20.0" right="20.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <Label fx:id="lblNhaSX" text="Label" textFill="#fcfcff">
+                                          <Label fx:id="lblNhaSX" textFill="#fcfcff">
                                              <font>
                                                 <Font name="Calibri Light Italic" size="18.0" />
                                              </font>

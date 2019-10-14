@@ -32,7 +32,6 @@ public class AdminController implements Initializable{
 	QuanLyNhanVien qlNV=new QuanLyNhanVien();
 	QuanLyAccount qlACC=new QuanLyAccount();
 	@FXML BorderPane bd;
-	@FXML public BorderPane mainBd;
 	@FXML MenuBar mnb;
 	@FXML Label lblLogin;
 	private double x, y;
@@ -82,6 +81,9 @@ public class AdminController implements Initializable{
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		Main.primaryStage=primaryStage;
 		primaryStage.show();
+	}
+	public void btnCLoseWindow(ActionEvent e) throws IOException {
+		((Node)(e.getSource())).getScene().getWindow().hide();  
 	}
 	public void btnQuanLyNhanVien(ActionEvent e) throws IOException {
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyNhanVien.fxml"));

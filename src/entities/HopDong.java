@@ -23,6 +23,18 @@ public class HopDong {
 	public HopDong() {
 		super();
 	}
+	
+
+	public HopDong(int maHopDong, LocalDate ngayLap, Double tienDatThanhToan, Double tienPhaiThanhToan,
+			NhanVien nhanVien) {
+		super();
+		this.maHopDong = maHopDong;
+		this.ngayLap = ngayLap;
+		this.tienDatThanhToan = tienDatThanhToan;
+		this.tienPhaiThanhToan = tienPhaiThanhToan;
+		this.nhanVien = nhanVien;
+	}
+
 
 	public int getMaHopDong() {
 		return maHopDong;
@@ -65,6 +77,13 @@ public class HopDong {
 		this.nhanVien = nhanVien;
 	}
 
+
+	public HopDong(int maHopDong) {
+		super();
+		this.maHopDong = maHopDong;
+	}
+
+	
 	
 	
 	

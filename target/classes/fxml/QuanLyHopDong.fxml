@@ -3,8 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,17 +16,17 @@
             <Font name="Calibri Bold" size="24.0" />
          </font>
       </Label>
-      <BorderPane layoutY="94.0" prefHeight="581.0" prefWidth="1027.0">
+      <BorderPane fx:id="bd" layoutY="94.0" prefHeight="581.0" prefWidth="1027.0">
          <bottom>
             <AnchorPane prefHeight="104.0" prefWidth="1005.0" style="-fx-background-color: #979292;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
+                  <TextField fx:id="txtMa" layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
                   <Label layoutX="75.0" layoutY="14.0" text="TÌm theo mã hợp đồng">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="927.0" layoutY="-4.0" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
+                  <JFXButton layoutX="927.0" layoutY="-4.0" onAction="#btnTim" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -47,7 +45,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Xóa" textFill="WHITE">
+                  <JFXButton onAction="#btnXoaHopDong" prefHeight="25.0" prefWidth="107.0" text="Xóa" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -55,15 +53,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
-                     <font>
-                        <Font name="Calibri Italic" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                  </JFXButton>
-                  <JFXButton prefHeight="25.0" prefWidth="107.0" text="Hủy" textFill="WHITE">
+                  <JFXButton onAction="#btnXoaRong" prefHeight="25.0" prefWidth="107.0" text="Xóa rỗng" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
@@ -74,17 +64,6 @@
                </children>
             </VBox>
          </right>
-         <center>
-            <TableView prefHeight="470.0" prefWidth="891.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="121.0" text="mã hợp đồng" />
-                <TableColumn prefWidth="211.0" text="Mã nhân viên" />
-                  <TableColumn prefWidth="201.0" text="Ngày lập" />
-                  <TableColumn prefWidth="200.0" text="Tiền đặt thanh toán" />
-                  <TableColumn prefWidth="192.0" text="Tiền phải thanh toán" />
-              </columns>
-            </TableView>
-         </center>
       </BorderPane>
    </children>
 </AnchorPane>
