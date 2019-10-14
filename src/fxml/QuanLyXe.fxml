@@ -53,7 +53,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btnSua" prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
+                  <JFXButton fx:id="btnSua" onAction="#btnSuaXe" prefHeight="25.0" prefWidth="107.0" text="Sửa" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>

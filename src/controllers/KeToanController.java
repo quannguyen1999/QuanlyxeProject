@@ -28,15 +28,25 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class KeToanController implements Initializable{
-	private double xOffset = 0;
-	private double yOffset = 0;
 	@FXML public BorderPane mainBd;
 	@FXML Label lblLogin;
 	@FXML MenuBar mnb;
+	private double x, y;
+    @FXML
+    private void draged(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setX(event.getScreenX() - x);
+        stage.setY(event.getScreenY() - y);
+    }
+
+    @FXML
+    private void pressed(MouseEvent event) {
+        x = event.getSceneX();
+        y = event.getSceneY();
+    }
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		makeStageDrageable();
 		try {
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyXe.fxml"));
 			mainBd.setCenter(root);
@@ -139,27 +149,4 @@ public class KeToanController implements Initializable{
 		stage.setIconified(true);
 	}
 
-	private void makeStageDrageable() {
-		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				xOffset = event.getSceneX();
-				yOffset = event.getSceneY();
-			}
-		});
-		mainBd.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-
-				Main.primaryStage.setX(event.getScreenX() - xOffset);
-				Main.primaryStage.setY(event.getScreenY() - yOffset);
-				Main.primaryStage.setOpacity(0.7f);
-			}
-		});
-		mainBd.setOnDragDone((e) -> {
-			Main.primaryStage.setOpacity(1.0f);
-		});
-		mainBd.setOnMouseReleased((e) -> {
-			Main.primaryStage.setOpacity(1.0f);
-		});
-
-	}
 }

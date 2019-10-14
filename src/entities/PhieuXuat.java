@@ -31,7 +31,13 @@ public class PhieuXuat {
 	public PhieuXuat() {
 		super();
 	}
-
+	public PhieuXuat(int maPX, NhanVien nhanVien, KhachHang khachHang, LocalDate ngayXuat) {
+		super();
+		this.maPX = maPX;
+		this.nhanVien = nhanVien;
+		this.khachHang = khachHang;
+		this.ngayXuat = ngayXuat;
+	}
 	public int getMaPX() {
 		return maPX;
 	}
@@ -71,23 +77,20 @@ public class PhieuXuat {
 	public void setcTPhieuXuat(List<CTPhieuXuat> cTPhieuXuat) {
 		this.cTPhieuXuat = cTPhieuXuat;
 	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("PhieuXuat [maPX=");
 		builder.append(maPX);
 		builder.append(", nhanVien=");
-		builder.append(nhanVien);
+		builder.append(nhanVien.getMaNV());
 		builder.append(", khachHang=");
-		builder.append(khachHang);
+		builder.append(khachHang.getMaKH());
 		builder.append(", ngayXuat=");
 		builder.append(ngayXuat);
-		builder.append(", cTPhieuXuat=");
-		builder.append(cTPhieuXuat);
-		builder.append("]");
 		return builder.toString();
 	}
+
 	
 	
 	

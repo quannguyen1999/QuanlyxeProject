@@ -187,7 +187,7 @@
                         <ToggleGroup fx:id="gioiTinh" />
                      </toggleGroup>
                   </JFXRadioButton>
-                  <JFXRadioButton fx:id="raNu" text="Nữ" textFill="#fdfdfd" toggleGroup="$gioiTinh">
+                  <JFXRadioButton fx:id="rdNu" text="Nữ" textFill="#fdfdfd" toggleGroup="$gioiTinh">
                      <HBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </HBox.margin>

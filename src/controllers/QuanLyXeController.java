@@ -91,42 +91,74 @@ public class QuanLyXeController implements Initializable{
 		tbl_view.getItems().clear();
 		UploaderDuLieuLenBang();
 	}
-	public void btnSuaXe(ActionEvent e) {
-//		int result=tbl_view.getSelectionModel().getSelectedIndex();
-//
-//		if(result!=-1) {
-//			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinXe.fxml"));
-//
-//			Parent root=loader.load();
-//
-//			ThemXe ctlMain=loader.getController();
-//
-////			String maXe=tbl_view.getItems().get(result).getUserName();
-////			String donViTinh=tbl_view.getItems().get(result).getPassword();
-////			String moTa=tbl_view.getItems().get(result).getLoaiTK();
-////			String nhaSX=tbl_view.getItems().get(result).getLoaiTK();
-////			String LoaiXe=tbl_view.getItems().get(result).getLoaiTK();
-////			String TenXe=tbl_view.getItems().get(result).getLoaiTK();
-////			String LoaiXe=tbl_view.getItems().get(result).getLoaiTK();
-////			ctlMain.txtUserName.setText(userName);
-////			ctlMain.txtPassword.setText(password);
-////			ctlMain.choiceBox.setValue(loaiTK);
-////			ctlMain.lblTitle.setText("Cập nhập tài khoản");
-////			ctlMain.txtUserName.setEditable(false);
-//
-//			Stage stage=new Stage();
-//			stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
-//			stage.initStyle(StageStyle.UNDECORATED);
-//			stage.initModality(Modality.APPLICATION_MODAL);
-//			stage.setScene(new Scene(root));
-//			Main.primaryStage=stage;
-//			stage.show();
-//			stage.setOnHidden(ev->{
-//				handleRefersh(new ActionEvent());
-//			});
-//		}else {
-//			thongBaoKieuLoi(e,"Bạn chưa chọn bảng cần sửa");
-//		}
+	public void btnSuaXe(ActionEvent e) throws IOException {
+		int result=tbl_view.getSelectionModel().getSelectedIndex();
+
+		if(result!=-1) {
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinXe.fxml"));
+
+			Parent root=loader.load();
+
+			ThemXe ctlMain=loader.getController();
+
+			String maXe=tbl_view.getItems().get(result).getMaXe();
+			String donViTinh=tbl_view.getItems().get(result).getDonViTinh();
+			String moTa=tbl_view.getItems().get(result).getMoTa();
+			String nhaSX=tbl_view.getItems().get(result).getNhaSX();
+			String LoaiXe=tbl_view.getItems().get(result).getLoaiXe();
+			String TenXe=tbl_view.getItems().get(result).getTenXe();
+			String thongTinBaoHanh=tbl_view.getItems().get(result).getThongTinBaoHanh();
+			String loaiXe=tbl_view.getItems().get(result).getLoaiXe();
+			String mauXe=tbl_view.getItems().get(result).getMauXe();
+			ctlMain.lblTitle.setText("Cập nhập tài khoản");
+			ctlMain.txtMaXe.setText(maXe);
+			ctlMain.txtMaXe.setEditable(false);
+			ctlMain.txtDonViTinh.setText(donViTinh);
+			ctlMain.txtMoTa.setText(moTa);
+			ctlMain.txtNhaSX.setText(nhaSX);
+			
+			
+			
+			if(mauXe.length()==5) {
+				ctlMain.choiceBoxMauXe.getItems().add("Trắng");
+				ctlMain.choiceBoxMauXe.setValue("Trắng");
+			}else if(mauXe.length()==10) {
+				ctlMain.choiceBoxMauXe.getItems().add("Xanh Dương");
+				ctlMain.choiceBoxMauXe.setValue("Xanh Dương");
+			}else {
+				ctlMain.choiceBoxMauXe.getItems().add(mauXe);
+				ctlMain.choiceBoxMauXe.setValue(mauXe);
+			}
+			
+			if(loaiXe.length()==5) {
+				ctlMain.choiceBoxLoaiXe.getItems().add("Xe số");
+				ctlMain.choiceBoxLoaiXe.setValue("Xe số");
+			}else {
+				ctlMain.choiceBoxLoaiXe.getItems().add(loaiXe);
+				ctlMain.choiceBoxLoaiXe.setValue(loaiXe);
+			}
+			
+			ctlMain.choiceBoxTenXe.getItems().add(TenXe);
+			ctlMain.choiceBoxTenXe.setValue(TenXe);
+			
+			ctlMain.choiceBoxLoaiXe.disabledProperty();
+			
+			
+			ctlMain.txtThongTinBaoHanh.setText(thongTinBaoHanh);
+
+			Stage stage=new Stage();
+			stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setScene(new Scene(root));
+			Main.primaryStage=stage;
+			stage.show();
+			stage.setOnHidden(ev->{
+				handleRefersh(new ActionEvent());
+			});
+		}else {
+			thongBaoKieuLoi(e,"Bạn chưa chọn bảng cần sửa");
+		}
 	}
 	public void btnXoaXe(ActionEvent e) {
 		int result=tbl_view.getSelectionModel().getSelectedIndex();

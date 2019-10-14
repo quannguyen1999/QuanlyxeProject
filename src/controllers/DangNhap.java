@@ -28,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class DangNhap implements Initializable{
 	private double xOffset = 0;
@@ -119,6 +120,7 @@ public class DangNhap implements Initializable{
 					KeToanController ctlKeToan=loader.getController();
 					ctlKeToan.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
 					stage=new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.show();
 					break;
@@ -129,6 +131,7 @@ public class DangNhap implements Initializable{
 					AdminController ctlAdmin=loader.getController();
 					ctlAdmin.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
 					stage=new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.show();
 					break;
@@ -139,6 +142,7 @@ public class DangNhap implements Initializable{
 					NhanVienController ctlNhanVien=loader.getController();
 					ctlNhanVien.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
 					stage=new Stage();
+					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.show();
 					break;

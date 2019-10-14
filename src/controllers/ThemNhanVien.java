@@ -54,7 +54,7 @@ public class ThemNhanVien implements Initializable{
 		box.setEditable(true);
 		loadDuLieu();
 	}
-
+	
 	public  void loadDuLieu() {
 		ObservableList<String> items = FXCollections.observableArrayList();
 

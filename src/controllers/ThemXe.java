@@ -41,7 +41,7 @@ public class ThemXe implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		makeStageDrageable();
-
+		System.out.println("Lại thêm");
 		String listTayGa[]= {"SH-300c","Vision-110C"};
 		choiceBoxTenXe.getItems().add("SH-300c");
 		choiceBoxTenXe.getItems().add("Vision-110C");
@@ -66,14 +66,12 @@ public class ThemXe implements Initializable{
 			{ 
 				if(st[new_value.intValue()]=="Xe tay ga") {
 					choiceBoxTenXe.getItems().clear();
-					choiceBoxMauXe.getItems().clear();
-
-
 					String listTayGa[]= {"SH-300c","Vision-110C"};
 					choiceBoxTenXe.getItems().add("SH-300c");
 					choiceBoxTenXe.getItems().add("Vision-110C");
 					choiceBoxTenXe.setValue("SH-300c");
 
+					choiceBoxMauXe.getItems().clear();
 					String listMauTayGa[]= {"Trắng","Đen"};
 					choiceBoxMauXe.getItems().add("Trắng");
 					choiceBoxMauXe.getItems().add("Đen");
@@ -81,7 +79,7 @@ public class ThemXe implements Initializable{
 
 					Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
 					img.setImage(image);
-				}else if(st[new_value.intValue()]=="Xe số") {
+				}else if(st[new_value.intValue()].length()==5) {
 					choiceBoxTenXe.getItems().clear();
 					choiceBoxMauXe.getItems().clear();
 
@@ -99,7 +97,6 @@ public class ThemXe implements Initializable{
 				}
 			} 
 		}); 
-
 		choiceBoxTenXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
@@ -108,15 +105,15 @@ public class ThemXe implements Initializable{
 						choiceBoxMauXe.getItems().clear();
 					}else if(listTayGa[new_value.intValue()]=="Vision-110C") {
 						choiceBoxMauXe.getItems().clear();
-						String listMauTayGaVision[]= {"Xanh dương","Đỏ","Vàng"};
-						choiceBoxMauXe.getItems().add("Xanh dương");
+						String listMauTayGaVision[]= {"Xanh Dương","Đỏ","Vàng"};
+						choiceBoxMauXe.getItems().add("Xanh Dương");
 						choiceBoxMauXe.getItems().add("Đỏ");
 						choiceBoxMauXe.getItems().add("Vàng");
 						choiceBoxMauXe.setValue("Đỏ");
 						Image image = new Image("/image/Vision-110C_do.PNG");
 						img.setImage(image);
 					}
-				}else if(choiceBoxLoaiXe.getValue()=="Xe số") {
+				}else if(choiceBoxLoaiXe.getValue().length()==5) {
 					if(listXeSo[new_value.intValue()]=="Blade-110C") {
 						choiceBoxMauXe.getItems().clear();
 						choiceBoxMauXe.getItems().add("Đen");
@@ -131,17 +128,15 @@ public class ThemXe implements Initializable{
 						Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
 						img.setImage(image);
 					}
-
 				}
 			}
 		});
 		choiceBoxMauXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
-				System.out.println(choiceBoxLoaiXe.getValue());
 				if(choiceBoxLoaiXe.getValue()=="Xe tay ga") {
 					if(choiceBoxTenXe.getValue()=="SH-300c") {
-						if(listMauTayGaSH[new_value.intValue()]=="Trắng") {
+						if(listMauTayGaSH[new_value.intValue()].length()==5) {
 							Image image = new Image("/image/SH-300c_trang.PNG");
 							img.setImage(image);
 						}else {
@@ -160,8 +155,7 @@ public class ThemXe implements Initializable{
 							img.setImage(image);
 						}
 					}
-
-				}else if(choiceBoxLoaiXe.getValue()=="Xe số") {
+				}else if(choiceBoxLoaiXe.getValue().length()==5) {
 					if(choiceBoxTenXe.getValue()=="Blade-110C") {
 						System.out.println("là màu:"+listMauXeBlade[new_value.intValue()]);
 						if(listMauXeBlade[new_value.intValue()].equals("Đen")) {
@@ -172,10 +166,11 @@ public class ThemXe implements Initializable{
 							img.setImage(image);
 						}
 					}
-					
+
 				}
 			}
 		}); 
+
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  
@@ -197,7 +192,7 @@ public class ThemXe implements Initializable{
 		String loaiXe=choiceBoxLoaiXe.getValue();
 		String mauXe=choiceBoxMauXe.getValue();
 		String thongTinBaoHanh=txtThongTinBaoHanh.getText().toString();
-		
+
 		Xe xe=new Xe(maXe, donViTinh, moTa, nhaSX, tenXe, thongTinBaoHanh, mauXe, loaiXe);
 		if(QuanLyXe.themXe(xe)==true) {
 			System.out.println(xe);

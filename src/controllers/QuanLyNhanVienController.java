@@ -46,13 +46,13 @@ public class QuanLyNhanVienController implements Initializable{
 	TableColumn<NhanVien, String> colNamSinh;
 	TableColumn<NhanVien, String> colTen;
 	TableColumn<NhanVien, String> colUserName;
-	
+
 	QuanLyNhanVien qlNV=new QuanLyNhanVien();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 		tbl_view=new TableView<NhanVien>();
 		colMaNV=new TableColumn<NhanVien, String>("Mã");
 		colChucVu=new TableColumn<NhanVien, String>("Chức vụ");
@@ -62,12 +62,12 @@ public class QuanLyNhanVienController implements Initializable{
 		colLuongCoBan=new TableColumn<NhanVien, String>("Lương co bản");
 		colNamSinh=new TableColumn<NhanVien, String>("Năm sinh");
 		colTen=new TableColumn<NhanVien, String>("Tên");
-//		colUserName=new TableColumn<NhanVien, String>("account");
-	
+		//		colUserName=new TableColumn<NhanVien, String>("account");
+
 		tbl_view.getColumns().addAll(colMaNV,colChucVu,colDiaChi,colDienThoai,colGioiTinh,colLuongCoBan,colNamSinh,colTen);
-		
+
 		bd.setCenter(tbl_view);
-		
+
 		colMaNV.setCellValueFactory(new PropertyValueFactory<>("maNV"));
 		colChucVu.setCellValueFactory(new PropertyValueFactory<>("chucVu"));
 		colDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
@@ -76,7 +76,7 @@ public class QuanLyNhanVienController implements Initializable{
 		colLuongCoBan.setCellValueFactory(new PropertyValueFactory<>("luongCoBan"));
 		colNamSinh.setCellValueFactory(new PropertyValueFactory<>("namSinh"));
 		colTen.setCellValueFactory(new PropertyValueFactory<>("tenNV"));
-		
+
 		UploaderDuLieuLenBang();
 	}
 	private void UploaderDuLieuLenBang(){
@@ -138,6 +138,8 @@ public class QuanLyNhanVienController implements Initializable{
 		}
 	}
 	public void btnSuaTaiKhoan(ActionEvent e) throws IOException {
+
+
 		int result=tbl_view.getSelectionModel().getSelectedIndex();
 
 		if(result!=-1) {
@@ -153,7 +155,7 @@ public class QuanLyNhanVienController implements Initializable{
 			String colDiaChi=tbl_view.getItems().get(result).getDiaChi();
 			String colDienThoai=tbl_view.getItems().get(result).getDienThoai();
 			double colLuong=tbl_view.getItems().get(result).getLuongCoBan();
-			
+
 			NhanVien nv=qlNV.timMa(colMa);
 			ctlMain.lblTitle.setText("Cập nhập nhân viên");
 			ctlMain.txtMa.setText(String.valueOf(colMa));
@@ -187,7 +189,7 @@ public class QuanLyNhanVienController implements Initializable{
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
 	}
-	
+
 	@FXML 
 	public void btnTim(ActionEvent e) {
 		NhanVien acc=null;

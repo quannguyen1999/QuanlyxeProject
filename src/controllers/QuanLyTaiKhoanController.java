@@ -134,13 +134,6 @@ public class QuanLyTaiKhoanController implements Initializable{
 		}else {
 			thongBaoKieuLoi(e, "bạn chưa chọn bảng cần xóa");
 		}
-		//		String acc=tbl_view.getItems().get(result).getUserName();
-		//		if(ql.xoaAcc(acc)==true) {
-		//			thongBaoKieuLoi(e,"xóa thành công");
-		//			handleRefersh(e);
-		//		}else {
-		//			thongBaoKieuLoi(e,"lỗi");
-		//		}
 	}
 	@FXML 
 	public void btnTim(ActionEvent e) {
@@ -167,7 +160,6 @@ public class QuanLyTaiKhoanController implements Initializable{
 			Parent root=loader.load();
 
 			ThemTaiKhoan ctlMain=loader.getController();
-
 			String userName=tbl_view.getItems().get(result).getUserName();
 			String password=tbl_view.getItems().get(result).getPassword();
 			String loaiTK=tbl_view.getItems().get(result).getLoaiTK();

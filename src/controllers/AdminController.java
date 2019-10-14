@@ -31,14 +31,24 @@ import javafx.stage.StageStyle;
 public class AdminController implements Initializable{
 	QuanLyNhanVien qlNV=new QuanLyNhanVien();
 	QuanLyAccount qlACC=new QuanLyAccount();
-	private double xOffset = 0;
-	private double yOffset = 0;
 	@FXML BorderPane bd;
 	@FXML public BorderPane mainBd;
 	@FXML MenuBar mnb;
 	@FXML Label lblLogin;
+	private double x, y;
+    @FXML
+    private void draged(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setX(event.getScreenX() - x);
+        stage.setY(event.getScreenY() - y);
+    }
+
+    @FXML
+    private void pressed(MouseEvent event) {
+        x = event.getSceneX();
+        y = event.getSceneY();
+    }
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		makeStageDrageable();
 		qlNV.showTatCaNhanVien();
 		qlACC.showTatCaAccount();
 		try {
@@ -117,29 +127,5 @@ public class AdminController implements Initializable{
 			System.out.println(e2.getMessage());
 		}
 	}
-	private void makeStageDrageable() {
-		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				xOffset = event.getSceneX();
-				yOffset = event.getSceneY();
-			}
-		});
-		mainBd.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-
-				Main.primaryStage.setX(event.getScreenX() - xOffset);
-				Main.primaryStage.setY(event.getScreenY() - yOffset);
-				Main.primaryStage.setOpacity(0.7f);
-			}
-		});
-		mainBd.setOnDragDone((e) -> {
-			Main.primaryStage.setOpacity(1.0f);
-		});
-		mainBd.setOnMouseReleased((e) -> {
-			Main.primaryStage.setOpacity(1.0f);
-		});
-
-	}
-
 
 }

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#draged" onMousePressed="#pressed" prefHeight="517.0" prefWidth="914.0" styleClass="sidebar" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemPhieuXuat">
+   <left>
+      <VBox prefHeight="518.0" prefWidth="635.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css" />
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="600.0">
+               <children>
+                  <Label text="Phiếu xuất" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Light" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="542.0" text="Mã phiếu xuất" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="600.0">
+               <children>
+                  <JFXTextField prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="273.0" text="Mã nhân viên" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="352.0" text="Mã Xe" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="80.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="600.0">
+               <children>
+                  <ComboBox fx:id="boxMaNV" prefHeight="26.0" prefWidth="274.0">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="boxMaXe" prefHeight="26.0" prefWidth="274.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="31.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="272.0" text="Mã khách hàng" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="300.0" text="Đơn giá xuất" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="600.0">
+               <children>
+                  <ComboBox fx:id="boxMaKH" prefHeight="26.0" prefWidth="273.0">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <JFXTextField prefHeight="26.0" prefWidth="298.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Ngày xuất" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="646.0" text="Số lượng xuất" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="600.0">
+               <children>
+                  <JFXDatePicker prefHeight="28.0" prefWidth="275.0">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </JFXDatePicker>
+                  <JFXTextField prefHeight="26.0" prefWidth="300.0" promptText="Nhập mã khách hàng..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton onAction="#btnCLoseWindow" styleClass="btnLogin" stylesheets="@../css/application.css" text="Thoát" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="130.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="40.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton prefHeight="36.0" prefWidth="123.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <HBox prefHeight="518.0" prefWidth="297.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox>
+               <children>
+                  <HBox alignment="TOP_RIGHT" prefHeight="518.0" prefWidth="291.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="518.0" prefWidth="269.0">
+                           <children>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="68.0" prefWidth="270.0">
+                                 <children>
+                                    <Label alignment="CENTER" prefHeight="27.0" prefWidth="393.0" text="Thông tin xe" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets left="20.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Calibri Light Italic" size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="TOP_RIGHT" prefHeight="68.0" prefWidth="142.0">
+                                       <children>
+                                          <JFXButton onAction="#btnCLoseWindow" text="X" textFill="WHITE">
+                                             <font>
+                                                <Font name="Calibri Light" size="18.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <ImageView fx:id="img" fitHeight="216.0" fitWidth="244.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/Blade-110C_den.PNG" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ImageView>
+                              <VBox prefHeight="226.0" prefWidth="270.0">
+                                 <children>
+                                    <HBox prefHeight="8.0" prefWidth="270.0">
+                                       <children>
+                                          <Label text="Tên xe:" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label fx:id="lblTenXe" text="Label" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="24.0" prefWidth="270.0">
+                                       <children>
+                                          <Label text="Màu xe:" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label fx:id="lblMauXe" text="lbl" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="0.0" prefWidth="270.0">
+                                       <children>
+                                          <Label text="Thông tin bảo hành:" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label fx:id="lblBH" text="Label" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="0.0" prefWidth="270.0">
+                                       <children>
+                                          <Label text="Loại xe:" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label fx:id="lblLoaiXe" text="Label" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="0.0" prefWidth="270.0">
+                                       <children>
+                                          <Label text="Nhà sản xuất:" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label fx:id="lblNhaSX" text="Label" textFill="#fcfcff">
+                                             <font>
+                                                <Font name="Calibri Light Italic" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="15.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

@@ -26,6 +26,16 @@ public class CTPhieuXuat {
 	public CTPhieuXuat() {
 		super();
 	}
+	
+	public CTPhieuXuat(PhieuXuat phieuXuat, Xe xe, double donGiaXuat, int sLXuat, double thue) {
+		super();
+		this.phieuXuat = phieuXuat;
+		this.xe = xe;
+		this.donGiaXuat = donGiaXuat;
+		this.sLXuat = sLXuat;
+		this.thue = thue;
+	}
+
 	public PhieuXuat getPhieuXuat() {
 		return phieuXuat;
 	}

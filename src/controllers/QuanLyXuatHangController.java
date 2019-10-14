@@ -23,7 +23,7 @@ public class QuanLyXuatHangController implements Initializable{
 	public void btnNhapThongTinXuatHang(ActionEvent e) throws IOException {
 		try {
 			Stage primaryStage=new Stage();
-			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormThongTinXuatHang.fxml"));
+			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormThongTinPhieuXuat.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);

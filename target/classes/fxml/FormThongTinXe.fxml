@@ -193,7 +193,7 @@
    <top>
       <AnchorPane prefHeight="33.0" prefWidth="811.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="361.0" layoutY="8.0" text="Thêm xe" textFill="WHITE">
+            <Label fx:id="lblTitle" layoutX="361.0" layoutY="8.0" text="Thêm xe" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
