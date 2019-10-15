@@ -79,7 +79,7 @@
                </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
-            <JFXButton alignment="BASELINE_LEFT" onAction="#btnQuanLyXe" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Danh Sách" textFill="#c3baba">
+            <JFXButton alignment="BASELINE_LEFT" onAction="#btnQuanLyXe" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Danh Sách xe" textFill="#c3baba">
                <padding>
                   <Insets left="40.0" />
                </padding>

@@ -68,6 +68,8 @@ public class ThemNhanVien implements Initializable{
 		box.getEditor().textProperty().addListener(new InputFilter(box, filteredItems, false));
 
 		box.setItems(filteredItems);
+		
+		txtNamSinh.setEditable(false);
 
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {

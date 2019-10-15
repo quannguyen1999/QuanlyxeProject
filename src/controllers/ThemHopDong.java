@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
@@ -32,10 +33,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-
+import javafx.scene.control.Label;
 public class ThemHopDong implements Initializable{
 	private double xOffset = 0;
 	private double yOffset = 0;
+	@FXML Label lblTitle;
 	@FXML public BorderPane mainBd;
 	@FXML JFXTextField txtMaHD;
 	@FXML ComboBox<String> boxMaNV=new ComboBox<String>();
@@ -47,6 +49,8 @@ public class ThemHopDong implements Initializable{
 	@FXML JFXTextField txtDiaChi;
 	@FXML JFXTextField txtSoDT;
 	@FXML JFXTextField txtTenKH;
+	@FXML JFXButton btnThem;
+	@FXML JFXButton btnXoaRong;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -72,6 +76,8 @@ public class ThemHopDong implements Initializable{
 				}
 			}
 		});
+		
+		txtNgayLap.setEditable(false);
 	}
 	public void thongBaoKieuLoi(ActionEvent e, String text) {
 		Alert alert = new Alert(AlertType.INFORMATION);

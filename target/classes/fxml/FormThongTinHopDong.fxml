@@ -15,7 +15,7 @@
    <right>
       <VBox prefHeight="639.0" prefWidth="358.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="345.0" style="-fx-background-color: #3C58FA;" stylesheets="@../css/application.css">
+            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="345.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
                <children>
                   <JFXButton onAction="#btnCLoseWindow" prefHeight="34.0" prefWidth="42.0" text="X" textFill="WHITE">
                      <font>
@@ -153,9 +153,9 @@
    <left>
       <VBox prefHeight="639.0" prefWidth="515.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="515.0" style="-fx-background-color: #3C58FA;" stylesheets="@../css/application.css">
+            <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="515.0" style="-fx-background-color: rgb(23,35,51);" stylesheets="@../css/application.css">
                <children>
-                  <Label prefHeight="36.0" prefWidth="123.0" text="Hợp đồng" textFill="WHITE">
+                  <Label fx:id="lblTitle" prefHeight="36.0" prefWidth="123.0" text="Hợp đồng" textFill="WHITE">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -339,7 +339,7 @@
                   <Insets left="50.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton onAction="#btnThemHopDong" prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok" textFill="#030202">
+            <JFXButton fx:id="btnThem" onAction="#btnThemHopDong" prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok" textFill="#030202">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
@@ -347,7 +347,7 @@
                   <Insets left="50.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton prefHeight="36.0" prefWidth="123.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng">
+            <JFXButton fx:id="btnXoaRong" prefHeight="36.0" prefWidth="123.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>

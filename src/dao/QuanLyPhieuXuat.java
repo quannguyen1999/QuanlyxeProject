@@ -12,7 +12,7 @@ import entities.NhanVien;
 import entities.PhieuXuat;
 
 public class QuanLyPhieuXuat {
-	public static CTPhieuXuat timMaCTPhieuXuat(int ma) {
+	public static CTPhieuXuat timMaCTPhieuXuat(Integer ma) {
 		CTPhieuXuat accs = null;
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;

@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -57,55 +58,57 @@ public class QuanLyXuatHangController implements Initializable{
 		colNgayXuat.setCellValueFactory(new PropertyValueFactory<>("ngayXuat"));
 		colMaKH.setCellValueFactory(new PropertyValueFactory<>("khachHang"));
 		colMaNV.setCellValueFactory(new PropertyValueFactory<>("nhanVien"));
-		
+
 		UploaderDuLieuLenBang();
-		
+
 		tbl_view.setOnMouseClicked(e->{
-			int result=tbl_view.getSelectionModel().getSelectedIndex();
-			if(result!=-1) {
-				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinPhieuXuat.fxml"));
+			if(e.getClickCount()==2) {
+				int result=tbl_view.getSelectionModel().getSelectedIndex();
+				if(result!=-1) {
+					FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinPhieuXuat.fxml"));
 
-				Parent root = null;
-				try {
-					root = loader.load();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					Parent root = null;
+					try {
+						root = loader.load();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					ThemPhieuXuat ctlMain=loader.getController();
+
+					int colMaPX=tbl_view.getItems().get(result).getMaPX();
+					int maNV=tbl_view.getItems().get(result).getNhanVien().getMaNV();
+					int maKH=tbl_view.getItems().get(result).getKhachHang().getMaKH();
+					LocalDate ngayXuat=tbl_view.getItems().get(result).getNgayXuat();
+					System.out.println(colMaPX);
+					CTPhieuXuat ctPX=QuanLyPhieuXuat.timMaCTPhieuXuat(colMaPX);
+					System.out.println(ctPX);
+					//				ctlMain.lblTitle.setText("Cập nhập Phiếu xuất");
+					//				ctlMain.txtPX.setText(String.valueOf(colMaPX));
+					//				ctlMain.boxMaNV.setValue(String.valueOf(maNV));
+					//				ctlMain.txtNgayXuat.setValue(ngayXuat);
+					//				ctlMain.boxMaXe.setValue(ctPX.getXe().getMaXe());
+					//				ctlMain.txtDonGiaXuat.setText(String.valueOf(ctPX.getDonGiaXuat()));
+					//				ctlMain.txtSoLuongXuat.setText(String.valueOf(ctPX.getsLXuat()));
+					//				
+					//				ctlMain.lblTenXe.setText(ctPX.getXe().getTenXe());
+					//				ctlMain.lblMauXe.setText(ctPX.getXe().getMauXe());
+					//				ctlMain.lblBH.setText(ctPX.getXe().getThongTinBaoHanh());
+					//				ctlMain.lblLoaiXe.setText(ctPX.getXe().getLoaiXe());
+					//				ctlMain.lblNhaSX.setText(ctPX.getXe().getNhaSX());
+					//				
+					//				Stage stage=new Stage();
+					//				stage.initOwner(btnThem.getScene().getWindow());
+					//				stage.setScene(new Scene(root));
+					//				stage.initStyle(StageStyle.UNDECORATED);
+					//				stage.initModality(Modality.APPLICATION_MODAL);
+					//				Main.primaryStage=stage;
+					//				stage.show();
+					//				stage.setOnHidden(evv->{
+					//					handleRefersh(new ActionEvent());
+					//				});
 				}
-
-				ThemPhieuXuat ctlMain=loader.getController();
-
-				int colMaPX=tbl_view.getItems().get(result).getMaPX();
-				int maNV=tbl_view.getItems().get(result).getNhanVien().getMaNV();
-				int maKH=tbl_view.getItems().get(result).getKhachHang().getMaKH();
-				LocalDate ngayXuat=tbl_view.getItems().get(result).getNgayXuat();
-				System.out.println(colMaPX);
-				CTPhieuXuat ctPX=QuanLyPhieuXuat.timMaCTPhieuXuat(colMaPX);
-				System.out.println(ctPX);
-//				ctlMain.lblTitle.setText("Cập nhập Phiếu xuất");
-//				ctlMain.txtPX.setText(String.valueOf(colMaPX));
-//				ctlMain.boxMaNV.setValue(String.valueOf(maNV));
-//				ctlMain.txtNgayXuat.setValue(ngayXuat);
-//				ctlMain.boxMaXe.setValue(ctPX.getXe().getMaXe());
-//				ctlMain.txtDonGiaXuat.setText(String.valueOf(ctPX.getDonGiaXuat()));
-//				ctlMain.txtSoLuongXuat.setText(String.valueOf(ctPX.getsLXuat()));
-//				
-//				ctlMain.lblTenXe.setText(ctPX.getXe().getTenXe());
-//				ctlMain.lblMauXe.setText(ctPX.getXe().getMauXe());
-//				ctlMain.lblBH.setText(ctPX.getXe().getThongTinBaoHanh());
-//				ctlMain.lblLoaiXe.setText(ctPX.getXe().getLoaiXe());
-//				ctlMain.lblNhaSX.setText(ctPX.getXe().getNhaSX());
-//				
-//				Stage stage=new Stage();
-//				stage.initOwner(btnThem.getScene().getWindow());
-//				stage.setScene(new Scene(root));
-//				stage.initStyle(StageStyle.UNDECORATED);
-//				stage.initModality(Modality.APPLICATION_MODAL);
-//				Main.primaryStage=stage;
-//				stage.show();
-//				stage.setOnHidden(evv->{
-//					handleRefersh(new ActionEvent());
-//				});
 			}
 		});
 	}
@@ -113,7 +116,6 @@ public class QuanLyXuatHangController implements Initializable{
 	private void UploaderDuLieuLenBang(){
 		List<PhieuXuat> accs=QuanLyPhieuXuat.showTatCaPhieuXuat();
 		accs.forEach(t->{
-			//			Account newAccount= new Account(t.getUserName(), t.getPassword(), t.getLoaiTK());
 			tbl_view.getItems().add(t);
 		});
 	}
@@ -123,20 +125,22 @@ public class QuanLyXuatHangController implements Initializable{
 	}
 	public void btnNhapThongTinXuatHang(ActionEvent e) throws IOException {
 		try {
-			Stage primaryStage=new Stage();
-			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormThongTinPhieuXuat.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.initStyle(StageStyle.UNDECORATED);
-			primaryStage.setAlwaysOnTop(true);
-			Main.primaryStage=primaryStage;
-			primaryStage.showAndWait();
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinPhieuXuat.fxml"));
+			Parent parent=loader.load();
+			Stage stage=new Stage(StageStyle.DECORATED);
+			stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setScene(new Scene(parent));
+			stage.show();
+			Main.primaryStage=stage;
+			stage.setOnHidden(ev->{
+				handleRefersh(e);
+			});
 		} catch (Exception e2) {
-			// TODO: handle exception
 			System.out.println(e2.getMessage());
 		}
 	}
-	
-	
+
+
 }

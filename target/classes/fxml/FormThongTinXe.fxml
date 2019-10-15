@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="811.0" styleClass="sidebar" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemXe">
+<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="811.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemXe">
    <left>
       <VBox prefHeight="668.0" prefWidth="232.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="15.0" prefWidth="232.0">
                <children>
-                  <Label alignment="CENTER" text="Mã xe" textFill="WHITE">
+                  <Label alignment="CENTER" text="Mã xe">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -32,14 +32,14 @@
                   <Insets left="10.0" top="20.0" />
                </VBox.margin>
             </HBox>
-            <JFXTextField fx:id="txtMaXe" focusColor="#6c779a" prefHeight="38.0" prefWidth="212.0" promptText="Nhập mã xe...." style="-fx-text-inner-color: red; -fx-prompt-text-fill: white;" unFocusColor="#ddc4c4">
+            <JFXTextField fx:id="txtMaXe" focusColor="#6c779a" prefHeight="38.0" prefWidth="212.0" promptText="Nhập mã xe...." style="-fx-text-inner-color: black; -fx-prompt-text-fill: black;" unFocusColor="#010000">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
             </JFXTextField>
             <HBox prefHeight="8.0" prefWidth="232.0">
                <children>
-                  <Label alignment="CENTER" text="Đơn vị tính" textFill="WHITE">
+                  <Label alignment="CENTER" text="Đơn vị tính">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -49,14 +49,14 @@
                   </Label>
                </children>
             </HBox>
-            <JFXTextField fx:id="txtDonViTinh" focusColor="#6c779a" prefHeight="34.0" prefWidth="212.0" promptText="Nhập đơn vị tính" style="-fx-text-inner-color: red; -fx-prompt-text-fill: white;" unFocusColor="#ddc4c4">
+            <JFXTextField fx:id="txtDonViTinh" focusColor="#6c779a" prefHeight="34.0" prefWidth="212.0" promptText="Nhập đơn vị tính" style="-fx-text-inner-color: black; -fx-prompt-text-fill: black;" unFocusColor="BLACK">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
             </JFXTextField>
             <HBox prefHeight="0.0" prefWidth="232.0">
                <children>
-                  <Label alignment="CENTER" text="Mô tả" textFill="WHITE">
+                  <Label alignment="CENTER" text="Mô tả" textFill="#190404">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -69,14 +69,14 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <JFXTextField fx:id="txtMoTa" focusColor="#6c779a" prefHeight="41.0" prefWidth="254.0" promptText="Nhập mô tả...." style="-fx-text-inner-color: red; -fx-prompt-text-fill: white;" unFocusColor="#ddc4c4">
+            <JFXTextField fx:id="txtMoTa" focusColor="#6c779a" prefHeight="41.0" prefWidth="254.0" promptText="Nhập mô tả...." style="-fx-text-inner-color: black; -fx-prompt-text-fill: black;" unFocusColor="BLACK">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
             </JFXTextField>
             <HBox prefHeight="42.0" prefWidth="242.0">
                <children>
-                  <Label alignment="CENTER" text="Nhà sản xuất" textFill="WHITE">
+                  <Label alignment="CENTER" text="Nhà sản xuất" textFill="#190404">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -89,7 +89,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <JFXTextField fx:id="txtNhaSX" focusColor="#6c779a" prefHeight="38.0" prefWidth="254.0" promptText="Nhập nhà sản xuất..." style="-fx-text-inner-color: red; -fx-prompt-text-fill: white;" unFocusColor="#ddc4c4">
+            <JFXTextField fx:id="txtNhaSX" focusColor="#6c779a" prefHeight="38.0" prefWidth="254.0" promptText="Nhập nhà sản xuất..." style="-fx-text-inner-color: black; -fx-prompt-text-fill: black;" unFocusColor="BLACK">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
@@ -102,7 +102,7 @@
          <children>
             <HBox prefHeight="42.0" prefWidth="217.0">
                <children>
-                  <Label alignment="CENTER" text="Loại xe:" textFill="WHITE">
+                  <Label alignment="CENTER" text="Loại xe:" textFill="#190404">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -122,7 +122,7 @@
             </ChoiceBox>
             <HBox prefHeight="42.0" prefWidth="242.0">
                <children>
-                  <Label alignment="CENTER" text="Tên xe:" textFill="WHITE">
+                  <Label alignment="CENTER" text="Tên xe:" textFill="#190404">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -142,7 +142,7 @@
             </ChoiceBox>
             <HBox prefHeight="42.0" prefWidth="242.0">
                <children>
-                  <Label alignment="CENTER" text="Màu xe" textFill="WHITE">
+                  <Label alignment="CENTER" text="Màu xe" textFill="#190404">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -162,7 +162,7 @@
             </ChoiceBox>
             <HBox prefHeight="42.0" prefWidth="242.0">
                <children>
-                  <Label alignment="CENTER" text="Thông tin bảo hành" textFill="WHITE">
+                  <Label alignment="CENTER" text="Thông tin bảo hành" textFill="#190404">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -175,7 +175,7 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <JFXTextField fx:id="txtThongTinBaoHanh" focusColor="#6c779a" prefHeight="47.0" prefWidth="254.0" promptText="Nhập thông tin bảo hành..." style="-fx-text-inner-color: red; -fx-prompt-text-fill: white;" unFocusColor="#ddc4c4">
+            <JFXTextField fx:id="txtThongTinBaoHanh" focusColor="#6c779a" prefHeight="47.0" prefWidth="254.0" promptText="Nhập thông tin bảo hành..." style="-fx-text-inner-color: black; -fx-prompt-text-fill: black;" unFocusColor="BLACK">
                <VBox.margin>
                   <Insets left="20.0" right="10.0" />
                </VBox.margin>
@@ -211,7 +211,7 @@
          <children>
             <HBox prefHeight="53.0" prefWidth="812.0">
                <children>
-                  <JFXButton onAction="#btnCLoseWindow" styleClass="btnLogin" stylesheets="@../css/application.css" text="Thoát" textFill="WHITE">
+                  <JFXButton onAction="#btnCLoseWindow" styleClass="btnLogin" stylesheets="@../css/application.css" text="Thoát">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
@@ -219,7 +219,7 @@
                         <Insets left="250.0" top="30.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton prefHeight="36.0" prefWidth="118.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng" textFill="WHITE">
+                  <JFXButton fx:id="btnXoaRong" prefHeight="36.0" prefWidth="118.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
@@ -227,7 +227,7 @@
                         <Insets left="30.0" top="30.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton onAction="#btnCLickOk" prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok" textFill="WHITE">
+                  <JFXButton fx:id="btnOK" onAction="#btnCLickOk" prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>

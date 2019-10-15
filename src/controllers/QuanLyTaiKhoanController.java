@@ -67,40 +67,43 @@ public class QuanLyTaiKhoanController implements Initializable{
 		colLoaiTK.setCellValueFactory(new PropertyValueFactory<>("loaiTK"));
 
 		tbl_view.setOnMouseClicked(ev->{
-			int result=tbl_view.getSelectionModel().getSelectedIndex();
+			if(ev.getClickCount()==2) {
+				int result=tbl_view.getSelectionModel().getSelectedIndex();
 
-			if(result!=-1) {
-				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinTaiKhoan.fxml"));
+				if(result!=-1) {
+					FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinTaiKhoan.fxml"));
 
-				Parent root = null;
-				try {
-					root = loader.load();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Parent root = null;
+					try {
+						root = loader.load();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					ThemTaiKhoan ctlMain=loader.getController();
+					String userName=tbl_view.getItems().get(result).getUserName();
+					String password=tbl_view.getItems().get(result).getPassword();
+					String loaiTK=tbl_view.getItems().get(result).getLoaiTK();
+					ctlMain.txtUserName.setText(userName);
+					ctlMain.txtPassword.setText(password);
+					ctlMain.choiceBox.setValue(loaiTK);
+					ctlMain.lblTitle.setText("Cập nhập tài khoản");
+					ctlMain.txtUserName.setEditable(false);
+						
+					Stage stage=new Stage();
+					stage.initOwner(btnThem.getScene().getWindow());
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.setScene(new Scene(root));
+					Main.primaryStage=stage;
+					stage.show();
+					stage.setOnHidden(evv->{
+						handleRefersh(new ActionEvent());
+					});
 				}
-
-				ThemTaiKhoan ctlMain=loader.getController();
-				String userName=tbl_view.getItems().get(result).getUserName();
-				String password=tbl_view.getItems().get(result).getPassword();
-				String loaiTK=tbl_view.getItems().get(result).getLoaiTK();
-				ctlMain.txtUserName.setText(userName);
-				ctlMain.txtPassword.setText(password);
-				ctlMain.choiceBox.setValue(loaiTK);
-				ctlMain.lblTitle.setText("Cập nhập tài khoản");
-				ctlMain.txtUserName.setEditable(false);
-
-				Stage stage=new Stage();
-				stage.initOwner(btnThem.getScene().getWindow());
-				stage.initStyle(StageStyle.UNDECORATED);
-				stage.initModality(Modality.APPLICATION_MODAL);
-				stage.setScene(new Scene(root));
-				Main.primaryStage=stage;
-				stage.show();
-				stage.setOnHidden(evv->{
-					handleRefersh(new ActionEvent());
-				});
 			}
+			
 		});
 		UploaderDuLieuLenBang();
 	}
@@ -183,19 +186,23 @@ public class QuanLyTaiKhoanController implements Initializable{
 	public void btnXoaTaiKhoan(ActionEvent e) {
 		int result=tbl_view.getSelectionModel().getSelectedIndex();
 		if(result!=-1) {
-			Alert alert = new Alert(AlertType.WARNING, "bạn có chắc muốn xóa",ButtonType.OK,ButtonType.CANCEL);
-			alert.setTitle("Cảnh báo");
-			Optional<ButtonType> resultx = alert.showAndWait();
-
-			if (resultx.get() == ButtonType.OK) {
-				String acc=tbl_view.getItems().get(result).getUserName();
-				if(ql.xoaAcc(acc)==true) {
-					thongBaoKieuLoi(e,"xóa thành công");
-					handleRefersh(e);
-				}else {
-					thongBaoKieuLoi(e,"lỗi");
+			if(tbl_view.getItems().get(result).getUserName().contentEquals("admin")) {
+				thongBaoKieuLoi(e, "admin không thể xóa");
+			}else {
+				Alert alert = new Alert(AlertType.WARNING, "bạn có chắc muốn xóa",ButtonType.OK,ButtonType.CANCEL);
+				alert.setTitle("Cảnh báo");
+				Optional<ButtonType> resultx = alert.showAndWait();
+				if (resultx.get() == ButtonType.OK) {
+					String acc=tbl_view.getItems().get(result).getUserName();
+					if(ql.xoaAcc(acc)==true) {
+						thongBaoKieuLoi(e,"xóa thành công");
+						handleRefersh(e);
+					}else {
+						thongBaoKieuLoi(e,"lỗi");
+					}
 				}
 			}
+			
 
 		}else {
 			thongBaoKieuLoi(e, "bạn chưa chọn bảng cần xóa");

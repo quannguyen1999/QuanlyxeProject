@@ -32,14 +32,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ComboBoxBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 public class ThemPhieuXuat implements Initializable{
@@ -53,25 +57,25 @@ public class ThemPhieuXuat implements Initializable{
 	@FXML Label lblBH;
 	@FXML Label lblLoaiXe;
 	@FXML Label lblNhaSX;
-	
+
 	@FXML JFXTextField txtPX;
 	@FXML JFXDatePicker txtNgayXuat;
 	@FXML JFXTextField txtDonGiaXuat;
 	@FXML JFXTextField txtSoLuongXuat;
 	private double x, y;
-    @FXML
-    private void draged(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setX(event.getScreenX() - x);
-        stage.setY(event.getScreenY() - y);
-    }
+	@FXML
+	private void draged(MouseEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setX(event.getScreenX() - x);
+		stage.setY(event.getScreenY() - y);
+	}
 
-    @FXML
-    private void pressed(MouseEvent event) {
-        x = event.getSceneX();
-        y = event.getSceneY();
-    }
-    public void thongBaoKieuLoi(ActionEvent e, String text) {
+	@FXML
+	private void pressed(MouseEvent event) {
+		x = event.getSceneX();
+		y = event.getSceneY();
+	}
+	public void thongBaoKieuLoi(ActionEvent e, String text) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText(null);
@@ -79,60 +83,111 @@ public class ThemPhieuXuat implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
-    @FXML void btnClickOK(ActionEvent e) {
-    	int mapx=Integer.parseInt(txtPX.getText().toString());
-    	NhanVien nv=QuanLyNhanVien.timMa(Integer.parseInt(boxMaNV.getValue()));
-    	if(nv!=null) {
-    		KhachHang kh=QuanLyKhachHang.timMa(Integer.parseInt(boxMaKH.getValue()));
-    		if(kh!=null) {
-    			LocalDate ngayXuat=txtNgayXuat.getValue();
-    			PhieuXuat px=new PhieuXuat(mapx, nv, kh, ngayXuat);
-    			Xe xe=QuanLyXe.timMa(boxMaXe.getValue());
-    			if(xe!=null) {
-    				if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
-    					int donGia=Integer.parseInt(txtDonGiaXuat.getText().toString());
-    					int slXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
-        				CTPhieuXuat ctPX=new CTPhieuXuat(px, xe, donGia, slXuat, 10);
-        				if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctPX)==true) {
-        					((Node) (e.getSource())).getScene().getWindow().hide();
-        				}else {
-        					System.out.println("Lỗi thêm chi tiết phiếu xuất");
-        				}
-        			}else {
-        				thongBaoKieuLoi(e, "Thêm phiếu xuất không thành công");
-        			}
-    			}else {
-    				thongBaoKieuLoi(e,"xe không tồn tại");
-    			}
-    			
-    		}
-    	}else {
-    		thongBaoKieuLoi(e, "Nhân viên không tồn tại");
-    	}
-    	
-    	
-    }
-    @FXML 
-    private void btnXoaRong(ActionEvent e) {
-    	txtPX.setText("");
-    	boxMaNV.setValue("");
-    	boxMaKH.setValue("");
-    	txtNgayXuat.setValue(LocalDate.of(2000, 11, 1));
-    	boxMaXe.setValue("");
-    	txtDonGiaXuat.setText("");
-    	txtSoLuongXuat.setText("");
-    	
-    	lblTenXe.setText("");
+	private void handleRefersh(ActionEvent e) {
+		try {
+			btnXoaRong(e);
+//			boxMaKH.setEditable(false);
+			ObservableList<String> items1 = FXCollections.observableArrayList();
+			List<KhachHang> kh1=QuanLyKhachHang.showTatCaKhachHang();
+			kh1.forEach(t->{
+				items1.add(String.valueOf(t.getMaKH()));
+			});
+			FilteredList<String> filteredItems1 = new FilteredList<String>(items1);
+			boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
+			boxMaKH.setItems(filteredItems1);
+			
+		} catch (Exception e2) {
+			// TODO: handle exception
+			e2.printStackTrace();
+		}
+	
+	}
+	private void resetMaKH() {
+		boxMaKH.getItems().clear();
+		boxMaKH.setEditable(true);
+		ObservableList<String> items1 = FXCollections.observableArrayList();
+		List<KhachHang> kh1=QuanLyKhachHang.showTatCaKhachHang();
+		kh1.forEach(t->{
+			items1.add(String.valueOf(t.getMaKH()));
+		});
+		FilteredList<String> filteredItems1 = new FilteredList<String>(items1);
+		boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
+		boxMaKH.setItems(filteredItems1);
+	}
+	public void btnNhapThongTinKhachHang(ActionEvent e) throws IOException {
+		try {
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinKhachHang.fxml"));
+			Parent parent=loader.load();
+			Stage stage=new Stage(StageStyle.DECORATED);
+			stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setScene(new Scene(parent));
+			stage.show();
+			Main.primaryStage=stage;
+			stage.setOnHidden(ev->{
+				handleRefersh(e);
+			});
+		} catch (Exception e2) {
+			// TODO: handle exception
+			System.out.println(e2.getMessage());
+		}
+	}
+	@FXML void btnClickOK(ActionEvent e) {
+		int mapx=Integer.parseInt(txtPX.getText().toString());
+		NhanVien nv=QuanLyNhanVien.timMa(Integer.parseInt(boxMaNV.getValue()));
+		if(nv!=null) {
+			KhachHang kh=QuanLyKhachHang.timMa(Integer.parseInt(boxMaKH.getValue()));
+			if(kh!=null) {
+				LocalDate ngayXuat=txtNgayXuat.getValue();
+				PhieuXuat px=new PhieuXuat(mapx, nv, kh, ngayXuat);
+				Xe xe=QuanLyXe.timMa(boxMaXe.getValue());
+				if(xe!=null) {
+					if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
+						int donGia=Integer.parseInt(txtDonGiaXuat.getText().toString());
+						int slXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
+						CTPhieuXuat ctPX=new CTPhieuXuat(px, xe, donGia, slXuat, 10);
+						if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctPX)==true) {
+							((Node) (e.getSource())).getScene().getWindow().hide();
+						}else {
+							System.out.println("Lỗi thêm chi tiết phiếu xuất");
+						}
+					}else {
+						thongBaoKieuLoi(e, "Thêm phiếu xuất không thành công");
+					}
+				}else {
+					thongBaoKieuLoi(e,"xe không tồn tại");
+				}
+
+			}
+		}else {
+			thongBaoKieuLoi(e, "Nhân viên không tồn tại");
+		}
+
+
+	}
+	@FXML 
+	private void btnXoaRong(ActionEvent e) {
+		txtPX.setText("");
+		boxMaNV.setValue("");
+		boxMaKH.setValue("");
+		txtNgayXuat.setValue(LocalDate.of(2000, 11, 1));
+		boxMaXe.setValue("");
+		txtDonGiaXuat.setText("");
+		txtSoLuongXuat.setText("");
+
+		lblTenXe.setText("");
 		lblMauXe.setText("");
 		lblBH.setText("");
 		lblLoaiXe.setText("");
 		lblNhaSX.setText("");
 		Image image = new Image("/image/Blade-110C_den.PNG");
 		img.setImage(image);
-    }
+
+//		boxMaKH.getItems().clear();
+	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
 		//box MaNV
 		boxMaNV.setEditable(true);
 		ObservableList<String> items0 = FXCollections.observableArrayList();
@@ -143,7 +198,7 @@ public class ThemPhieuXuat implements Initializable{
 		FilteredList<String> filteredItems0 = new FilteredList<String>(items0);
 		boxMaNV.getEditor().textProperty().addListener(new InputFilter(boxMaNV, filteredItems0, false));
 		boxMaNV.setItems(filteredItems0);
-		
+
 		//box MaKH
 		boxMaKH.setEditable(true);
 		ObservableList<String> items1 = FXCollections.observableArrayList();
@@ -155,7 +210,7 @@ public class ThemPhieuXuat implements Initializable{
 		boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
 		boxMaKH.setItems(filteredItems1);
 
-		
+
 		//filter ma xe
 		boxMaXe.setEditable(true);
 		ObservableList<String> items = FXCollections.observableArrayList();
@@ -169,7 +224,7 @@ public class ThemPhieuXuat implements Initializable{
 		boxMaXe.getEditor().textProperty().addListener(new InputFilter(boxMaXe, filteredItems, false));
 
 		boxMaXe.setItems(filteredItems);
-		
+
 		boxMaXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
@@ -220,7 +275,7 @@ public class ThemPhieuXuat implements Initializable{
 					lblNhaSX.setText("");
 					Image image = new Image("/image/Blade-110C_den.PNG");
 					img.setImage(image);
-					
+
 				}
 			}
 		});

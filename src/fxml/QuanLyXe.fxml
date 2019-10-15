@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -20,17 +24,25 @@
          <bottom>
             <AnchorPane prefHeight="104.0" prefWidth="1005.0" style="-fx-background-color: #979292;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="txtMa" layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
-                  <Label layoutX="75.0" layoutY="14.0" text="Tìm theo mã xe">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
+                  <TextField fx:id="txtMa" layoutX="40.0" layoutY="42.0" prefHeight="26.0" prefWidth="158.0" />
                   <JFXButton layoutX="927.0" layoutY="-4.0" onAction="#btnTim" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
                   </JFXButton>
+                  <Label layoutX="436.0" layoutY="14.0" text="Màu xe" />
+                  <Label layoutX="626.0" layoutY="14.0" text="Tên xe" />
+                  <Separator layoutX="216.0" layoutY="1.0" orientation="VERTICAL" prefHeight="110.0" prefWidth="0.0" />
+                  <ChoiceBox fx:id="choiceBoxLoaiXe" layoutX="238.0" layoutY="42.0" prefHeight="26.0" prefWidth="166.0" />
+                  <ChoiceBox fx:id="choiceBoxMauXe" layoutX="438.0" layoutY="43.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="choiceBoxTenXe" layoutX="626.0" layoutY="43.0" prefWidth="150.0" />
+                  <Label layoutX="321.0" layoutY="14.0" text="Loại xe" />
+                  <JFXRadioButton fx:id="rdOne" layoutX="40.0" layoutY="14.0" onAction="#btnCLickOne" selected="true" text="Tìm theo mã" textFill="WHITE">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="tim" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="rdTwo" layoutX="235.0" layoutY="14.0" onAction="#btnClickTwo" text="Theo:" textFill="WHITE" toggleGroup="$tim" />
                </children>
             </AnchorPane>
          </bottom>

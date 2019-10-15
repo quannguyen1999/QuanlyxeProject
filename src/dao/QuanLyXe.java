@@ -10,9 +10,30 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import entities.Account;
+import entities.NhanVien;
 import entities.Xe;
 
 public class QuanLyXe {
+	static List<Xe> accs = null;
+	public static List<Xe> timTheoLoai(String loai,String mau,String ten) {
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			javax.persistence.Query query = manager.createQuery("from Xe where loaiXe='"+loai+"' and mauXe='"+mau+"' and tenXe='"+ten+"'");
+			accs=query.getResultList();
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		return accs;
+	}
 	public static Xe timMa(String ma) {
 		Xe accs = null;
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();

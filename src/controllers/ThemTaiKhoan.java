@@ -39,10 +39,9 @@ public class ThemTaiKhoan implements Initializable {
 		// TODO Auto-generated method stub
 		makeStageDrageable();
 
-		choiceBox.getItems().add("Ke toan truong");
 		choiceBox.getItems().add("Ke toan");
-		choiceBox.getItems().add("Admin");
 		choiceBox.getItems().add("Nhân viên");
+		choiceBox.getItems().add("Admin");
 
 		choiceBox.setValue("Nhân viên");
 	}
@@ -51,17 +50,27 @@ public class ThemTaiKhoan implements Initializable {
 		((Node) (e.getSource())).getScene().getWindow().hide();
 	}
 
-	public boolean kiemTraUserName(String text) {
+	public boolean kiemTraUserName(ActionEvent e,String text) {
 		if (text.isEmpty() == true) {
+			thongBaoKieuLoi(e, "User name không được để trống");
+			txtUserName.requestFocus();
 			return false;
 		}
 		return true;
 	}
 
-	public boolean kiemTraPassword(String text) {
+	public boolean kiemTraPassword(ActionEvent e,String text) {
 		if (text.isEmpty() == true) {
+			thongBaoKieuLoi(e, "Password không được để trống");
+			txtPassword.requestFocus();
 			return false;
 		}
+		if(txtPassword.getText().length()<6) {
+			thongBaoKieuLoi(e, "Yêu cầu password tối thiểu là 6 ký tự");
+			txtPassword.requestFocus();
+			return false;
+		}
+		
 		return true;
 	}
 
@@ -93,14 +102,13 @@ public class ThemTaiKhoan implements Initializable {
 	public void btnThem(ActionEvent e) throws IOException {
 		try {
 			boolean result = false;
-			if (kiemTraUserName(txtUserName.getText().toString()) == true) {
+			if (kiemTraUserName(e,txtUserName.getText().toString()) == true) {
 				result = true;
 			} else {
-				thongBaoKieuLoi(e, "Username không hợp lệ");
 				txtUserName.requestFocus();
 			}
 			if (result == true) {
-				boolean resultPassword = kiemTraPassword(txtPassword.getText().toString());
+				boolean resultPassword = kiemTraPassword(e,txtPassword.getText().toString());
 				if (resultPassword == true) {
 					Account acc = new Account(txtUserName.getText().toString(), txtPassword.getText().toString(),
 							choiceBox.getValue());
@@ -119,7 +127,6 @@ public class ThemTaiKhoan implements Initializable {
 					}
 
 				} else {
-					thongBaoKieuLoi(e, "Password không hợp lệ");
 					txtPassword.requestFocus();
 				}
 			}

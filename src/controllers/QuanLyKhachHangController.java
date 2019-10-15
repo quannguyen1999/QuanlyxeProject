@@ -58,7 +58,7 @@ public class QuanLyKhachHangController implements Initializable{
 
 	@FXML 
 	TextField txtMa;
-	
+
 	@FXML JFXButton btnThem;
 
 	@Override
@@ -84,44 +84,46 @@ public class QuanLyKhachHangController implements Initializable{
 		UploaderDuLieuLenBang();
 
 		tbl_view.setOnMouseClicked(e->{
-			int result=tbl_view.getSelectionModel().getSelectedIndex();
-			if(result!=-1) {
-				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinKhachHang.fxml"));
+			if(e.getClickCount()==2) {
+				int result=tbl_view.getSelectionModel().getSelectedIndex();
+				if(result!=-1) {
+					FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinKhachHang.fxml"));
 
-				Parent root = null;
-				try {
-					root = loader.load();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					Parent root = null;
+					try {
+						root = loader.load();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					ThemKhachHang ctlMain=loader.getController();
+
+					int colMaKH=tbl_view.getItems().get(result).getMaKH();
+					String diaChi=tbl_view.getItems().get(result).getDiaChi();
+					String email=tbl_view.getItems().get(result).getEmail();
+					String soDT=tbl_view.getItems().get(result).getSoDT();
+					String tenKH=tbl_view.getItems().get(result).getTenKH();
+
+					KhachHang nv=QuanLyKhachHang.timMa(colMaKH);
+					ctlMain.lblTitle.setText("Cập nhập khách hàng");
+					ctlMain.txtMa.setText(String.valueOf(colMaKH));
+					ctlMain.txtDiaChi.setText(diaChi);
+					ctlMain.txtEmail.setText(email);
+					ctlMain.txtDienThoai.setText(soDT);
+					ctlMain.txtTenKH.setText(tenKH);
+
+					Stage stage=new Stage();
+					stage.initOwner(btnThem.getScene().getWindow());
+					stage.setScene(new Scene(root));
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.initModality(Modality.APPLICATION_MODAL);
+					Main.primaryStage=stage;
+					stage.show();
+					stage.setOnHidden(evv->{
+						handleRefersh(new ActionEvent());
+					});
 				}
-
-				ThemKhachHang ctlMain=loader.getController();
-
-				int colMaKH=tbl_view.getItems().get(result).getMaKH();
-				String diaChi=tbl_view.getItems().get(result).getDiaChi();
-				String email=tbl_view.getItems().get(result).getEmail();
-				String soDT=tbl_view.getItems().get(result).getSoDT();
-				String tenKH=tbl_view.getItems().get(result).getTenKH();
-
-				KhachHang nv=QuanLyKhachHang.timMa(colMaKH);
-				ctlMain.lblTitle.setText("Cập nhập khách hàng");
-				ctlMain.txtMa.setText(String.valueOf(colMaKH));
-				ctlMain.txtDiaChi.setText(diaChi);
-				ctlMain.txtEmail.setText(email);
-				ctlMain.txtDienThoai.setText(soDT);
-				ctlMain.txtTenKH.setText(tenKH);
-				
-				Stage stage=new Stage();
-				stage.initOwner(btnThem.getScene().getWindow());
-				stage.setScene(new Scene(root));
-				stage.initStyle(StageStyle.UNDECORATED);
-				stage.initModality(Modality.APPLICATION_MODAL);
-				Main.primaryStage=stage;
-				stage.show();
-				stage.setOnHidden(evv->{
-					handleRefersh(new ActionEvent());
-				});
 			}
 		});
 
@@ -172,6 +174,7 @@ public class QuanLyKhachHangController implements Initializable{
 	public void btnXoaRong(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
+	
 	}
 	@FXML 
 	public void btnTim(ActionEvent e) {

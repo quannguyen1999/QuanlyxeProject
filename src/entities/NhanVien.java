@@ -31,8 +31,13 @@ public class NhanVien {
 	@OneToMany(mappedBy = "nhanVien")
 	private List<BaoCao> baoCao;
 
-	@OneToMany(mappedBy = "nhanVien")
+	@OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL)
 	private List<HopDong> hopDong;
+	
+	
+	@OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL)
+	private List<PhieuXuat> phieuXuat;
+	
 
 	public NhanVien() {
 		super();

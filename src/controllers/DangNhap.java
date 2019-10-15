@@ -80,22 +80,43 @@ public class DangNhap implements Initializable{
 		alert.showAndWait();
 	}
 	public Account kiemTraUserName(ActionEvent e,String userName,String passWord) {
-		Account acc=QuanLyAccount.timMa(userName);
+//		Account acc=QuanLyAccount.timMa(userName);
 //		System.out.println(acc);
-		if(acc!=null) {
-			if(passWord.equals(acc.getPassword())==true) {
-				return acc; 
-			}else {
-//				System.out.println(passWord);
-//				System.out.println(acc.getPassword());
-				thongBaoKieuLoi(e, "mật khẩu không hợp lệ");
-				txtPass.requestFocus();
-			}
-		}else {
-			thongBaoKieuLoi(e, "Tài khoản không tồn tại");
+//		if(acc!=null) {
+//			if(passWord.equals(acc.getPassword())==true) {
+//				return acc; 
+//			}else {
+////				System.out.println(passWord);
+////				System.out.println(acc.getPassword());
+//				thongBaoKieuLoi(e, "mật khẩu không hợp lệ");
+//				txtPass.requestFocus();
+//			}
+//		}else {
+//			thongBaoKieuLoi(e, "Tài khoản không tồn tại");
+//			txtUser.requestFocus();
+//		}
+		Account acc=null;
+		if(userName.isEmpty() || passWord.isEmpty()) {
+			thongBaoKieuLoi(e, "không được để trống mật khẩu hay tên đăng nhập");
 			txtUser.requestFocus();
+		}else {
+			acc=QuanLyAccount.timMa(userName);
+			if(acc!=null) {
+				if(passWord.contentEquals(acc.getPassword())==true) {
+					
+				}else {
+					thongBaoKieuLoi(e,"mật khẩu không hợp lệ");
+					txtPass.requestFocus();
+					acc=null;
+				}
+				return acc;
+			}else {
+				thongBaoKieuLoi(e, "tên người dùng không tồn tại");
+				acc=null;
+			}
+			
 		}
-		return null;
+		return acc;
 	}
 //	@FXML 
 //	private void keyPressed(KeyEvent keyEvent) {

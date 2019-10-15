@@ -37,7 +37,7 @@
          <right>
             <VBox alignment="CENTER" prefHeight="470.0" prefWidth="101.0" style="-fx-background-color: rgb(23,35,51);" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton onAction="#btnNhapThongTinHopDong" prefHeight="25.0" prefWidth="107.0" text="Thêm" textFill="WHITE">
+                  <JFXButton fx:id="btnThem" onAction="#btnNhapThongTinHopDong" prefHeight="25.0" prefWidth="107.0" text="Thêm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>

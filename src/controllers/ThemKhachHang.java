@@ -152,6 +152,7 @@ public class ThemKhachHang implements Initializable{
 		txtEmail.setText("");
 		txtDienThoai.setText("");
 		txtTenKH.setText("");
+		
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  

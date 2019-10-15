@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
@@ -15,10 +16,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
@@ -37,6 +44,9 @@ public class ThemXe implements Initializable{
 	@FXML JFXTextField txtThongTinBaoHanh;
 	@FXML Label lblTitle;
 	@FXML ImageView img;
+	@FXML JFXButton btnOK;
+	@FXML JFXButton btnXoaRong;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -181,6 +191,7 @@ public class ThemXe implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
+	
 	public void btnCLickOk(ActionEvent e) {
 		String maXe=txtMaXe.getText().toString();
 		String donViTinh=txtDonViTinh.getText().toString();
@@ -191,7 +202,7 @@ public class ThemXe implements Initializable{
 		String mauXe=choiceBoxMauXe.getValue();
 		String thongTinBaoHanh=txtThongTinBaoHanh.getText().toString();
 		Xe xe=new Xe(maXe, donViTinh, moTa, nhaSX, tenXe, thongTinBaoHanh, mauXe, loaiXe);
-		if(lblTitle.getText().toString().equals("Cập nhập tài khoản")) {
+		if(lblTitle.getText().toString().equals("Cập nhập xe")) {
 			if(QuanLyXe.capNhapXe(xe)==true) {
 				((Node) (e.getSource())).getScene().getWindow().hide();
 			}else {
