@@ -115,10 +115,12 @@ public class QuanLyNhanVienController implements Initializable{
 					ctlMain.txtDiaChi.setText(colDiaChi);
 					ctlMain.txtDienThoai.setText(colDienThoai);
 					ctlMain.txtCMND.setText(colCMND);
-					if(nv.getGioiTinh().equals("Nu")) {
+					if(nv.getGioiTinh().equals("Nữ")) {
+						ctlMain.rdNam.setSelected(false);
 						ctlMain.rdNu.setSelected(true);
 					}else {
 						ctlMain.rdNam.setSelected(true);
+						ctlMain.rdNu.setSelected(false);
 					}
 					ctlMain.txtLuong.setText(String.valueOf(colLuong));
 					

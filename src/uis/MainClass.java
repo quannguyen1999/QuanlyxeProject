@@ -47,17 +47,13 @@ public class MainClass {
 		NhanVien nv_ad=new NhanVien(111, "Kế toán trưởng","33/16 đường huỳnh văn nghệ","0708821227",
 				"Nam", 50000, LocalDate.of(1999, 11, 24),"Nguyễn đặng anh quân", ad, "image/"+111+".PNG", "0708821227");
 		NhanVien nv_nv=new NhanVien(112, "Nhân viên", "45/13 hoa nguyễn", "071238394",
-				"Nu", 80000, LocalDate.of(1999, 11, 9), "Nhan vĩ nam", nv,"image/"+112+".PNG" ,"12344567");
+				"Nữ", 80000, LocalDate.of(1999, 11, 9), "Nhan vĩ nam", nv,"image/"+112+".PNG" ,"12344567");
 		NhanVien nv_kt=new NhanVien(113, "Kế toán", "78/11 phạm văn hai", "01279877","Nam" ,400000
 				, LocalDate.of(1999, 5, 5),"Lê thanh tùng",kt,"image/"+113+".PNG","1234556");
 		
 		File currentDirFile = new File("");
 		String helper = currentDirFile.getAbsolutePath();
 		String begin=kiemTraChuoi(helper);
-		System.out.println("file:///"+begin+"/src/image/backup/"+"111.PNG");
-		System.out.println("file:///"+begin+"/src/image/backup/"+"112.PNG");
-		System.out.println("file:///"+begin+"/src/image/backup/"+"113.PNG");
-		
 		
 		if(QuanLyNhanVien.themNV(nv_ad)==1) {
 			copyFileUsingStream(new File(begin+"/src/image/backup/"+"111.PNG"),new File("src/image/"+111+".PNG"));
@@ -136,11 +132,8 @@ public class MainClass {
 		}else {
 			System.out.println("Thêm phiếu xuất không thành công");
 		}
-		
-		
-		
-		
 	}
+	
 	private static String kiemTraChuoi(String text) {
 		String newTextResult="";
 		for(int i=0;i<=text.length()-1;i++) {

@@ -11,6 +11,7 @@ import javafx.application.Preloader.StateChangeNotification.Type;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -33,8 +34,10 @@ public class Loading  extends Preloader {
 		BorderPane root = new BorderPane(loading);
 		Scene scene = new Scene(root);
 
+		primaryStage.initStyle(StageStyle.UTILITY);
 		primaryStage.setWidth(300);
-		primaryStage.setHeight(100);
+		primaryStage.getIcons().add(new Image("/image/logo.PNG"));
+		primaryStage.setHeight(80);
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.show();

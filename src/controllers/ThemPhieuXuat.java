@@ -135,48 +135,123 @@ public class ThemPhieuXuat implements Initializable{
 			System.out.println(e2.getMessage());
 		}
 	}
+	public boolean kiemTraMaPhieuXuat(ActionEvent e,String text) {
+		String MaKT=text.trim();
+		if(MaKT.isEmpty()==false) {
+			return true;
+		}else {
+			thongBaoKieuLoi(e, "mã phiếu xuất không được để trống");
+			return false;
+		}
+	}
 	@FXML void btnClickOK(ActionEvent e) {
-		int mapx=Integer.parseInt(txtPX.getText().toString());
-		NhanVien nv=QuanLyNhanVien.timMa(Integer.parseInt(boxMaNV.getValue()));
-		if(nv!=null) {
-			KhachHang kh=QuanLyKhachHang.timMa(Integer.parseInt(boxMaKH.getValue()));
-			if(kh!=null) {
-				HopDong hd=QuanLyHopDong.timMaHopDong(Integer.parseInt(boxMaHD.getValue()));
-				if(hd!=null) {
-					LocalDate ngayXuat=txtNgayXuat.getValue();
-					int txtma=Integer.parseInt(txtPX.getText().toString());
-					double donGiaXuat=Double.parseDouble(txtDonGiaXuat.getText().toString());
-					int sLXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
-					Double thue=Double.parseDouble("10");
-					PhieuXuat px=new PhieuXuat(txtma, nv, kh, hd, ngayXuat);
-					Xe xe=QuanLyXe.timMa(boxMaXe.getValue());
-					if(xe!=null) {
-						CTPhieuXuat ctpx=new CTPhieuXuat(px, xe, donGiaXuat, sLXuat, thue);
-						if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
-							int donGia=Integer.parseInt(txtDonGiaXuat.getText().toString());
-							int slXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
-							CTPhieuXuat ctPX=new CTPhieuXuat(px, xe, donGia, slXuat, 10);
-							if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctPX)==true) {
-								((Node) (e.getSource())).getScene().getWindow().hide();
-							}else {
-								System.out.println("Lỗi thêm chi tiết phiếu xuất");
+		boolean continues=true;
+		int mapx=0;
+		try {
+			mapx=Integer.parseInt(txtPX.getText().toString());
+		} catch (Exception e2) {
+			thongBaoKieuLoi(e, "Mã phiếu xuất không hợp lệ");
+			continues=false;
+			txtPX.requestFocus();
+		}
+		if(continues==true) {
+			int maTim=0;
+			try {
+				maTim=Integer.parseInt(boxMaHD.getValue());
+			} catch (Exception e2) {
+				// TODO: handle exception
+				thongBaoKieuLoi(e, "Mã Hợp đồng chỉ nhập số");
+				continues=false;
+				boxMaHD.requestFocus();
+			}
+			if(continues==true) {
+				NhanVien nv=QuanLyNhanVien.timMa(Integer.parseInt(boxMaNV.getValue()));
+				if(nv!=null) {
+					KhachHang kh=QuanLyKhachHang.timMa(Integer.parseInt(boxMaKH.getValue()));
+					if(kh!=null) {
+						HopDong hd=QuanLyHopDong.timMaHopDong(Integer.parseInt(boxMaHD.getValue()));
+						if(hd!=null) {
+							LocalDate ngayXuat=txtNgayXuat.getValue();
+							int txtma=0;
+							try {
+								txtma=Integer.parseInt(txtPX.getText().toString());
+							} catch (Exception e2) {
+								// TODO: handle exception
+								continues=false;
+								thongBaoKieuLoi(e, "Mã hợp đồng chỉ nhập số");
+								txtPX.requestFocus();
 							}
+							if(continues==true) {
+								if(txtNgayXuat.getValue()==null) {
+									continues=false;
+									txtNgayXuat.requestFocus();
+									thongBaoKieuLoi(e, "Ngày xuất chưa nhập");
+								}
+							}
+							double donGiaXuat=0;
+							if(continues==true) {
+								try {
+									donGiaXuat=Double.parseDouble(txtDonGiaXuat.getText().toString());
+								} catch (Exception e2) {
+									continues=false;
+									thongBaoKieuLoi(e, "Đơn giá xuất không hợp lệ");
+									txtDonGiaXuat.requestFocus();
+								}
+							}
+							int sLXuat=0;
+							if(continues==true) {
+								try {
+									sLXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
+								} catch (Exception e2) {
+									continues=false;
+									thongBaoKieuLoi(e, "Số lượng xuất không hợp lệ");
+									txtSoLuongXuat.requestFocus();
+								}
+							}
+							Double thue=0.1;
+							if(continues==true) {
+								try {
+									thue=Double.parseDouble("10");
+								} catch (Exception e2) {
+									continues=false;
+									thongBaoKieuLoi(e, "thuế không hợp lệ");
+								}
+							}
+
+							if(continues==true) {
+								PhieuXuat px=new PhieuXuat(txtma, nv, kh, hd, ngayXuat);
+								Xe xe=QuanLyXe.timMa(boxMaXe.getValue());
+								if(xe!=null) {
+									CTPhieuXuat ctpx=new CTPhieuXuat(px, xe, donGiaXuat, sLXuat, thue);
+									if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
+										int donGia=Integer.parseInt(txtDonGiaXuat.getText().toString());
+										int slXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
+										CTPhieuXuat ctPX=new CTPhieuXuat(px, xe, donGia, slXuat, 10);
+										if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctPX)==true) {
+											((Node) (e.getSource())).getScene().getWindow().hide();
+										}else {
+											System.out.println("Lỗi thêm chi tiết phiếu xuất");
+										}
+									}else {
+										thongBaoKieuLoi(e, "Thêm phiếu xuất không thành công");
+									}
+								}else {
+									thongBaoKieuLoi(e,"xe không tồn tại");
+								}
+							}
+
 						}else {
-							thongBaoKieuLoi(e, "Thêm phiếu xuất không thành công");
+							thongBaoKieuLoi(e, "Hợp đồng này không tồn tại");
 						}
 					}else {
-						thongBaoKieuLoi(e,"xe không tồn tại");
+						thongBaoKieuLoi(e, "Khách hàng này không còn tồn tại");
 					}
 				}else {
-					thongBaoKieuLoi(e, "Hợp đồng này không tồn tại");
+					thongBaoKieuLoi(e, "Nhân viên này không còn tồn tại");
 				}
 
-
-			}else {
-				thongBaoKieuLoi(e, "Khách hàng này không còn tồn tại");
 			}
-		}else {
-			thongBaoKieuLoi(e, "Nhân viên này không còn tồn tại");
+			
 		}
 	}
 	@FXML 
@@ -199,6 +274,7 @@ public class ThemPhieuXuat implements Initializable{
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		txtNgayXuat.setEditable(false);
 		//box MaNV
 		boxMaNV.setEditable(false);
 		boxMaNV.setDisable(true);

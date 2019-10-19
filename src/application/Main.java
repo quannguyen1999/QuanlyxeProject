@@ -48,6 +48,7 @@ public class Main extends Application {
 	}
 	@SuppressWarnings("restriction")
 	public static void main(String[] args) {
+		//chú ý chạy uis trước
 		LauncherImpl.launchApplication(Main.class, Loading.class, args);
 	}
 }

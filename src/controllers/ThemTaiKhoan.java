@@ -60,18 +60,34 @@ public class ThemTaiKhoan implements Initializable {
 	}
 
 	public boolean kiemTraPassword(ActionEvent e,String text) {
-		if (text.isEmpty() == true) {
-			thongBaoKieuLoi(e, "Password không được để trống");
-			txtPassword.requestFocus();
-			return false;
-		}
-		if(txtPassword.getText().length()<6) {
-			thongBaoKieuLoi(e, "Yêu cầu password tối thiểu là 6 ký tự");
-			txtPassword.requestFocus();
+		String kiemTraText=text.trim();
+		if(kiemTraText.isEmpty()==false) {
+			if(kiemTraText.length()>=6) {
+				if(kiemTraText.matches("((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#%])).{1,}")) {
+					return true;
+				}else {
+					thongBaoKieuLoi(e, "yêu cầu mật khẩu có [A-Z] và [a-z] và [0-9] và @#%");
+					return false;
+				}
+			}else {
+				thongBaoKieuLoi(e, "Yêu cầu mật khẩu tối thiểu 6 ký tự");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Mật khẩu chưa nhập");
 			return false;
 		}
 		
-		return true;
+	}
+	
+	public boolean kiemTraTaiKhoan(ActionEvent e,String text) {
+		String kiemTraText=text.trim();
+		if(kiemTraText.isEmpty()==false) {
+			return true;
+		}else {
+			thongBaoKieuLoi(e, "tài khoản chưa nhập");
+			return false;
+		}
 	}
 
 	public void thongBaoKieuLoi(ActionEvent e, String text) {
@@ -101,11 +117,19 @@ public class ThemTaiKhoan implements Initializable {
 	
 	public void btnThem(ActionEvent e) throws IOException {
 		try {
-			boolean result = false;
-			if (kiemTraUserName(e,txtUserName.getText().toString()) == true) {
-				result = true;
-			} else {
+			boolean result = true;
+			String pass=txtPassword.getText().toString();
+			String username=txtUserName.getText().toString();
+			if(kiemTraUserName(e, username)==false) {
+				result=false;
 				txtUserName.requestFocus();
+			}
+			
+			if(result==true) {
+				if(kiemTraPassword(e,pass)==false) {
+					result=false;
+					txtPassword.requestFocus();
+				}
 			}
 			if (result == true) {
 				boolean resultPassword = kiemTraPassword(e,txtPassword.getText().toString());

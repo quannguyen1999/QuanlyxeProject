@@ -64,6 +64,7 @@ public class ThemNhanVien implements Initializable{
 		makeStageDrageable();
 		box.setEditable(true);
 		loadDuLieu();
+		txtNamSinh.setEditable(false);
 	}
 
 	public  void loadDuLieu() {
@@ -83,7 +84,117 @@ public class ThemNhanVien implements Initializable{
 		txtNamSinh.setEditable(false);
 
 	}
+	public boolean kiemTraMaNhanVien(ActionEvent e,String ma) {
+		System.out.println("đã vào mã");
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.length()==5) {
+				if(MaKT.matches("[0-9]+")==true) {
+					return true;
+				}else {
+					thongBaoKieuLoi(e, "Mã nhân viên chỉ nhập số");
+					return false;
+				}
+			}else {
+				thongBaoKieuLoi(e, "Ký tự mã nhân viên phải lớn hơn 5");
+				return false;
+			}
+		}else {
+			System.out.println("mã nhân trống");
+			thongBaoKieuLoi(e, "Mã nhân viên không được để trống");
+			return false;
+		}
 
+	}
+	public boolean kiemTraTenNhanVien(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("^[A-Za-z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "Tên nhân viên không được nhập ký tự đặc biệt");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Tên nhân viên không được để trống");
+			return false;
+		}
+	}
+	public boolean kiemTraCMND(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.length()==9) {
+				if(MaKT.matches("[0-9]{9}+")==true) {
+					return true;
+				}else {
+					thongBaoKieuLoi(e, "Mã nhân viên chỉ nhập số");
+					return false;
+				}
+			}else {
+				thongBaoKieuLoi(e, "chứng minh nhân dân phải 9 số");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "chứng minh nhân dân không được để trống");
+			return false;
+		}
+	}
+	public boolean kiemTraDiaChi(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("^[A-Za-z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "địa chỉ không được nhập ký tự đặc biệt");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "địa chỉ không được để trống");
+			return false;
+		}
+	}
+	public boolean kiemTraDienThoai(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.length()==10) {
+				if(MaKT.matches("[0-9]{10}+")==true) {
+					return true;
+				}else {
+					thongBaoKieuLoi(e, "số điện thoại chỉ nhập số");
+					return false;
+				}
+			}else {
+				thongBaoKieuLoi(e, "số điện thoại phải 10 số");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Số điện thoại không được để trống");
+			return false;
+		}
+	}
+	public boolean kiemTraLuong(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("[0-9]+")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "tiền lương chỉ nhập số");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "lương không được để trống");
+			return false;
+		}
+	}
+	public boolean kiemTraUserName(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			return true;
+		}else {
+			thongBaoKieuLoi(e, "username không được để trống");
+			return false;
+		}
+	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  
 	}
@@ -107,73 +218,129 @@ public class ThemNhanVien implements Initializable{
 			img.setImage(image);
 		}
 	}
+
 	public void btnThem(ActionEvent e) throws IOException {
 		try {
-			Account acc=ql.timMa(box.getValue());
-			if(acc!=null) {
-				String textMa=txtMa.getText().toString();
-				String textTen=txtTen.getText().toString();
-				String textNamSinh=txtNamSinh.getValue().toString();
-				String textDiaChi= txtDiaChi.getText().toString();
-				String textDienThoai=txtDienThoai.getText().toString();
-				String textLuong=txtLuong.getText().toString();
-				String textCMND=txtCMND.getText().toString();
-				if(textMa.isEmpty()==false
-						&& textTen.isEmpty()==false
-						&& textNamSinh.isEmpty()==false 
-						&& textDiaChi.isEmpty()==false
-						&& textDienThoai.isEmpty()==false 
-						&& textLuong.isEmpty()==false
-						&& textCMND.isEmpty()==false
-						) {
-					NhanVien nv=null;
-					if(lblTitle.getText().toString().equals("Cập nhập nhân viên")) {
-						System.out.println(fileHinh);
-						System.out.println(fileHinhCapNhap);
-						if(fileHinhCapNhap.contentEquals(fileHinh)) {
-						}else if(fileHinh.isEmpty()==false){
-							copyFileUsingStream(new File(fileHinh),new File("src/image/"+textMa+".PNG"));
-						}
-						if(rdNam.isSelected()==true) {
-							nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,rdNam.getText().toString(),Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
-						}else {
-							nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,"Nu",Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
-						}
-						if(qlNV.suaNV(nv)==true) {
-							((Node) (e.getSource())).getScene().getWindow().hide();
-						}else {
-							thongBaoKieuLoi(e, "sửa không thành công");
-						}
-					}else {
-						if(fileHinh.isEmpty()==false) {
+			boolean ktChuoi=true;
+			String textMa=txtMa.getText().toString();
+			String textTen=txtTen.getText().toString();
+			String textDiaChi= txtDiaChi.getText().toString();
+			String textDienThoai=txtDienThoai.getText().toString();
+			String textLuong=txtLuong.getText().toString();
+			String textCMND=txtCMND.getText().toString();
+
+			if(kiemTraMaNhanVien(e, textMa)==false) {
+				ktChuoi=false;
+				txtMa.requestFocus();
+			}
+			if(ktChuoi==true) {
+				if(box.getValue()==null) {
+					thongBaoKieuLoi(e, "Bạn chưa nhập mã");
+					ktChuoi=false;
+				}
+			}
+
+			if(ktChuoi==true) {
+				if(kiemTraTenNhanVien(e, textTen)==false) {
+					ktChuoi=false;
+					txtTen.requestFocus();
+				}
+			}
+
+			if(ktChuoi==true) {
+				if(txtNamSinh.getValue()==null) {
+					thongBaoKieuLoi(e, "Bạn chưa nhập ngày sinh");
+					ktChuoi=false;
+				}
+			}
+
+
+			if(ktChuoi==true) {
+				if(kiemTraCMND(e, textCMND)==false) {
+					ktChuoi=false;
+					txtCMND.requestFocus();
+				}
+			}
+
+			if(ktChuoi==true) {
+				if(kiemTraDiaChi(e, textDiaChi)==false) {
+					ktChuoi=false;
+				}
+			}
+
+			if(ktChuoi==true) {
+				if(kiemTraDienThoai(e, textDienThoai)==false) {
+					ktChuoi=false;
+					txtDienThoai.requestFocus();
+				}
+			}
+
+			if(ktChuoi==true) {
+				if(kiemTraLuong(e, textLuong)==false) {
+					ktChuoi=false;
+					txtLuong.requestFocus();
+				}
+			}
+			if(ktChuoi==true) {
+				Account acc=ql.timMa(box.getValue());
+				if(acc!=null) {
+					if(textMa.isEmpty()==false
+							&& textTen.isEmpty()==false
+							&& textDiaChi.isEmpty()==false
+							&& textDienThoai.isEmpty()==false 
+							&& textLuong.isEmpty()==false
+							&& textCMND.isEmpty()==false
+							) {
+						NhanVien nv=null;
+						if(lblTitle.getText().toString().equals("Cập nhập nhân viên")) {
+							if(fileHinhCapNhap.contentEquals(fileHinh)) {
+							}else if(fileHinh.isEmpty()==false){
+								copyFileUsingStream(new File(fileHinh),new File("src/image/"+textMa+".PNG"));
+							}
 							if(rdNam.isSelected()==true) {
 								nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,rdNam.getText().toString(),Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
 							}else {
-								nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,"Nu",Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
+								nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,"Nữ",Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
 							}
-							if(nv!=null) {
-								int result=qlNV.themNV(nv);
-								if(result==-1) {
-									thongBaoKieuLoi(e, "usename đã có người sử dụng");
-								}else if(result==0) {
-									thongBaoKieuLoi(e, "bị trùng mã");
-								}else {
-									copyFileUsingStream(new File(fileHinh),new File("src/image/"+textMa+".PNG"));
-									((Node) (e.getSource())).getScene().getWindow().hide();
-								}
+							if(qlNV.suaNV(nv)==true) {
+								((Node) (e.getSource())).getScene().getWindow().hide();
 							}else {
-								thongBaoKieuLoi(e, "thêm không thành công");
+								thongBaoKieuLoi(e, "sửa không thành công");
 							}
 						}else {
-							thongBaoKieuLoi(e, "vui lòng chọn hình");
+							if(fileHinh.isEmpty()==false) {
+								if(rdNam.isSelected()==true) {
+									nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,rdNam.getText().toString(),Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
+								}else {
+									nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,"Nu",Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
+								}
+								if(nv!=null) {
+									int result=qlNV.themNV(nv);
+									if(result==-1) {
+										thongBaoKieuLoi(e, "usename đã có người sử dụng");
+										box.requestFocus();
+									}else if(result==0) {
+										thongBaoKieuLoi(e, "bị trùng mã");
+									}else {
+										copyFileUsingStream(new File(fileHinh),new File("src/image/"+textMa+".PNG"));
+										((Node) (e.getSource())).getScene().getWindow().hide();
+									}
+								}else {
+									thongBaoKieuLoi(e, "thêm không thành công");
+								}
+							}else {
+								thongBaoKieuLoi(e, "vui lòng chọn hình");
+							}
 						}
+					}else {
+						thongBaoKieuLoi(e, "yêu cầu nhập đầy đủ và hợp lệ");
 					}
 				}else {
-					thongBaoKieuLoi(e, "yêu cầu nhập đầy đủ và hợp lệ");
+					thongBaoKieuLoi(e, "username không tồn tại");
+					box.requestFocus();
 				}
-			}else {
-				thongBaoKieuLoi(e, "username không tồn tại");
 			}
+
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		}
@@ -217,7 +384,7 @@ public class ThemNhanVien implements Initializable{
 			os.close();
 		}
 	}
-	
+
 	private void makeStageDrageable() {
 		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {

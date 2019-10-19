@@ -56,8 +56,6 @@ public class AdminController implements Initializable{
         y = event.getSceneY();
     }
 	public void initialize(URL arg0, ResourceBundle arg1) {
-//		qlNV.showTatCaNhanVien();
-//		qlACC.showTatCaAccount();
 		try {
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Welcome.fxml"));
 			bd.setCenter(root);

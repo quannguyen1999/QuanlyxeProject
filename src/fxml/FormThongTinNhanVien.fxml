@@ -131,17 +131,14 @@
                      </HBox.margin>
                   </JFXTextField>
                   <JFXRadioButton fx:id="rdNam" prefHeight="31.0" prefWidth="54.0" selected="true" text="Nam">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="gioiTinh" />
-                     </toggleGroup>
                      <HBox.margin>
                         <Insets left="60.0" top="10.0" />
                      </HBox.margin>
-                  </JFXRadioButton>
-                  <JFXRadioButton fx:id="rdNu" prefHeight="33.0" prefWidth="45.0" text="Nữ">
                      <toggleGroup>
-                        <ToggleGroup fx:id="gioiTinh" />
+                        <ToggleGroup fx:id="GT" />
                      </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="rdNu" prefHeight="33.0" prefWidth="45.0" text="Nữ" toggleGroup="$GT">
                      <HBox.margin>
                         <Insets left="30.0" top="10.0" />
                      </HBox.margin>

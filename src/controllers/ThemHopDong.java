@@ -173,7 +173,7 @@ public class ThemHopDong implements Initializable{
 				txtCMNDNhanVien.setText(nv.getCMND());
 				txtNoiONV.setText(nv.getDiaChi());
 				txtSDTNV.setText(nv.getDienThoai());
-				
+
 			}
 		});
 	}
@@ -217,27 +217,92 @@ public class ThemHopDong implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
+	public boolean kiemTraSoTien(ActionEvent e,String text) {
+		String MaKT=text.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("[0-9]+")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "Số tiền chỉ nhập số");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Tiền đặt chưa nhập");
+			return false;
+		}
+	}
 	@FXML
 	public void btnThemHopDong(ActionEvent e) {
-		int maHopDong=Integer.parseInt(txtMaHD.getText().toString());
+		boolean continues=true;
+		int maHopDong=0;
+		try {
+			maHopDong=Integer.parseInt(txtMaHD.getText().toString());
+		} catch (Exception e2) {
+			continues=false;
+			thongBaoKieuLoi(e, "mã hợp đồng không được để trống");
+			txtMaHD.requestFocus();
+			// TODO: handle exception
+		}
 		LocalDate ngayLap = LocalDate.now();
 		String tenNguoiBan=txtTenNV.getText().toString();
 		String cMNDNB=txtCMNDNhanVien.getText().toString();
 		String noiONB=txtNoiONV.getText().toString();
 		String soDTNB=txtSDTNV.getText().toString();
-		String maNV=boxMaNV.getValue();
+		String maNV="";
 		String tenNguoiMua=txtTenKH.getText().toString();
 		String cMNDNM=txtCMNDKH.getText().toString();
 		String noiONM=txtNoiOKH.getText().toString();
 		String soDTNM=txtSoDTKH.getText().toString();
 		String tienDatThanhToan=txtTienPhaiDat.getText().toString();
-		String maKH=boxMaKH.getValue();
-		HopDong hd=new HopDong(maHopDong, ngayLap, maNV, tenNguoiBan, cMNDNB, noiONB, soDTNB, maKH, tenNguoiMua, cMNDNM, noiONM, soDTNM, Double.parseDouble(tienDatThanhToan));
-		if(QuanLyHopDong.themHopDong(hd)==true) {
-			((Node)(e.getSource())).getScene().getWindow().hide();  
-		}else {
-			thongBaoKieuLoi(e, "Mã hợp đồng đã tồn tại");
+		String maKH="";
+		if(continues==true) {
+			if(boxMaNV.getValue()==null) {
+				thongBaoKieuLoi(e, "Mã nhân viên chưa nhập");
+				continues=false;
+				boxMaNV.requestFocus();
+			}else {
+				maNV=boxMaNV.getValue();
+			}
 		}
+
+		if(continues==true) {
+			if(QuanLyNhanVien.timMa(Integer.parseInt(maNV))==null) {
+				thongBaoKieuLoi(e, "Mã nhân viên không tồn tại");
+				continues=false;
+				boxMaNV.requestFocus();
+			}
+		}
+		if(continues==true) {
+			if(boxMaKH.getValue()==null) {
+				thongBaoKieuLoi(e, "Mã khách hàng chưa nhập");
+				continues=false;
+				boxMaKH.requestFocus();
+			}else {
+				maKH=boxMaKH.getValue();
+			}
+		}
+		if(continues==true) {
+			if(QuanLyKhachHang.timMa(Integer.parseInt(maKH))==null) {
+				thongBaoKieuLoi(e, "Mã khách hàng không tồn tại");
+				continues=false;
+				boxMaKH.requestFocus();
+			}
+		}
+		if(continues==true) {
+			if(kiemTraSoTien(e, tienDatThanhToan)==false) {
+				continues=false;
+				txtTienPhaiDat.requestFocus();
+			}
+		}
+		if(continues==true) {
+			HopDong hd=new HopDong(maHopDong, ngayLap, maNV, tenNguoiBan, cMNDNB, noiONB, soDTNB, maKH, tenNguoiMua, cMNDNM, noiONM, soDTNM, Double.parseDouble(tienDatThanhToan));
+			if(QuanLyHopDong.themHopDong(hd)==true) {
+				((Node)(e.getSource())).getScene().getWindow().hide();  
+			}else {
+				thongBaoKieuLoi(e, "Mã hợp đồng đã tồn tại");
+			}
+		}
+
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  

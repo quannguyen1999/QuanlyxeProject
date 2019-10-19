@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
 import application.Main;
 import dao.QuanLyAccount;
+import dao.QuanLyHopDong;
 import dao.QuanLyKhachHang;
 import dao.QuanLyPhieuXuat;
 import dao.QuanLyXe;
@@ -25,8 +27,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -171,6 +176,37 @@ public class QuanLyXuatHangController implements Initializable{
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
 		}
+	}
+	public void thongBaoKieuLoi(ActionEvent e, String text) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information Dialog");
+		alert.setHeaderText(null);
+		alert.setContentText(text);
+		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
+		alert.showAndWait();
+	}
+	@FXML
+	public void btnXoaPhieuXuat(ActionEvent e) {
+		int result=tbl_view.getSelectionModel().getSelectedIndex();
+		if(result!=-1) {
+			Alert alert = new Alert(AlertType.WARNING, "bạn có chắc muốn xóa",ButtonType.OK,ButtonType.CANCEL);
+			alert.setTitle("Cảnh báo");
+			Optional<ButtonType> resultx = alert.showAndWait();
+
+			if (resultx.get() == ButtonType.OK) {
+				int acc=tbl_view.getItems().get(result).getPhieuXuat().getMaPX();
+				if(QuanLyPhieuXuat.xoaPhieuXuat(acc)==true) {
+					thongBaoKieuLoi(e, "xóa thành công");
+				}else{
+					thongBaoKieuLoi(e, "xóa không thành công");
+				};
+				handleRefersh(e);
+			}
+
+		}else {
+			thongBaoKieuLoi(e, "bạn chưa chọn bảng cần xóa");
+		}
+		
 	}
 
 

@@ -44,41 +44,83 @@ public class ThemKhachHang implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
-	public boolean kiemTraMa(String text) {
+	public boolean kiemTraMa(ActionEvent e,String text) {
 		if(text.isEmpty()==false) {
 			try {
 				int result=Integer.parseInt(text);
 				return true;
-			} catch (Exception e) {
-				// TODO: handle exception
+			} catch (Exception ev) {
+				thongBaoKieuLoi(e, "Mã khách hàng chỉ nhập số");
 				return false;
 			}
 		}
 		return false;
 	}
-	public boolean kiemTraDiaChi(String text) {
-		if(text.isEmpty()==false) {
-			return true;
+	public boolean kiemTraDiaChi(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("^[A-Za-z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "địa chỉ không được nhập ký tự đặc biệt");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "địa chỉ không được để trống");
+			return false;
 		}
-		return false;
 	}
-	public boolean kiemTraEmail(String text) {
-		if(text.isEmpty()==false) {
-			return true;
+	public boolean kiemTraCMND(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.length()==9) {
+				if(MaKT.matches("[0-9]{9}+")==true) {
+					return true;
+				}else {
+					thongBaoKieuLoi(e, "Mã nhân viên chỉ nhập số");
+					return false;
+				}
+			}else {
+				thongBaoKieuLoi(e, "chứng minh nhân dân phải 9 số");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "chứng minh nhân dân không được để trống");
+			return false;
 		}
-		return false;
 	}
-	public boolean kiemTraDienThoai(String text) {
-		if(text.isEmpty()==false) {
-			return true;
+	public boolean kiemTraDienThoai(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.length()==10) {
+				if(MaKT.matches("[0-9]{10}+")==true) {
+					return true;
+				}else {
+					thongBaoKieuLoi(e, "số điện thoại chỉ nhập số");
+					return false;
+				}
+			}else {
+				thongBaoKieuLoi(e, "số điện thoại phải 10 số");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Số điện thoại không được để trống");
+			return false;
 		}
-		return false;
 	}
-	public boolean kiemTraTen(String text) {
-		if(text.isEmpty()==false) {
-			return true;
+	public boolean kiemTraTenKhachHang(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("^[A-Za-z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "Tên khách hàng không được nhập ký tự đặc biệt");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Tên khách hàng không được để trống");
+			return false;
 		}
-		return false;
 	}
 	public void CLickOK(ActionEvent e) {
 		String ma=txtMa.getText().toString();
@@ -88,47 +130,49 @@ public class ThemKhachHang implements Initializable{
 		String ten=txtTenKH.getText().toString();
 		LocalDate lc=txtNgaySinh.getValue();
 		boolean stillContunite=true;
-		if(kiemTraMa(ma)==true) {
+		if(kiemTraMa(e, ma)==true) {
 			stillContunite=true;
 		}else {
-			thongBaoKieuLoi(e, "yêu cầu nhập mã");
 			txtMa.requestFocus();
 			stillContunite=false;
 		}
 		if(stillContunite==true) {
-			if(kiemTraDiaChi(diaChi)) {
+			if(kiemTraDiaChi(e,diaChi)) {
 				stillContunite=true;
 			}else {
-				thongBaoKieuLoi(e, "yêu cầu nhập địa chỉ");
 				txtDiaChi.requestFocus();
 				stillContunite=false;
 			}
 		}
 		if(stillContunite==true) {
-			if(kiemTraEmail(CMND)) {
+			if(kiemTraCMND(e,CMND)) {
 				stillContunite=true;
 			}else {
-				thongBaoKieuLoi(e, "yêu cầu nhập email");
 				txtCMND.requestFocus();
 				stillContunite=false;
 			}
 		}
 		if(stillContunite==true) {
-			if(kiemTraDienThoai(DienThoai)) {
+			if(kiemTraDienThoai(e,DienThoai)) {
 				stillContunite=true;
 			}else {
-				thongBaoKieuLoi(e, "yêu cầu nhập điện thoại");
 				txtDienThoai.requestFocus();
 				stillContunite=false;
 			}
 		}
 		if(stillContunite==true) {
-			if(kiemTraTen(ten)) {
+			if(kiemTraTenKhachHang(e,ten)) {
 				stillContunite=true;
 			}else {
-				thongBaoKieuLoi(e, "yêu cầu nhập tên");
 				txtTenKH.requestFocus();
 				stillContunite=false;
+			}
+		}
+		if(stillContunite==true) {
+			if(txtNgaySinh.getValue()==null) {
+				stillContunite=false;
+				thongBaoKieuLoi(e, "Ngày sinh chưa chọn");
+				txtNgaySinh.requestFocus();
 			}
 		}
 		if(stillContunite==true) {

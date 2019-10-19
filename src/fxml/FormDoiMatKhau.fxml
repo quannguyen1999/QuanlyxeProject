@@ -51,7 +51,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txtPassOld" focusColor="WHITE" layoutX="184.0" layoutY="31.0" prefHeight="26.0" prefWidth="221.0" promptText="nhập mật khẩu cũ" unFocusColor="WHITE" AnchorPane.leftAnchor="184.0">
+            <JFXPasswordField fx:id="txtPassOld" focusColor="WHITE" layoutX="184.0" layoutY="31.0" prefHeight="26.0" prefWidth="221.0" promptText="nhập mật khẩu cũ" style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;" unFocusColor="WHITE" AnchorPane.leftAnchor="184.0">
                <padding>
                   <Insets top="10.0" />
                </padding>
@@ -65,7 +65,7 @@
                   <Font name="Calibri Light" size="18.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txtPassNew" focusColor="WHITE" layoutX="184.0" layoutY="45.0" prefHeight="26.0" prefWidth="222.0" promptText="nhập mật khẩu mới" unFocusColor="WHITE" />
+            <JFXPasswordField fx:id="txtPassNew" focusColor="WHITE" layoutX="184.0" layoutY="45.0" prefHeight="26.0" prefWidth="222.0" promptText="nhập mật khẩu mới" style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: white;" unFocusColor="WHITE" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="59.0" prefWidth="600.0">

@@ -86,29 +86,29 @@ public class QuanLyXeController implements Initializable{
 
 
 		tbl_view.getColumns().addAll(colMaXe,colDonViTinh,colMoTa,colNhaSX,colLoaiXe,colTenXe,colThongTinBaoHanh,colMauXe);
-		
+
 		bd.setCenter(tbl_view);
-		
+
 		colMaXe.setCellValueFactory(new PropertyValueFactory<>("maXe"));
 		colDonViTinh.setCellValueFactory(new PropertyValueFactory<>("donViTinh"));
 		colMoTa.setCellValueFactory(new PropertyValueFactory<>("moTa"));
 		colThongTinBaoHanh.setCellValueFactory(new PropertyValueFactory<>("thongTinBaoHanh"));
 
 		colNhaSX.setCellValueFactory(cellData -> 
-        new SimpleStringProperty(cellData.getValue().getLx().getNuocSX()));
+		new SimpleStringProperty(cellData.getValue().getLx().getNuocSX()));
 		colLoaiXe.setCellValueFactory(cellData -> 
-        new SimpleStringProperty(cellData.getValue().getLx().getLoaixe()));
+		new SimpleStringProperty(cellData.getValue().getLx().getLoaixe()));
 		colTenXe.setCellValueFactory(cellData -> 
-        new SimpleStringProperty(cellData.getValue().getLx().getTenxe()));
+		new SimpleStringProperty(cellData.getValue().getLx().getTenxe()));
 		colMauXe.setCellValueFactory(cellData -> 
-	        new SimpleStringProperty(cellData.getValue().getLx().getMauson()));
-		
-		
-		
+		new SimpleStringProperty(cellData.getValue().getLx().getMauson()));
+
+
+
 		choiceBoxLoaiXe.setDisable(true);
 		choiceBoxMauXe.setDisable(true);
 		choiceBoxTenXe.setDisable(true);
-		
+
 		List<String> lx=QuanLyLoaiXe.showLoaiXe();
 		lx.forEach(t->{
 			choiceBoxLoaiXe.getItems().add(t);
@@ -121,6 +121,8 @@ public class QuanLyXeController implements Initializable{
 			{ 
 				choiceBoxTenXe.getItems().clear();
 				choiceBoxMauXe.getItems().clear();
+				lxMauXe.clear();
+				lxTenXe.clear();
 				List<String> ListTenXe=QuanLyLoaiXe.showTenXe(lx.get((int)new_value));
 				ListTenXe.forEach(t->{
 					choiceBoxTenXe.getItems().add(t);
@@ -142,6 +144,7 @@ public class QuanLyXeController implements Initializable{
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
 				choiceBoxMauXe.getItems().clear();
+				lxMauXe.clear();
 				List<String> listMauXe=QuanLyLoaiXe.showMauXeCuaTenXe(choiceBoxLoaiXe.getValue(), lxTenXe.get((int)new_value));
 				listMauXe.forEach(t->{
 					choiceBoxMauXe.getItems().add(t);
@@ -156,7 +159,7 @@ public class QuanLyXeController implements Initializable{
 			}
 		});
 
-		
+
 		UploaderDuLieuLenBang();
 
 		tbl_view.setOnMouseClicked(ev->{
@@ -175,7 +178,7 @@ public class QuanLyXeController implements Initializable{
 					}
 
 					ThemXe ctlMain=loader.getController();
-					
+
 					String maXe=tbl_view.getItems().get(result).getMaXe();
 					String donViTinh=tbl_view.getItems().get(result).getDonViTinh();
 					String moTa=tbl_view.getItems().get(result).getMoTa();
@@ -184,7 +187,7 @@ public class QuanLyXeController implements Initializable{
 					String TenXe=tbl_view.getItems().get(result).getLx().getTenxe();
 					String thongTinBaoHanh=tbl_view.getItems().get(result).getThongTinBaoHanh();
 					String mauXe=tbl_view.getItems().get(result).getLx().getMauson();
-					
+
 					ctlMain.txtMaXe.setText(maXe);
 					ctlMain.txtMaXe.setEditable(false);
 					ctlMain.txtDonViTinh.setText(donViTinh);
@@ -194,7 +197,7 @@ public class QuanLyXeController implements Initializable{
 					ctlMain.choiceBoxLoaiXe.setValue(LoaiXe);
 					ctlMain.choiceBoxMauXe.setValue(mauXe);
 					ctlMain.choiceBoxTenXe.setValue(TenXe);
-					
+
 					if(btnThem.isDisabled()==true) {
 						System.out.println("nhân viên");
 						ctlMain.lblTitle.setText("thông tin xe");
@@ -243,7 +246,7 @@ public class QuanLyXeController implements Initializable{
 		choiceBoxLoaiXe.setDisable(false);
 		choiceBoxMauXe.setDisable(false);
 		choiceBoxTenXe.setDisable(false);
-		
+
 	}
 	@FXML
 	private void btnCLickOne(ActionEvent e) {
@@ -253,7 +256,7 @@ public class QuanLyXeController implements Initializable{
 		choiceBoxMauXe.setDisable(true);
 		choiceBoxTenXe.setDisable(true);
 	}
-	
+
 	private void UploaderDuLieuLenBang(){
 		List<Xe> accs=QuanLyXe.showTatCaXe();
 		accs.forEach(t->{
@@ -321,17 +324,17 @@ public class QuanLyXeController implements Initializable{
 			List<Loaixe> listLoaiXe=QuanLyLoaiXe.timMaTraVeLoaiXe(loaiXe, tenXe, mauXe);
 			List<Xe> listXe=QuanLyXe.timTheoLoai(listLoaiXe.get(0).getMaloai());
 			if(listXe!=null) {
-				
+
 				tbl_view.getItems().clear();
 				listXe.forEach(t->{
 					tbl_view.getItems().add(t);
 				});
-			
+
 			}else {
 				thongBaoKieuLoi(e, "không tìm thấy");
 			}
 		}
-		
+
 
 	}
 	@FXML

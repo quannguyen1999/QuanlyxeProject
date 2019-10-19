@@ -157,9 +157,11 @@ public class QuanLyHopDongController implements Initializable{
 
 			if (resultx.get() == ButtonType.OK) {
 				int acc=tbl_view.getItems().get(result).getMaHopDong();
-//				HopDong hd=QuanLyHopDong.timMaHopDong(acc);
-				QuanLyHopDong.xoaHopDong(acc);
-				thongBaoKieuLoi(e, "xóa thành công");
+				if(QuanLyHopDong.xoaHopDong(acc)==true) {
+					thongBaoKieuLoi(e, "xóa thành công");
+				}else{
+					thongBaoKieuLoi(e, "xóa không thành công");
+				};
 				handleRefersh(e);
 			}
 
@@ -169,18 +171,18 @@ public class QuanLyHopDongController implements Initializable{
 	}
 	@FXML 
 	public void btnTim(ActionEvent e) {
-//		String text=txtMa.getText().trim().toString();
-//		if (text.isEmpty()==false) {
-//			HopDong acc=QuanLyHopDong.timMaHopDong(Integer.parseInt(text));
-//			if(acc!=null) {
-//				tbl_view.getItems().clear();
-//				tbl_view.getItems().add(acc);
-//			}else {
-//				thongBaoKieuLoi(e, "không tìm thấy");
-//			}
-//		}else {
-//			handleRefersh(e);
-//		}
+		String text=txtMa.getText().trim().toString();
+		if (text.isEmpty()==false) {
+			HopDong acc=QuanLyHopDong.timMaHopDong(Integer.parseInt(text));
+			if(acc!=null) {
+				tbl_view.getItems().clear();
+				tbl_view.getItems().add(acc);
+			}else {
+				thongBaoKieuLoi(e, "không tìm thấy");
+			}
+		}else {
+			handleRefersh(e);
+		}
 
 	}
 	private void handleRefersh(ActionEvent e) {
@@ -203,7 +205,6 @@ public class QuanLyHopDongController implements Initializable{
 				handleRefersh(e);
 			});
 		} catch (Exception e2) {
-			// TODO: handle exception
 			System.out.println(e2.getMessage());
 		}
 	}

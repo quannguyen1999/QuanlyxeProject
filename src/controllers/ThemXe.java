@@ -75,6 +75,8 @@ public class ThemXe implements Initializable{
 			{ 
 				choiceBoxTenXe.getItems().clear();
 				choiceBoxMauXe.getItems().clear();
+				lxMauXe.clear();
+				lxTenXe.clear();
 				List<String> ListTenXe=QuanLyLoaiXe.showTenXe(lx.get((int)new_value));
 				ListTenXe.forEach(t->{
 					choiceBoxTenXe.getItems().add(t);
@@ -103,6 +105,7 @@ public class ThemXe implements Initializable{
 		choiceBoxTenXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
+				lxMauXe.clear();
 				choiceBoxMauXe.getItems().clear();
 				List<String> listMauXe=QuanLyLoaiXe.showMauXeCuaTenXe(choiceBoxLoaiXe.getValue(), lxTenXe.get((int)new_value));
 				listMauXe.forEach(t->{
@@ -123,6 +126,7 @@ public class ThemXe implements Initializable{
 		choiceBoxMauXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
+				
 				List<String> listHinhAnhXe=QuanLyLoaiXe.showHinhAnhCuaXe(choiceBoxLoaiXe.getValue(), choiceBoxTenXe.getValue(), lxMauXe.get((int)new_value));
 				System.out.println(listHinhAnhXe.get(0).toString());
 				File currentDirFile = new File("");
