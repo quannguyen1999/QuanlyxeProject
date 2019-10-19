@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -7,6 +8,7 @@ import java.util.ResourceBundle;
 
 import application.Main;
 import dao.QuanLyNhanVien;
+import dao.QuanLyXe;
 import entities.NhanVien;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -48,6 +51,7 @@ public class NhanVienController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		try {
+//			QuanLyXe.showTatCaXe();
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Welcome.fxml"));
 			mainBd.setCenter(root);
 		} catch (IOException e) {
@@ -85,6 +89,7 @@ public class NhanVienController implements Initializable{
 		primaryStage.setScene(scene);
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		Main.primaryStage=primaryStage;
+		primaryStage.getIcons().add(new Image("/image/logo.PNG"));
 		primaryStage.show();
 	}
 	public void handleExit(ActionEvent e) {
@@ -106,21 +111,39 @@ public class NhanVienController implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
+	private static String kiemTraChuoi(String text) {
+		String newTextResult="";
+		for(int i=0;i<=text.length()-1;i++) {
+			if((int)text.charAt(i)==92) {
+				newTextResult+="/";
+			}else {
+				newTextResult+=text.charAt(i);
+			}
+		}
+		return newTextResult;
+	}
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
+
 			NhanVien nv=QuanLyNhanVien.timMa2(lblLogin.getText().toString());
 			if(nv!=null) {
 				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
 				Parent root=loader.load();
 				ThongTinNguoiDung ctlThongTin=loader.getController();
-				System.out.println(lblLogin.getText().toString());
 				ctlThongTin.thietLapFormNguoiDung(nv);
+				File currentDirFile = new File("");
+				String helper = currentDirFile.getAbsolutePath();
+				String begin=kiemTraChuoi(helper);
+				System.out.println("file:///"+begin+"/"+nv.getHinhAnh());
+				Image image = new Image("file:///"+begin+"/src/"+nv.getHinhAnh());
+				ctlThongTin.img.setImage(image);
 				Stage stage=new Stage();
 				Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
 				stage.initOwner(stageCunrrent);
 				stage.initStyle(StageStyle.UNDECORATED);
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(new Scene(root));
+				stage.getIcons().add(new Image("/image/logo.PNG"));
 				Main.primaryStage=stage;
 				stage.show();
 			}else {
@@ -131,7 +154,7 @@ public class NhanVienController implements Initializable{
 				alert.initOwner((Stage) mnb.getScene().getWindow());
 				alert.showAndWait();
 			}
-			
+
 		} catch (Exception e2) {
 			// TODO: handle exception
 			System.out.println(e2.getMessage());

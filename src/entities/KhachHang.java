@@ -1,31 +1,42 @@
 package entities;
 
+import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class KhachHang {
-	@Id 
+	@Id
 	private int maKH;
+	@Column(columnDefinition = "nvarchar(100)")
 	private String diaChi;
-	private String email;
+	private String CMND;
 	private String soDT;
+	@Column(columnDefinition = "nvarchar(100)")
 	private String tenKH;
-	
+	private LocalDate ngaySinh;
+	@OneToMany(mappedBy = "khachHang")
+	private List<PhieuXuat> dspx;
 
 	public KhachHang() {
 		super();
 	}
+
 	
-	public KhachHang(int maKH, String diaChi, String email, String soDT, String tenKH) {
+	public KhachHang(int maKH, String diaChi, String cMND, String soDT, String tenKH, LocalDate ngaySinh) {
 		super();
 		this.maKH = maKH;
 		this.diaChi = diaChi;
-		this.email = email;
+		CMND = cMND;
 		this.soDT = soDT;
 		this.tenKH = tenKH;
+		this.ngaySinh = ngaySinh;
 	}
+
 
 	public int getMaKH() {
 		return maKH;
@@ -35,6 +46,16 @@ public class KhachHang {
 		this.maKH = maKH;
 	}
 
+	public LocalDate getNgaySinh() {
+		return ngaySinh;
+	}
+
+
+	public void setNgaySinh(LocalDate ngaySinh) {
+		this.ngaySinh = ngaySinh;
+	}
+
+
 	public String getDiaChi() {
 		return diaChi;
 	}
@@ -43,12 +64,14 @@ public class KhachHang {
 		this.diaChi = diaChi;
 	}
 
-	public String getEmail() {
-		return email;
+	
+
+	public String getCMND() {
+		return CMND;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCMND(String cMND) {
+		CMND = cMND;
 	}
 
 	public String getSoDT() {
@@ -67,14 +90,20 @@ public class KhachHang {
 		this.tenKH = tenKH;
 	}
 
+	public List<PhieuXuat> getDspx() {
+		return dspx;
+	}
+
+	public void setDspx(List<PhieuXuat> dspx) {
+		this.dspx = dspx;
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append(maKH);
-		return builder.toString();
+		return "KhachHang [maKH=" + maKH + ", diaChi=" + diaChi + ", CMND=" + CMND + ", soDT=" + soDT + ", tenKH="
+				+ tenKH + "]";
 	}
-	
 
 	
-	
+
 }

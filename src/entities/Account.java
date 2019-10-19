@@ -1,5 +1,6 @@
 package entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,6 +9,7 @@ public class Account {
 	@Id 
 	private String userName;
 	private String password; 
+	@Column(columnDefinition = "nvarchar(50)")
 	private String loaiTK; 
 	
 	public Account(String userName, String password, String loaiTK) {
@@ -49,6 +51,9 @@ public class Account {
 	public String toString() {
 		return "Account [userName=" + userName + ", password=" + password + ", loaiTK=" + loaiTK + "]";
 	}
+	
+
+	
 	
 	
 	

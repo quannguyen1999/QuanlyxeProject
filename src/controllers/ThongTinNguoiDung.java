@@ -1,5 +1,6 @@
 package controllers;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,36 +32,24 @@ public class ThongTinNguoiDung implements Initializable{
 	@FXML Label lblDT;
 	@FXML Label lblGioiTinh;
 	@FXML Label lblUsername;
-	
+	@FXML ImageView img;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		makeStageDrageable();
 	}
 
-	private void makeStageDrageable() {
-		bd.setOnMousePressed(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				xOffset = event.getSceneX();
-				yOffset = event.getSceneY();
-			}
-		});
-		bd.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
+	private double x, y;
+    @FXML
+    private void draged(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setX(event.getScreenX() - x);
+        stage.setY(event.getScreenY() - y);
+    }
 
-				Main.primaryStage.setX(event.getScreenX() - xOffset);
-				Main.primaryStage.setY(event.getScreenY() - yOffset);
-				Main.primaryStage.setOpacity(0.7f);
-			}
-		});
-		bd.setOnDragDone((e) -> {
-			Main.primaryStage.setOpacity(1.0f);
-		});
-		bd.setOnMouseReleased((e) -> {
-			Main.primaryStage.setOpacity(1.0f);
-		});
-
-	}
+    @FXML
+    private void pressed(MouseEvent event) {
+        x = event.getSceneX();
+        y = event.getSceneY();
+    }
 	public void thietLapFormNguoiDung(NhanVien nv) {
 		lblHoTen.setText(nv.getTenNV());
 		lblChucVu.setText(nv.getChucVu());
@@ -69,21 +58,7 @@ public class ThongTinNguoiDung implements Initializable{
 		lblGioiTinh.setText(nv.getGioiTinh());
 		lblUsername.setText(nv.getAccount().getUserName());
 	}
-	public void btnQuayLai(ActionEvent e) throws IOException {
-//		((Node)(e.getSource())).getScene().getWindow().hide();  
-//
-//		Stage primaryStage=new Stage();
-//		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
-//		Scene scene = new Scene(root);
-//		scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
-//		primaryStage.setScene(scene);
-//		//		primaryStage.initStyle(StageStyle.UNDECORATED);
-//		primaryStage.setResizable(false);
-//		Main.primaryStage=primaryStage;
-//		primaryStage.show();
-	}
 	public void btnDoiMatKhau(ActionEvent e) throws IOException {
-		((Node)(e.getSource())).getScene().getWindow().hide();  
 		FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormDoiMatKhau.fxml"));
 		Parent root=loader.load();
 		DoiMatKhau ctlThongTin=loader.getController();
@@ -93,6 +68,7 @@ public class ThongTinNguoiDung implements Initializable{
 		stage.initStyle(StageStyle.UNDECORATED);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(new Scene(root));
+		stage.getIcons().add(new Image("/image/logo.PNG"));
 		Main.primaryStage=stage;
 		stage.show();
 	}

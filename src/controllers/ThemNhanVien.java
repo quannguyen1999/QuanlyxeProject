@@ -1,6 +1,11 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,9 +32,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ThemNhanVien implements Initializable{
 	private double xOffset = 0;
@@ -44,9 +53,11 @@ public class ThemNhanVien implements Initializable{
 	@FXML ComboBox<String> box;
 	@FXML JFXTextField txtDienThoai;
 	@FXML JFXTextField txtLuong;
+	@FXML JFXTextField txtCMND;
 	@FXML JFXRadioButton rdNam;
 	@FXML JFXRadioButton rdNu;
 	@FXML Label lblTitle;
+	@FXML ImageView img;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -54,7 +65,7 @@ public class ThemNhanVien implements Initializable{
 		box.setEditable(true);
 		loadDuLieu();
 	}
-	
+
 	public  void loadDuLieu() {
 		ObservableList<String> items = FXCollections.observableArrayList();
 
@@ -68,10 +79,11 @@ public class ThemNhanVien implements Initializable{
 		box.getEditor().textProperty().addListener(new InputFilter(box, filteredItems, false));
 
 		box.setItems(filteredItems);
-		
+
 		txtNamSinh.setEditable(false);
 
 	}
+
 	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  
 	}
@@ -83,6 +95,18 @@ public class ThemNhanVien implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
+	String fileHinhCapNhap="";
+	String fileHinh="";
+	public void btnChonHinh(ActionEvent e) {
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().add(new ExtensionFilter("PNG Files", "*.PNG"));
+		List<File> f=fc.showOpenMultipleDialog(null);
+		for(File file:f) {
+			fileHinh=file.getAbsolutePath();
+			Image image = new Image("file:///"+file.getAbsolutePath());
+			img.setImage(image);
+		}
+	}
 	public void btnThem(ActionEvent e) throws IOException {
 		try {
 			Account acc=ql.timMa(box.getValue());
@@ -93,41 +117,57 @@ public class ThemNhanVien implements Initializable{
 				String textDiaChi= txtDiaChi.getText().toString();
 				String textDienThoai=txtDienThoai.getText().toString();
 				String textLuong=txtLuong.getText().toString();
+				String textCMND=txtCMND.getText().toString();
 				if(textMa.isEmpty()==false
 						&& textTen.isEmpty()==false
 						&& textNamSinh.isEmpty()==false 
 						&& textDiaChi.isEmpty()==false
 						&& textDienThoai.isEmpty()==false 
-						&& textLuong.isEmpty()==false) {
+						&& textLuong.isEmpty()==false
+						&& textCMND.isEmpty()==false
+						) {
 					NhanVien nv=null;
-					if(rdNam.isSelected()==true) {
-						nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,rdNam.getText().toString(),Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc);
+					if(lblTitle.getText().toString().equals("Cập nhập nhân viên")) {
+						System.out.println(fileHinh);
+						System.out.println(fileHinhCapNhap);
+						if(fileHinhCapNhap.contentEquals(fileHinh)) {
+						}else if(fileHinh.isEmpty()==false){
+							copyFileUsingStream(new File(fileHinh),new File("src/image/"+textMa+".PNG"));
+						}
+						if(rdNam.isSelected()==true) {
+							nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,rdNam.getText().toString(),Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
+						}else {
+							nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,"Nu",Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
+						}
+						if(qlNV.suaNV(nv)==true) {
+							((Node) (e.getSource())).getScene().getWindow().hide();
+						}else {
+							thongBaoKieuLoi(e, "sửa không thành công");
+						}
 					}else {
-						nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,"Nu",Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc);
-					}
-					
-					if(nv!=null) {
-						if(lblTitle.getText().toString().equals("Cập nhập nhân viên")) {
-							if(qlNV.suaNV(nv)==true) {
-								((Node) (e.getSource())).getScene().getWindow().hide();
+						if(fileHinh.isEmpty()==false) {
+							if(rdNam.isSelected()==true) {
+								nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,rdNam.getText().toString(),Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
 							}else {
-								thongBaoKieuLoi(e, "sửa không thành công");
+								nv=new NhanVien(Integer.parseInt(textMa), acc.getLoaiTK(), textDiaChi,textDienThoai,"Nu",Double.parseDouble(textLuong),txtNamSinh.getValue(),textTen,acc,"image/"+textMa+".PNG",textCMND);
+							}
+							if(nv!=null) {
+								int result=qlNV.themNV(nv);
+								if(result==-1) {
+									thongBaoKieuLoi(e, "usename đã có người sử dụng");
+								}else if(result==0) {
+									thongBaoKieuLoi(e, "bị trùng mã");
+								}else {
+									copyFileUsingStream(new File(fileHinh),new File("src/image/"+textMa+".PNG"));
+									((Node) (e.getSource())).getScene().getWindow().hide();
+								}
+							}else {
+								thongBaoKieuLoi(e, "thêm không thành công");
 							}
 						}else {
-							int result=qlNV.themNV(nv);
-							if(result==-1) {
-								thongBaoKieuLoi(e, "usename đã có người sử dụng");
-							}else if(result==0) {
-								thongBaoKieuLoi(e, "bị trùng mã");
-							}else {
-								((Node) (e.getSource())).getScene().getWindow().hide();
-							}
+							thongBaoKieuLoi(e, "vui lòng chọn hình");
 						}
-						
-					}else {
-						thongBaoKieuLoi(e, "thêm không thành công");
 					}
-					
 				}else {
 					thongBaoKieuLoi(e, "yêu cầu nhập đầy đủ và hợp lệ");
 				}
@@ -138,17 +178,46 @@ public class ThemNhanVien implements Initializable{
 			System.out.println(e2.getMessage());
 		}
 	}
+
 	@FXML
 	public void btnXoaRong(ActionEvent e) {
-		txtMa.setText("");
+		if(lblTitle.getText().toString().equals("Cập nhập nhân viên")==false) {
+			txtMa.setText("");
+		}
 		txtTen.setText("");
 		box.setValue("");
 		txtNamSinh.setValue(LocalDate.of(2000,1,1));
 		txtDiaChi.setText("");
 		txtDienThoai.setText("");
 		txtLuong.setText("");
+		txtCMND.setText("");
 		rdNam.setSelected(true);
+		//		
+		//		try {
+		//			copyFileUsingStream(new File(fileHinh),new File("src/image/xeMoi.png"));
+		//		} catch (IOException e1) {
+		//			System.out.println(e1.getMessage());
+		//			// TODO Auto-generated catch block
+		//		}
 	}
+
+	private static void copyFileUsingStream(File source, File dest) throws IOException {
+		InputStream is = null;
+		OutputStream os = null;
+		try {
+			is = new FileInputStream(source);
+			os = new FileOutputStream(dest);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = is.read(buffer)) > 0) {
+				os.write(buffer, 0, length);
+			}
+		}finally {
+			is.close();
+			os.close();
+		}
+	}
+	
 	private void makeStageDrageable() {
 		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {

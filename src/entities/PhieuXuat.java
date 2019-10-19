@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,32 +13,30 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class PhieuXuat {
-	@Id 
+	@Id
 	private int maPX;
-	
-	@ManyToOne 
-	@JoinColumn(name = "maNV")
-	private NhanVien nhanVien; 
-	
-	@ManyToOne 
-	@JoinColumn(name = "maKH")
+
+	@ManyToOne
+	@JoinColumn(name = "maNV",foreignKey = @ForeignKey)
+	private NhanVien nhanVien;
+
+	@ManyToOne
+	@JoinColumn(name = "maKH",foreignKey = @ForeignKey)
 	private KhachHang khachHang;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "maHopDong",foreignKey = @ForeignKey)
+	private HopDong hopDong;
+
 	private LocalDate ngayXuat;
-	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "phieuXuat") 
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "phieuXuat")
 	private List<CTPhieuXuat> cTPhieuXuat;
 
-	public PhieuXuat() {
-		super();
-	}
-	public PhieuXuat(int maPX, NhanVien nhanVien, KhachHang khachHang, LocalDate ngayXuat) {
-		super();
-		this.maPX = maPX;
-		this.nhanVien = nhanVien;
-		this.khachHang = khachHang;
-		this.ngayXuat = ngayXuat;
-	}
+	
+	
+	
+
 	public int getMaPX() {
 		return maPX;
 	}
@@ -62,6 +61,14 @@ public class PhieuXuat {
 		this.khachHang = khachHang;
 	}
 
+	public HopDong getHopDong() {
+		return hopDong;
+	}
+
+	public void setHopDong(HopDong hopDong) {
+		this.hopDong = hopDong;
+	}
+
 	public LocalDate getNgayXuat() {
 		return ngayXuat;
 	}
@@ -77,21 +84,26 @@ public class PhieuXuat {
 	public void setcTPhieuXuat(List<CTPhieuXuat> cTPhieuXuat) {
 		this.cTPhieuXuat = cTPhieuXuat;
 	}
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PhieuXuat [maPX=");
-		builder.append(maPX);
-		builder.append(", nhanVien=");
-		builder.append(nhanVien.getMaNV());
-		builder.append(", khachHang=");
-		builder.append(khachHang.getMaKH());
-		builder.append(", ngayXuat=");
-		builder.append(ngayXuat);
-		return builder.toString();
-	}
 
 	
-	
-	
+
+	public PhieuXuat(int maPX, NhanVien nhanVien, KhachHang khachHang, HopDong hopDong, LocalDate ngayXuat) {
+		super();
+		this.maPX = maPX;
+		this.nhanVien = nhanVien;
+		this.khachHang = khachHang;
+		this.hopDong = hopDong;
+		this.ngayXuat = ngayXuat;
+	}
+
+	public PhieuXuat() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "PhieuXuat [maPX=" + maPX + ", nhanVien=" + nhanVien + ", khachHang=" + khachHang + ", hopDong="
+				+ hopDong + ", ngayXuat=" + ngayXuat + ", cTPhieuXuat=" + cTPhieuXuat + "]";
+	}
+
 }

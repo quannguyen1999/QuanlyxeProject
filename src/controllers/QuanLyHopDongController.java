@@ -12,7 +12,6 @@ import com.jfoenix.controls.JFXButton;
 import application.Main;
 import dao.QuanLyHopDong;
 import dao.QuanLyKhachHang;
-import entities.CTHopDong;
 import entities.HopDong;
 import entities.KhachHang;
 import entities.Xe;
@@ -30,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -42,8 +42,8 @@ public class QuanLyHopDongController implements Initializable{
 	private TableView<HopDong> tbl_view;
 	TableColumn<HopDong, String> colMaHopDong;
 	TableColumn<HopDong, String> colNgayLap;
-	TableColumn<HopDong, String> colTienDatThanhToan;
-	TableColumn<HopDong, String> colTienPhaiThanhToan;
+	TableColumn<HopDong, String> colSoDTKH;
+	TableColumn<HopDong, String> colTenNguoiMua;
 
 	@FXML 
 	TextField txtMa;
@@ -53,17 +53,17 @@ public class QuanLyHopDongController implements Initializable{
 		tbl_view=new TableView<HopDong>();
 		colMaHopDong=new TableColumn<HopDong, String>("Mã Hợp đồng");
 		colNgayLap=new TableColumn<HopDong, String>("Ngày lập");
-		colTienDatThanhToan=new TableColumn<HopDong, String>("Tiền đặt thanh toán");
-		colTienPhaiThanhToan=new TableColumn<HopDong, String>("Tiền phải thanh toán");
+		colSoDTKH=new TableColumn<HopDong, String>("Số điện thoại khách hàng");
+		colTenNguoiMua=new TableColumn<HopDong, String>("Tên người mua");
 
-		tbl_view.getColumns().addAll(colMaHopDong,colNgayLap,colTienDatThanhToan,colTienPhaiThanhToan);
+		tbl_view.getColumns().addAll(colMaHopDong,colNgayLap,colSoDTKH,colTenNguoiMua);
 
 		bd.setCenter(tbl_view);
 
 		colMaHopDong.setCellValueFactory(new PropertyValueFactory<>("maHopDong"));
 		colNgayLap.setCellValueFactory(new PropertyValueFactory<>("ngayLap"));
-		colTienDatThanhToan.setCellValueFactory(new PropertyValueFactory<>("tienDatThanhToan"));
-		colTienPhaiThanhToan.setCellValueFactory(new PropertyValueFactory<>("tienPhaiThanhToan"));
+		colSoDTKH.setCellValueFactory(new PropertyValueFactory<>("soDTNM"));
+		colTenNguoiMua.setCellValueFactory(new PropertyValueFactory<>("tenNguoiMua"));
 
 		tbl_view.setOnMouseClicked(e->{
 			if(e.getClickCount()==2) {
@@ -83,40 +83,35 @@ public class QuanLyHopDongController implements Initializable{
 
 					int maHD=tbl_view.getItems().get(result).getMaHopDong();
 					HopDong hd=QuanLyHopDong.timMaHopDong(maHD);
-					int maNV=hd.getNhanVien().getMaNV();
-					String tenNV=hd.getNhanVien().getTenNV();
-					LocalDate ngayLap=tbl_view.getItems().get(result).getNgayLap();
-					String tienDatThanhToan=String.valueOf(tbl_view.getItems().get(result).getTienDatThanhToan());
-					String tienPhaiThanhToan=String.valueOf(tbl_view.getItems().get(result).getTienPhaiThanhToan());
-					CTHopDong cthd=QuanLyHopDong.timMaTheoHopDong(hd.getMaHopDong());
-					String cmnd=cthd.getCMND();
-					String diaChi=cthd.getDiaChiKH();
-					String soDT=cthd.getSoDT();
-					String tenKH=cthd.getTenKH();
-
+					System.out.println(hd);
 					ctlMain.txtMaHD.setText(String.valueOf(maHD));
 					ctlMain.txtMaHD.setEditable(false);
-					ctlMain.boxMaNV.setValue(String.valueOf(maNV));
+					ctlMain.boxMaNV.setValue(hd.getMaNV());
 					ctlMain.boxMaNV.setDisable(true);
-					ctlMain.txtTenNV.setText(tenNV);
+					ctlMain.txtTenNV.setText(hd.getTenNguoiBan());
 					ctlMain.txtTenNV.setEditable(false);
-					ctlMain.txtNgayLap.setValue(ngayLap);
-					ctlMain.txtNgayLap.setEditable(false);
-					ctlMain.txtTienDat.setText(tienDatThanhToan);
-					ctlMain.txtTienDat.setEditable(false);
-					ctlMain.txtTienPhai.setText(tienPhaiThanhToan);
-					ctlMain.txtTienPhai.setEditable(false);
-					ctlMain.txtCMND.setText(cmnd);
-					ctlMain.txtCMND.setEditable(false);
-					ctlMain.txtDiaChi.setText(diaChi);
-					ctlMain.txtDiaChi.setEditable(false);
-					ctlMain.txtSoDT.setText(soDT);
-					ctlMain.txtSoDT.setEditable(false);
-					ctlMain.txtTenKH.setText(tenKH);
+					ctlMain.txtCMNDNhanVien.setText(hd.getCMNDNB());
+					ctlMain.txtNoiONV.setText(hd.getNoiONB());
+					ctlMain.txtNoiONV.setEditable(false);
+					ctlMain.txtSDTNV.setText(hd.getSoDTNB());
+					ctlMain.txtSDTNV.setEditable(false);
+					ctlMain.txtTienPhaiDat.setText(String.valueOf(hd.getTienDatThanhToan()));
+					ctlMain.txtTienPhaiDat.setEditable(false);
+					
+					ctlMain.txtTenKH.setText(hd.getTenNguoiMua());
 					ctlMain.txtTenKH.setEditable(false);
+					ctlMain.boxMaKH.setValue(hd.getMaKH());
+					ctlMain.boxMaKH.setDisable(true);
+					ctlMain.txtDiaChiKH.setText(hd.getNoiONM());
+					ctlMain.txtDiaChiKH.setEditable(false);
+					ctlMain.txtSoDTKH.setText(hd.getSoDTNM());
+					ctlMain.txtSoDTKH.setEditable(false);
+					ctlMain.txtNoiOKH.setText(hd.getNoiONM());
+					ctlMain.txtNoiOKH.setEditable(false);
+					ctlMain.txtCMNDKH.setText(hd.getCMNDNM());
+					ctlMain.txtCMNDKH.setEditable(false);
 					ctlMain.btnThem.setDisable(true);
-					ctlMain.btnXoaRong.setDisable(true);
-
+					ctlMain.btnXoa.setDisable(true);
 
 					Stage stage=new Stage();
 					stage.initOwner(btnThem.getScene().getWindow());
@@ -125,6 +120,7 @@ public class QuanLyHopDongController implements Initializable{
 					stage.initModality(Modality.APPLICATION_MODAL);
 					Main.primaryStage=stage;
 					stage.show();
+					stage.getIcons().add(new Image("/image/logo.PNG"));
 					stage.setOnHidden(evv->{
 						handleRefersh(new ActionEvent());
 					});
@@ -161,8 +157,7 @@ public class QuanLyHopDongController implements Initializable{
 
 			if (resultx.get() == ButtonType.OK) {
 				int acc=tbl_view.getItems().get(result).getMaHopDong();
-				CTHopDong hd=QuanLyHopDong.timMaTheoHopDong(acc);
-				QuanLyHopDong.xoaChiTietHopDong(hd.getCMND());
+//				HopDong hd=QuanLyHopDong.timMaHopDong(acc);
 				QuanLyHopDong.xoaHopDong(acc);
 				thongBaoKieuLoi(e, "xóa thành công");
 				handleRefersh(e);
@@ -174,18 +169,18 @@ public class QuanLyHopDongController implements Initializable{
 	}
 	@FXML 
 	public void btnTim(ActionEvent e) {
-		String text=txtMa.getText().trim().toString();
-		if (text.isEmpty()==false) {
-			HopDong acc=QuanLyHopDong.timMaHopDong(Integer.parseInt(text));
-			if(acc!=null) {
-				tbl_view.getItems().clear();
-				tbl_view.getItems().add(acc);
-			}else {
-				thongBaoKieuLoi(e, "không tìm thấy");
-			}
-		}else {
-			handleRefersh(e);
-		}
+//		String text=txtMa.getText().trim().toString();
+//		if (text.isEmpty()==false) {
+//			HopDong acc=QuanLyHopDong.timMaHopDong(Integer.parseInt(text));
+//			if(acc!=null) {
+//				tbl_view.getItems().clear();
+//				tbl_view.getItems().add(acc);
+//			}else {
+//				thongBaoKieuLoi(e, "không tìm thấy");
+//			}
+//		}else {
+//			handleRefersh(e);
+//		}
 
 	}
 	private void handleRefersh(ActionEvent e) {
@@ -202,6 +197,7 @@ public class QuanLyHopDongController implements Initializable{
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(new Scene(parent));
 			stage.show();
+			stage.getIcons().add(new Image("/image/logo.PNG"));
 			Main.primaryStage=stage;
 			stage.setOnHidden(ev->{
 				handleRefersh(e);

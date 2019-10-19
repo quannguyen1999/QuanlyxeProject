@@ -11,36 +11,34 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bd" prefHeight="591.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThongTinNguoiDung">
+<BorderPane fx:id="bd" onMouseDragged="#draged" onMousePressed="#pressed" prefHeight="674.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThongTinNguoiDung">
    <center>
       <BorderPane prefHeight="656.0" prefWidth="0.0">
          <center>
-            <AnchorPane prefHeight="651.0" prefWidth="912.0" style="-fx-background-color: rgb(58,69,88);" styleClass="sidebar" stylesheets="@../../../DeAnQuanLyXe/src/css/application.css">
+            <AnchorPane prefHeight="651.0" prefWidth="912.0" styleClass="sidebar" stylesheets="@../../../DeAnQuanLyXe/src/css/application.css">
                <children>
-                  <ImageView fitHeight="94.0" fitWidth="188.0" layoutX="376.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/demon.PNG" />
-                     </image>
-                  </ImageView>
                   <VBox layoutX="236.0" layoutY="147.0" prefHeight="485.0" prefWidth="450.0">
                      <children>
                         <HBox prefHeight="76.0" prefWidth="450.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="71.0" prefWidth="450.0" text="Thông tin người dùng" textFill="#ebebeb">
+                              <Label alignment="CENTER" prefHeight="71.0" prefWidth="450.0" text="Thông tin người dùng">
                                  <font>
                                     <Font name="Calibri Light" size="24.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" top="100.0" />
+                                 </HBox.margin>
                               </Label>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
                            <children>
-                              <Label prefHeight="27.0" prefWidth="100.0" text="Họ tên :" textFill="WHITE">
+                              <Label prefHeight="27.0" prefWidth="100.0" text="Họ tên :">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblHoTen" prefHeight="27.0" prefWidth="231.0" text="lblHoTen" textFill="WHITE">
+                              <Label fx:id="lblHoTen" prefHeight="27.0" prefWidth="231.0" text="lblHoTen">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
@@ -52,29 +50,12 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
                            <children>
-                              <Label prefHeight="24.0" prefWidth="100.0" text="Chức vụ :" textFill="WHITE">
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Chức vụ :">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblChucVu" prefHeight="24.0" prefWidth="231.0" text="admin" textFill="WHITE">
-                                 <font>
-                                    <Font name="Calibri Light" size="18.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
-                           <children>
-                              <Label prefHeight="24.0" prefWidth="100.0" text="Địa chỉ :" textFill="WHITE">
-                                 <font>
-                                    <Font name="Calibri Light" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblDiaChi" prefHeight="24.0" prefWidth="231.0" text="33/16" textFill="WHITE">
+                              <Label fx:id="lblChucVu" prefHeight="24.0" prefWidth="231.0" text="admin">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
@@ -86,12 +67,12 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
                            <children>
-                              <Label prefHeight="24.0" prefWidth="100.0" text="Điện thoại :" textFill="WHITE">
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Địa chỉ :">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblDT" prefHeight="24.0" prefWidth="231.0" text="0905360" textFill="WHITE">
+                              <Label fx:id="lblDiaChi" prefHeight="24.0" prefWidth="231.0" text="33/16">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
@@ -103,12 +84,29 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
                            <children>
-                              <Label prefHeight="24.0" prefWidth="100.0" text="Giới tính :" textFill="WHITE">
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Điện thoại :">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblGioiTinh" prefHeight="24.0" prefWidth="231.0" text="nam" textFill="WHITE">
+                              <Label fx:id="lblDT" prefHeight="24.0" prefWidth="231.0" text="0905360">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="418.0">
+                           <children>
+                              <Label prefHeight="24.0" prefWidth="100.0" text="Giới tính :">
+                                 <font>
+                                    <Font name="Calibri Light" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblGioiTinh" prefHeight="24.0" prefWidth="231.0" text="nam">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
@@ -120,7 +118,7 @@
                         </HBox>
                         <HBox prefHeight="34.0" prefWidth="450.0">
                            <children>
-                              <Label prefHeight="27.0" prefWidth="100.0" text="tên tài khoản:" textFill="WHITE">
+                              <Label prefHeight="27.0" prefWidth="100.0" text="tên tài khoản:">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
@@ -128,7 +126,7 @@
                                     <Insets left="55.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="lblUsername" prefHeight="27.0" prefWidth="231.0" text="lblHoTen" textFill="WHITE">
+                              <Label fx:id="lblUsername" prefHeight="27.0" prefWidth="231.0" text="lblHoTen">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
                                  </font>
@@ -138,7 +136,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <JFXButton onAction="#btnDoiMatKhau" prefHeight="75.0" prefWidth="450.0" style="-fx-border-color: white;" text="Đổi mật khẩu" textFill="#c9c8c8">
+                        <JFXButton onAction="#btnDoiMatKhau" prefHeight="75.0" prefWidth="450.0" style="-fx-border-color: black;" text="Đổi mật khẩu">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -146,7 +144,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </JFXButton>
-                        <JFXButton onAction="#btnCLoseWindow" prefHeight="75.0" prefWidth="450.0" style="-fx-border-color: white;" text="Thoát" textFill="#c9c8c8">
+                        <JFXButton onAction="#btnCLoseWindow" prefHeight="75.0" prefWidth="450.0" style="-fx-border-color: black;" text="Thoát">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -160,7 +158,7 @@
                      <children>
                         <AnchorPane prefHeight="43.0" prefWidth="929.0">
                            <children>
-                              <JFXButton layoutY="8.0" onAction="#btnQuayLai" prefHeight="35.0" prefWidth="41.0" text="quiay lại" textFill="#172333" />
+                              <JFXButton layoutY="8.0" prefHeight="35.0" prefWidth="41.0" text="quiay lại" textFill="#172333" />
                               <JFXButton layoutX="878.0" layoutY="5.0" onAction="#btnCLoseWindow" text="X" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Light" size="18.0" />
@@ -170,6 +168,11 @@
                         </AnchorPane>
                      </children>
                   </HBox>
+                  <ImageView fx:id="img" fitHeight="195.0" fitWidth="154.0" layoutX="379.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/user.PNG" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </center>

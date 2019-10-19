@@ -23,6 +23,7 @@ public class CTPhieuXuat {
 	private double donGiaXuat;
 	private int sLXuat;
 	private double thue;
+	
 	public CTPhieuXuat() {
 		super();
 	}

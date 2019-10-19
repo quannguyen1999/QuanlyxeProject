@@ -33,12 +33,20 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="542.0" text="Mã phiếu xuất">
+                  <Label prefHeight="27.0" prefWidth="279.0" text="Mã phiếu xuất">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="50.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label prefHeight="27.0" prefWidth="283.0" text="Mã hợp đồng">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="15.0" />
                      </HBox.margin>
                   </Label>
                </children>
@@ -50,6 +58,16 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                   </JFXTextField>
+                  <ComboBox fx:id="boxMaHD" prefHeight="26.0" prefWidth="232.0">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="38.0" text="+">
+                     <HBox.margin>
+                        <Insets left="7.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
@@ -108,12 +126,12 @@
             </HBox>
             <HBox prefHeight="33.0" prefWidth="600.0">
                <children>
-                  <ComboBox fx:id="boxMaKH" prefHeight="26.0" prefWidth="219.0">
+                  <ComboBox fx:id="boxMaKH" prefHeight="26.0" prefWidth="232.0">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <Button mnemonicParsing="false" onAction="#btnNhapThongTinKhachHang" prefHeight="26.0" prefWidth="52.0" text="+">
+                  <Button mnemonicParsing="false" onAction="#btnNhapThongTinKhachHang" prefHeight="26.0" prefWidth="38.0" text="+">
                      <HBox.margin>
                         <Insets left="7.0" />
                      </HBox.margin>
@@ -264,26 +282,6 @@
                                              </HBox.margin>
                                           </Label>
                                           <Label fx:id="lblMauXe" textFill="#fcfcff">
-                                             <font>
-                                                <Font name="Calibri Light Italic" size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets top="15.0" />
-                                       </VBox.margin>
-                                    </HBox>
-                                    <HBox prefHeight="0.0" prefWidth="270.0">
-                                       <children>
-                                          <Label text="Thông tin bảo hành:" textFill="#fcfcff">
-                                             <font>
-                                                <Font name="Calibri Light Italic" size="18.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" right="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="lblBH" textFill="#fcfcff">
                                              <font>
                                                 <Font name="Calibri Light Italic" size="18.0" />
                                              </font>

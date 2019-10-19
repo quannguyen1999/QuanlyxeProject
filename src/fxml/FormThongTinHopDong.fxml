@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="869.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemHopDong">
+<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="869.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemHopDong">
    <right>
       <VBox prefHeight="639.0" prefWidth="358.0" BorderPane.alignment="CENTER">
          <children>
@@ -40,7 +40,7 @@
                   </HBox>
                   <HBox prefHeight="33.0" prefWidth="600.0">
                      <children>
-                        <Label text="Chứng minh nhân dân">
+                        <Label text="Tên khách hàng">
                            <HBox.margin>
                               <Insets top="10.0" />
                            </HBox.margin>
@@ -53,20 +53,38 @@
                         <Insets top="4.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="53.0" prefWidth="650.0">
+                  <HBox prefHeight="42.0" prefWidth="354.0">
                      <children>
-                        <JFXTextField fx:id="txtCMND" prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã nhân viên..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                        <JFXTextField fx:id="txtTenKH" prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã nhân viên..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="13.0" prefWidth="354.0">
+                     <children>
+                        <Label text="mã khách hàng">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
                            <HBox.margin>
-                              <Insets top="5.0" />
+                              <Insets bottom="5.0" />
                            </HBox.margin>
-                        </JFXTextField>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="18.0" prefWidth="354.0">
+                     <children>
+                        <ComboBox fx:id="boxMaKH" prefHeight="26.0" prefWidth="239.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Button mnemonicParsing="false" onAction="#btnNhapThongTinKhachHang" prefHeight="26.0" prefWidth="47.0" text="+" />
                      </children>
                   </HBox>
                   <HBox prefHeight="31.0" prefWidth="600.0">
                      <children>
                         <Label prefHeight="27.0" prefWidth="616.0" text="Địa chỉ khách hàng">
                            <HBox.margin>
-                              <Insets top="10.0" />
+                              <Insets />
                            </HBox.margin>
                            <font>
                               <Font size="15.0" />
@@ -76,7 +94,7 @@
                   </HBox>
                   <HBox prefHeight="33.0" prefWidth="600.0">
                      <children>
-                        <JFXTextField fx:id="txtDiaChi" prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã nhân viên..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                        <JFXTextField fx:id="txtDiaChiKH" prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã nhân viên..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
                            <HBox.margin>
                               <Insets top="1.0" />
                            </HBox.margin>
@@ -87,7 +105,7 @@
                      <children>
                         <Label prefHeight="27.0" prefWidth="616.0" text="Số điện thoại">
                            <HBox.margin>
-                              <Insets top="10.0" />
+                              <Insets top="20.0" />
                            </HBox.margin>
                            <font>
                               <Font size="15.0" />
@@ -97,7 +115,7 @@
                   </HBox>
                   <HBox prefHeight="33.0" prefWidth="600.0">
                      <children>
-                        <JFXTextField fx:id="txtSoDT" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                        <JFXTextField fx:id="txtSoDTKH" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -106,9 +124,9 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="600.0">
                      <children>
-                        <Label prefHeight="27.0" prefWidth="616.0" text="Tên Khách hàng">
+                        <Label prefHeight="27.0" prefWidth="616.0" text="Nơi ở">
                            <HBox.margin>
-                              <Insets top="10.0" />
+                              <Insets top="20.0" />
                            </HBox.margin>
                            <font>
                               <Font size="15.0" />
@@ -116,11 +134,11 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox prefHeight="40.0" prefWidth="600.0">
+                  <HBox prefHeight="16.0" prefWidth="354.0">
                      <children>
-                        <JFXTextField fx:id="txtTenKH" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                        <JFXTextField fx:id="txtNoiOKH" prefHeight="32.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
                            <HBox.margin>
-                              <Insets top="1.0" />
+                              <Insets top="8.0" />
                            </HBox.margin>
                         </JFXTextField>
                      </children>
@@ -128,22 +146,29 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="49.0" prefWidth="600.0">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
+                  <HBox prefHeight="32.0" prefWidth="354.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="616.0" text="Chứng minh nhân dân">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="0.0" prefWidth="354.0">
                      <VBox.margin>
-                        <Insets left="150.0" />
+                        <Insets />
                      </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
-                  <HBox prefHeight="11.0" prefWidth="515.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
+                     <children>
+                        <JFXTextField fx:id="txtCMNDKH" prefHeight="32.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                           <HBox.margin>
+                              <Insets top="35.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                     </children>
                   </HBox>
                </children>
             </VBox>
@@ -200,7 +225,7 @@
             </HBox>
             <HBox prefHeight="53.0" prefWidth="650.0">
                <children>
-                  <JFXTextField fx:id="txtMaHD" prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã nhân viên..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                  <JFXTextField fx:id="txtMaHD" prefHeight="25.0" prefWidth="278.0" promptText="Nhập mã hợp đồng" style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
                      <HBox.margin>
                         <Insets left="150.0" />
                      </HBox.margin>
@@ -223,7 +248,7 @@
                <children>
                   <ComboBox fx:id="boxMaNV" prefHeight="26.0" prefWidth="279.0">
                      <HBox.margin>
-                        <Insets left="150.0" />
+                        <Insets left="150.0" top="10.0" />
                      </HBox.margin>
                   </ComboBox>
                </children>
@@ -238,6 +263,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
                </children>
             </HBox>
             <HBox prefHeight="33.0" prefWidth="600.0">
@@ -249,39 +275,12 @@
                   </JFXTextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="600.0">
-               <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Ngày lập">
-                     <HBox.margin>
-                        <Insets left="150.0" top="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox prefHeight="40.0" prefWidth="600.0">
-               <padding>
-                  <Insets left="150.0" />
-               </padding>
-               <children>
-                  <JFXDatePicker fx:id="txtNgayLap" prefHeight="28.0" prefWidth="278.0">
-                     <padding>
-                        <Insets top="-5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets top="6.0" />
-                     </HBox.margin>
-                  </JFXDatePicker>
-               </children>
-            </HBox>
             <HBox prefHeight="49.0" prefWidth="600.0">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>
                <children>
-                  <Label prefHeight="44.0" prefWidth="366.0" text="Tiền đặt thanh toán">
+                  <Label prefHeight="44.0" prefWidth="366.0" text="CMND">
                      <HBox.margin>
                         <Insets left="150.0" />
                      </HBox.margin>
@@ -293,7 +292,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXTextField fx:id="txtTienDat" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;" />
+                  <JFXTextField fx:id="txtCMNDNhanVien" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;" />
                </children>
                <VBox.margin>
                   <Insets left="150.0" />
@@ -301,7 +300,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Tiền phải thanh toán">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Nơi ở">
                      <HBox.margin>
                         <Insets left="150.0" top="10.0" />
                      </HBox.margin>
@@ -313,7 +312,7 @@
             </HBox>
             <HBox prefHeight="11.0" prefWidth="515.0">
                <children>
-                  <JFXTextField fx:id="txtTienPhai" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                  <JFXTextField fx:id="txtNoiONV" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
                      <HBox.margin>
                         <Insets left="150.0" />
                      </HBox.margin>
@@ -322,8 +321,48 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
+               <children>
+                  <Label prefHeight="44.0" prefWidth="366.0" text="Số điện thoại">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="150.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="0.0" prefWidth="515.0">
+               <children>
+                  <JFXTextField fx:id="txtSDTNV" prefHeight="43.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                     <HBox.margin>
+                        <Insets left="150.0" top="15.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="44.0" prefWidth="366.0" text="số tiền thanh toán">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="150.0" top="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXTextField fx:id="txtTienPhaiDat" prefHeight="25.0" prefWidth="278.0" promptText="Nhập tiền đặt thanh toán..." style="-fx-prompt-text-fill: #a0a0a0; -fx-text-inner-color: black;">
+                     <HBox.margin>
+                        <Insets left="150.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
             </HBox>
          </children>
       </VBox>
@@ -347,7 +386,7 @@
                   <Insets left="50.0" />
                </HBox.margin>
             </JFXButton>
-            <JFXButton fx:id="btnXoaRong" prefHeight="36.0" prefWidth="123.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng">
+            <JFXButton fx:id="btnXoa" onAction="#btnXoaRong" prefHeight="36.0" prefWidth="123.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>

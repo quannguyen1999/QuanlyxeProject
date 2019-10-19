@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -10,13 +11,17 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import application.Main;
 import dao.QuanLyAccount;
+import dao.QuanLyHopDong;
 import dao.QuanLyKhachHang;
+import dao.QuanLyLoaiXe;
 import dao.QuanLyNhanVien;
 import dao.QuanLyPhieuXuat;
 import dao.QuanLyXe;
 import entities.Account;
 import entities.CTPhieuXuat;
+import entities.HopDong;
 import entities.KhachHang;
+import entities.Loaixe;
 import entities.NhanVien;
 import entities.PhieuXuat;
 import entities.Xe;
@@ -52,9 +57,9 @@ public class ThemPhieuXuat implements Initializable{
 	@FXML ComboBox<String> boxMaXe;
 	@FXML ComboBox<String> boxMaNV;
 	@FXML ComboBox<String> boxMaKH;
+	@FXML ComboBox<String> boxMaHD;
 	@FXML Label lblTenXe;
 	@FXML Label lblMauXe;
-	@FXML Label lblBH;
 	@FXML Label lblLoaiXe;
 	@FXML Label lblNhaSX;
 
@@ -86,7 +91,6 @@ public class ThemPhieuXuat implements Initializable{
 	private void handleRefersh(ActionEvent e) {
 		try {
 			btnXoaRong(e);
-//			boxMaKH.setEditable(false);
 			ObservableList<String> items1 = FXCollections.observableArrayList();
 			List<KhachHang> kh1=QuanLyKhachHang.showTatCaKhachHang();
 			kh1.forEach(t->{
@@ -95,12 +99,11 @@ public class ThemPhieuXuat implements Initializable{
 			FilteredList<String> filteredItems1 = new FilteredList<String>(items1);
 			boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
 			boxMaKH.setItems(filteredItems1);
-			
+
 		} catch (Exception e2) {
-			// TODO: handle exception
 			e2.printStackTrace();
 		}
-	
+
 	}
 	private void resetMaKH() {
 		boxMaKH.getItems().clear();
@@ -129,7 +132,6 @@ public class ThemPhieuXuat implements Initializable{
 				handleRefersh(e);
 			});
 		} catch (Exception e2) {
-			// TODO: handle exception
 			System.out.println(e2.getMessage());
 		}
 	}
@@ -139,32 +141,43 @@ public class ThemPhieuXuat implements Initializable{
 		if(nv!=null) {
 			KhachHang kh=QuanLyKhachHang.timMa(Integer.parseInt(boxMaKH.getValue()));
 			if(kh!=null) {
-				LocalDate ngayXuat=txtNgayXuat.getValue();
-				PhieuXuat px=new PhieuXuat(mapx, nv, kh, ngayXuat);
-				Xe xe=QuanLyXe.timMa(boxMaXe.getValue());
-				if(xe!=null) {
-					if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
-						int donGia=Integer.parseInt(txtDonGiaXuat.getText().toString());
-						int slXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
-						CTPhieuXuat ctPX=new CTPhieuXuat(px, xe, donGia, slXuat, 10);
-						if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctPX)==true) {
-							((Node) (e.getSource())).getScene().getWindow().hide();
+				HopDong hd=QuanLyHopDong.timMaHopDong(Integer.parseInt(boxMaHD.getValue()));
+				if(hd!=null) {
+					LocalDate ngayXuat=txtNgayXuat.getValue();
+					int txtma=Integer.parseInt(txtPX.getText().toString());
+					double donGiaXuat=Double.parseDouble(txtDonGiaXuat.getText().toString());
+					int sLXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
+					Double thue=Double.parseDouble("10");
+					PhieuXuat px=new PhieuXuat(txtma, nv, kh, hd, ngayXuat);
+					Xe xe=QuanLyXe.timMa(boxMaXe.getValue());
+					if(xe!=null) {
+						CTPhieuXuat ctpx=new CTPhieuXuat(px, xe, donGiaXuat, sLXuat, thue);
+						if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
+							int donGia=Integer.parseInt(txtDonGiaXuat.getText().toString());
+							int slXuat=Integer.parseInt(txtSoLuongXuat.getText().toString());
+							CTPhieuXuat ctPX=new CTPhieuXuat(px, xe, donGia, slXuat, 10);
+							if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctPX)==true) {
+								((Node) (e.getSource())).getScene().getWindow().hide();
+							}else {
+								System.out.println("Lỗi thêm chi tiết phiếu xuất");
+							}
 						}else {
-							System.out.println("Lỗi thêm chi tiết phiếu xuất");
+							thongBaoKieuLoi(e, "Thêm phiếu xuất không thành công");
 						}
 					}else {
-						thongBaoKieuLoi(e, "Thêm phiếu xuất không thành công");
+						thongBaoKieuLoi(e,"xe không tồn tại");
 					}
 				}else {
-					thongBaoKieuLoi(e,"xe không tồn tại");
+					thongBaoKieuLoi(e, "Hợp đồng này không tồn tại");
 				}
 
+
+			}else {
+				thongBaoKieuLoi(e, "Khách hàng này không còn tồn tại");
 			}
 		}else {
-			thongBaoKieuLoi(e, "Nhân viên không tồn tại");
+			thongBaoKieuLoi(e, "Nhân viên này không còn tồn tại");
 		}
-
-
 	}
 	@FXML 
 	private void btnXoaRong(ActionEvent e) {
@@ -178,41 +191,41 @@ public class ThemPhieuXuat implements Initializable{
 
 		lblTenXe.setText("");
 		lblMauXe.setText("");
-		lblBH.setText("");
 		lblLoaiXe.setText("");
 		lblNhaSX.setText("");
 		Image image = new Image("/image/Blade-110C_den.PNG");
 		img.setImage(image);
 
-//		boxMaKH.getItems().clear();
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		//box MaNV
-		boxMaNV.setEditable(true);
-		ObservableList<String> items0 = FXCollections.observableArrayList();
-		List<NhanVien> kh0=QuanLyNhanVien.showTatCaNhanVien();
-		kh0.forEach(t->{
-			items0.add(String.valueOf(t.getMaNV()));
-		});
-		FilteredList<String> filteredItems0 = new FilteredList<String>(items0);
-		boxMaNV.getEditor().textProperty().addListener(new InputFilter(boxMaNV, filteredItems0, false));
-		boxMaNV.setItems(filteredItems0);
-
-		//box MaKH
-		boxMaKH.setEditable(true);
-		ObservableList<String> items1 = FXCollections.observableArrayList();
-		List<KhachHang> kh1=QuanLyKhachHang.showTatCaKhachHang();
-		kh1.forEach(t->{
-			items1.add(String.valueOf(t.getMaKH()));
-		});
-		FilteredList<String> filteredItems1 = new FilteredList<String>(items1);
-		boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
-		boxMaKH.setItems(filteredItems1);
+		boxMaNV.setEditable(false);
+		boxMaNV.setDisable(true);
+		//		ObservableList<String> items0 = FXCollections.observableArrayList();
+		//		List<NhanVien> kh0=QuanLyNhanVien.showTatCaNhanVien();
+		//		kh0.forEach(t->{
+		//			items0.add(String.valueOf(t.getMaNV()));
+		//		});
+		//		FilteredList<String> filteredItems0 = new FilteredList<String>(items0);
+		//		boxMaNV.getEditor().textProperty().addListener(new InputFilter(boxMaNV, filteredItems0, false));
+		//		boxMaNV.setItems(filteredItems0);
+		//
+		//		//box MaKH
+		//		boxMaKH.setEditable(true);
+		//		ObservableList<String> items1 = FXCollections.observableArrayList();
+		//		List<KhachHang> kh1=QuanLyKhachHang.showTatCaKhachHang();
+		//		kh1.forEach(t->{
+		//			items1.add(String.valueOf(t.getMaKH()));
+		//		});
+		//		FilteredList<String> filteredItems1 = new FilteredList<String>(items1);
+		//		boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
+		//		boxMaKH.setItems(filteredItems1);
 
 
 		//filter ma xe
-		boxMaXe.setEditable(true);
+		boxMaKH.setEditable(false);
+		boxMaKH.setDisable(true);
 		ObservableList<String> items = FXCollections.observableArrayList();
 
 		List<Xe> accs=QuanLyXe.showTatCaXe();
@@ -228,57 +241,59 @@ public class ThemPhieuXuat implements Initializable{
 		boxMaXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
 			public void changed(ObservableValue ov, Number value, Number new_value) 
 			{ 
-				Xe xe=QuanLyXe.timMa(boxMaXe.getValue());
-				if(xe!=null) {
-					lblTenXe.setText(xe.getTenXe());
-					lblMauXe.setText(xe.getMauXe());
-					lblBH.setText(xe.getThongTinBaoHanh());
-					lblLoaiXe.setText(xe.getLoaiXe());
-					lblNhaSX.setText(xe.getNhaSX());
-					if(xe.getTenXe().equals("Blade-110C")) {
-						if(xe.getMauXe().length()==10) {
-							Image image = new Image("/image/Blade-110C_XanhDuong.PNG");
-							img.setImage(image);
-
-						}else {
-							Image image = new Image("/image/Blade-110C_den.PNG");
-							img.setImage(image);
-						}
-					}else if(xe.getTenXe().contentEquals("SUPER-CUB")) {
-						Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
-						img.setImage(image);
-					}else if(xe.getTenXe().contentEquals("SH-300c")) {
-						if(xe.getMauXe().length()==3) {
-							Image image = new Image("/image/SH-300c_den.PNG");
-							img.setImage(image);
-						}else {
-							Image image = new Image("/image/SH-300c_trang.PNG");
-							img.setImage(image);
-						}
-					}else if(xe.getTenXe().contentEquals("Vision-110C")) {
-						if(xe.getMauXe().length()==2) {
-							Image image = new Image("/image/Vision-110C_do.PNG");
-							img.setImage(image);
-						}else if(xe.getMauXe().length()==10) {
-							Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
-							img.setImage(image);
-						}else {
-							Image image = new Image("/image/Vision-110C_Vang.PNG");
-							img.setImage(image);
-						}
-					}
-				}else {
-					lblTenXe.setText("");
-					lblMauXe.setText("");
-					lblBH.setText("");
-					lblLoaiXe.setText("");
-					lblNhaSX.setText("");
-					Image image = new Image("/image/Blade-110C_den.PNG");
-					img.setImage(image);
-
-				}
+				Xe xe=QuanLyXe.timMa(items.get((int) new_value).toString());
+				Loaixe lx=QuanLyLoaiXe.timMa(xe.getLx().getMaloai());
+				System.out.println(lx);
+				lblTenXe.setText(xe.getLx().getTenxe());
+				lblMauXe.setText(xe.getLx().getMauson());
+				lblNhaSX.setText(xe.getLx().getNuocSX());
+				lblLoaiXe.setText(xe.getLx().getLoaixe());
+				File currentDirFile = new File("");
+				String helper = currentDirFile.getAbsolutePath();
+				String begin=kiemTraChuoi(helper);
+				System.out.println("file:///"+begin+"/"+xe.getLx().getHinhanh());
+				Image image = new Image("file:///"+begin+"/src/"+xe.getLx().getHinhanh());
+				img.setImage(image);
 			}
 		});
+
+		//filter hd 
+		boxMaHD.setEditable(true);
+		ObservableList<String> itemHD = FXCollections.observableArrayList();
+
+		List<HopDong> listHD=QuanLyHopDong.showTatCaHopDong();
+		listHD.forEach(t->{
+			itemHD.add(String.valueOf(t.getMaHopDong()));
+		});
+		FilteredList<String> filteredItemsHD = new FilteredList<String>(itemHD);
+
+		boxMaHD.getEditor().textProperty().addListener(new InputFilter(boxMaHD, filteredItemsHD, false));
+
+		boxMaHD.setItems(filteredItemsHD);
+
+		boxMaHD.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
+			public void changed(ObservableValue ov, Number value, Number new_value) 
+			{ 
+				int textTim=Integer.parseInt(itemHD.get((int)new_value));
+				HopDong qlhd=QuanLyHopDong.timMaHopDong(textTim);
+				boxMaNV.getItems().add(qlhd.getMaNV());
+				boxMaNV.setValue(qlhd.getMaNV());
+				boxMaKH.getItems().add(qlhd.getMaKH());
+				boxMaKH.setValue(qlhd.getMaKH());
+			}
+		});
+
+	}
+	private static String kiemTraChuoi(String text) {
+		String newTextResult="";
+		for(int i=0;i<=text.length()-1;i++) {
+			if((int)text.charAt(i)==92) {
+				newTextResult+="/";
+			}else {
+				newTextResult+=text.charAt(i);
+			}
+		}
+		return newTextResult;
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node) (e.getSource())).getScene().getWindow().hide();

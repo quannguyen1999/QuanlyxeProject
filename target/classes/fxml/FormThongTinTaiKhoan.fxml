@@ -97,12 +97,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton onAction="#btnHuy" prefHeight="36.0" prefWidth="74.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Hủy">
+                  <JFXButton onAction="#btnHuy" prefHeight="36.0" prefWidth="128.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Xóa rỗng">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="150.0" right="30.0" />
+                        <Insets left="120.0" right="30.0" />
                      </HBox.margin>
                   </JFXButton>
                   <JFXButton onAction="#btnThem" prefHeight="36.0" prefWidth="72.0" styleClass="btnLogin" stylesheets="@../css/application.css" text="Ok">

@@ -1,9 +1,7 @@
-/controllers/
 /META-INF/
-/application/
 /css/
-/dao/
-/entities/
 /fxml/
 /image/
-/uis/
+/application/
+/controllers/
+/dao/

@@ -29,9 +29,6 @@ public class QuanLyNhanVien {
 		} finally {
 			manager.close();
 		}
-		accs.forEach(t->{
-			System.out.println(t);
-		});
 		return accs;
 	}
 	public static NhanVien timMa(int ma) {
@@ -56,7 +53,6 @@ public class QuanLyNhanVien {
 	}
 	static NhanVien accs = null;
 	public static NhanVien timMa2(String ma) {
-		
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;
 		try {
@@ -78,8 +74,8 @@ public class QuanLyNhanVien {
 		}
 		return accs;
 	}
-	boolean result=false;
-	public int themNV(NhanVien acc) {
+	static boolean result=false;
+	public static int themNV(NhanVien acc) {
 		
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		List<NhanVien> nvs=showTatCaNhanVien();

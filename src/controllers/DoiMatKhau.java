@@ -25,12 +25,14 @@ import javafx.stage.StageStyle;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 public class DoiMatKhau implements Initializable{
 	@FXML Label lblUsername;
 	@FXML JFXPasswordField txtPassOld;
 	@FXML JFXPasswordField txtPassNew;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 	}
 	public void thongBaoKieuLoi(ActionEvent e, String text) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -40,6 +42,19 @@ public class DoiMatKhau implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
+	private double x, y;
+    @FXML
+    private void draged(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setX(event.getScreenX() - x);
+        stage.setY(event.getScreenY() - y);
+    }
+
+    @FXML
+    private void pressed(MouseEvent event) {
+        x = event.getSceneX();
+        y = event.getSceneY();
+    }
 	public void btnThayDoi(ActionEvent e) {
 		try {
 			String passOld=txtPassOld.getText().toString();
@@ -52,8 +67,7 @@ public class DoiMatKhau implements Initializable{
 					Account acc2=new Account(lblUsername.getText().toString(), passNew, nv.getChucVu());
 					if(QuanLyAccount.suaAcc(acc2)==true) {
 						thongBaoKieuLoi(e, "Sửa thành công");
-						txtPassOld.setText("");
-						txtPassNew.setText("");
+						((Node)(e.getSource())).getScene().getWindow().hide();  
 					}else{
 						thongBaoKieuLoi(e, "Sửa không thành công");
 					};
@@ -78,20 +92,8 @@ public class DoiMatKhau implements Initializable{
 	public void thietLapTenNguoiDung(String userName) {
 		lblUsername.setText(userName);
 	}
-
-	public void btnQuayLai(ActionEvent e) throws IOException {
+	public void btnCLoseWindow(ActionEvent e) throws IOException {
 		((Node)(e.getSource())).getScene().getWindow().hide();  
-		FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
-		Parent root=loader.load();
-		ThongTinNguoiDung ctlThongTin=loader.getController();
-		NhanVien nv=QuanLyNhanVien.timMa2(lblUsername.getText().toString());
-		ctlThongTin.thietLapFormNguoiDung(nv);
-		Stage stage=new Stage();
-		stage.initStyle(StageStyle.UNDECORATED);
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setScene(new Scene(root));
-		Main.primaryStage=stage;
-		stage.show();
 	}
 
 }

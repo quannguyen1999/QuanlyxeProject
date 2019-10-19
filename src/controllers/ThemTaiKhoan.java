@@ -39,9 +39,9 @@ public class ThemTaiKhoan implements Initializable {
 		// TODO Auto-generated method stub
 		makeStageDrageable();
 
-		choiceBox.getItems().add("Ke toan");
+		choiceBox.getItems().add("Kế toán trưởng");
 		choiceBox.getItems().add("Nhân viên");
-		choiceBox.getItems().add("Admin");
+		choiceBox.getItems().add("Kế toán");
 
 		choiceBox.setValue("Nhân viên");
 	}

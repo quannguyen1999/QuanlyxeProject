@@ -69,6 +69,25 @@ public class QuanLyPhieuXuat {
 		}
 		return accs;
 	}
+	public static List<CTPhieuXuat> showTatCaChiTietPhieuXuat() {
+		List<CTPhieuXuat> accs = null;
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			accs=manager.createQuery("select s from CTPhieuXuat s",CTPhieuXuat.class).getResultList();
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		return accs;
+	}
 	public static boolean themChiTietPhieuXuat(CTPhieuXuat acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
 		EntityTransaction transaction = null;

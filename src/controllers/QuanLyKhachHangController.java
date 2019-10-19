@@ -32,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,9 +53,10 @@ public class QuanLyKhachHangController implements Initializable{
 
 	TableColumn<KhachHang, String> colMaKH;
 	TableColumn<KhachHang, String> colDiaChi;
-	TableColumn<KhachHang, String> colEmail;
+	TableColumn<KhachHang, String> colCMND;
 	TableColumn<KhachHang, String> colSoDT;
 	TableColumn<KhachHang, String> colTenKH;
+	TableColumn<KhachHang, String> colNgaySinh;
 
 	@FXML 
 	TextField txtMa;
@@ -67,19 +69,20 @@ public class QuanLyKhachHangController implements Initializable{
 		tbl_view=new TableView<KhachHang>();
 		colMaKH=new TableColumn<KhachHang, String>("Mã KH");
 		colDiaChi=new TableColumn<KhachHang, String>("Địa chỉ");
-		colEmail=new TableColumn<KhachHang, String>("Email");
+		colCMND=new TableColumn<KhachHang, String>("CMND");
 		colSoDT=new TableColumn<KhachHang, String>("Số điện thoại");
 		colTenKH=new TableColumn<KhachHang, String>("Tên KH");
+		colNgaySinh=new TableColumn<KhachHang, String>("Ngày sinh");
 
-		tbl_view.getColumns().addAll(colMaKH,colDiaChi,colEmail,colSoDT,colTenKH);
+		tbl_view.getColumns().addAll(colMaKH,colDiaChi,colCMND,colSoDT,colTenKH,colNgaySinh);
 
 		bd.setCenter(tbl_view);
-
 		colMaKH.setCellValueFactory(new PropertyValueFactory<>("maKH"));
 		colDiaChi.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
-		colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+		colCMND.setCellValueFactory(new PropertyValueFactory<>("CMND"));
 		colSoDT.setCellValueFactory(new PropertyValueFactory<>("soDT"));
 		colTenKH.setCellValueFactory(new PropertyValueFactory<>("tenKH"));
+		colNgaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
 
 		UploaderDuLieuLenBang();
 
@@ -101,23 +104,25 @@ public class QuanLyKhachHangController implements Initializable{
 
 					int colMaKH=tbl_view.getItems().get(result).getMaKH();
 					String diaChi=tbl_view.getItems().get(result).getDiaChi();
-					String email=tbl_view.getItems().get(result).getEmail();
+					String CMND=tbl_view.getItems().get(result).getCMND();
 					String soDT=tbl_view.getItems().get(result).getSoDT();
 					String tenKH=tbl_view.getItems().get(result).getTenKH();
-
+					LocalDate ngaySinh=tbl_view.getItems().get(result).getNgaySinh();
 					KhachHang nv=QuanLyKhachHang.timMa(colMaKH);
 					ctlMain.lblTitle.setText("Cập nhập khách hàng");
 					ctlMain.txtMa.setText(String.valueOf(colMaKH));
 					ctlMain.txtDiaChi.setText(diaChi);
-					ctlMain.txtEmail.setText(email);
+					ctlMain.txtCMND.setText(CMND);
 					ctlMain.txtDienThoai.setText(soDT);
 					ctlMain.txtTenKH.setText(tenKH);
+					ctlMain.txtNgaySinh.setValue(ngaySinh);
 
 					Stage stage=new Stage();
 					stage.initOwner(btnThem.getScene().getWindow());
 					stage.setScene(new Scene(root));
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.initModality(Modality.APPLICATION_MODAL);
+					stage.getIcons().add(new Image("/image/logo.PNG"));
 					Main.primaryStage=stage;
 					stage.show();
 					stage.setOnHidden(evv->{
@@ -202,6 +207,7 @@ public class QuanLyKhachHangController implements Initializable{
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(new Scene(parent));
 			stage.show();
+			stage.getIcons().add(new Image("/image/logo.PNG"));
 			Main.primaryStage=stage;
 			stage.setOnHidden(ev->{
 				handleRefersh(e);

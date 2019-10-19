@@ -7,8 +7,10 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.javafx.application.LauncherImpl;
 
 import application.Main;
+import application.Loading;
 import dao.QuanLyAccount;
 import dao.QuanLyNhanVien;
 import entities.Account;
@@ -23,9 +25,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -47,7 +54,7 @@ public class DangNhap implements Initializable{
 		}
 
 	}
-	
+
 	private void makeStageDrageable() {
 		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -80,21 +87,21 @@ public class DangNhap implements Initializable{
 		alert.showAndWait();
 	}
 	public Account kiemTraUserName(ActionEvent e,String userName,String passWord) {
-//		Account acc=QuanLyAccount.timMa(userName);
-//		System.out.println(acc);
-//		if(acc!=null) {
-//			if(passWord.equals(acc.getPassword())==true) {
-//				return acc; 
-//			}else {
-////				System.out.println(passWord);
-////				System.out.println(acc.getPassword());
-//				thongBaoKieuLoi(e, "mật khẩu không hợp lệ");
-//				txtPass.requestFocus();
-//			}
-//		}else {
-//			thongBaoKieuLoi(e, "Tài khoản không tồn tại");
-//			txtUser.requestFocus();
-//		}
+		//		Account acc=QuanLyAccount.timMa(userName);
+		//		System.out.println(acc);
+		//		if(acc!=null) {
+		//			if(passWord.equals(acc.getPassword())==true) {
+		//				return acc; 
+		//			}else {
+		////				System.out.println(passWord);
+		////				System.out.println(acc.getPassword());
+		//				thongBaoKieuLoi(e, "mật khẩu không hợp lệ");
+		//				txtPass.requestFocus();
+		//			}
+		//		}else {
+		//			thongBaoKieuLoi(e, "Tài khoản không tồn tại");
+		//			txtUser.requestFocus();
+		//		}
 		Account acc=null;
 		if(userName.isEmpty() || passWord.isEmpty()) {
 			thongBaoKieuLoi(e, "không được để trống mật khẩu hay tên đăng nhập");
@@ -103,7 +110,7 @@ public class DangNhap implements Initializable{
 			acc=QuanLyAccount.timMa(userName);
 			if(acc!=null) {
 				if(passWord.contentEquals(acc.getPassword())==true) {
-					
+
 				}else {
 					thongBaoKieuLoi(e,"mật khẩu không hợp lệ");
 					txtPass.requestFocus();
@@ -114,14 +121,10 @@ public class DangNhap implements Initializable{
 				thongBaoKieuLoi(e, "tên người dùng không tồn tại");
 				acc=null;
 			}
-			
+
 		}
 		return acc;
 	}
-//	@FXML 
-//	private void keyPressed(KeyEvent keyEvent) {
-//		if(keyEvent.getCode()==KeyCode.ENTER) {
-//	}
 	public void btnLogin(ActionEvent e) throws IOException {
 		FXMLLoader loader;
 		Parent root;
@@ -134,18 +137,31 @@ public class DangNhap implements Initializable{
 				switch (acc.getLoaiTK()) {
 				case "Ke toan truong":
 					break;
-				case "Ke toan":
+				case "Kế toán":
+
+//					VBox loading = new VBox(20);
+//					loading.setMaxWidth(Region.USE_PREF_SIZE);
+//					loading.setMaxHeight(Region.USE_PREF_SIZE);
+//					loading.getChildren().add(new ProgressBar());
+//					loading.getChildren().add(new Label("Please wait..."));
+
+//					BorderPane root = new BorderPane(loading);
+
+					
 					((Node)(e.getSource())).getScene().getWindow().hide();  
 					loader=new FXMLLoader(getClass().getResource("/fxml/KeToan.fxml"));
 					root=loader.load();
 					KeToanController ctlKeToan=loader.getController();
 					ctlKeToan.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
+					
 					stage=new Stage();
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
+					stage.getIcons().add(new Image("/image/logo.PNG"));
+//					LauncherImpl.launchApplication(KeToanController.class, MainClass.class, root.toString());
 					stage.show();
 					break;
-				case "Admin":
+				case "Kế toán trưởng":
 					((Node)(e.getSource())).getScene().getWindow().hide();  
 					loader=new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 					root=loader.load();
@@ -154,6 +170,7 @@ public class DangNhap implements Initializable{
 					stage=new Stage();
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
+					stage.getIcons().add(new Image("/image/logo.PNG"));
 					stage.show();
 					break;
 				case "Nhân viên":
@@ -165,6 +182,7 @@ public class DangNhap implements Initializable{
 					stage=new Stage();
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
+					stage.getIcons().add(new Image("/image/logo.PNG"));
 					stage.show();
 					break;
 				default:

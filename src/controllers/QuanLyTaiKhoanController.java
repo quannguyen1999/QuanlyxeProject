@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -98,6 +99,7 @@ public class QuanLyTaiKhoanController implements Initializable{
 					stage.setScene(new Scene(root));
 					Main.primaryStage=stage;
 					stage.show();
+					stage.getIcons().add(new Image("/image/logo.PNG"));
 					stage.setOnHidden(evv->{
 						handleRefersh(new ActionEvent());
 					});
@@ -130,6 +132,7 @@ public class QuanLyTaiKhoanController implements Initializable{
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(new Scene(parent));
 				stage.show();
+				stage.getIcons().add(new Image("/image/logo.PNG"));
 				Main.primaryStage=stage;
 				stage.setOnHidden(ev->{
 					tbl_view.getItems().clear();
@@ -164,6 +167,7 @@ public class QuanLyTaiKhoanController implements Initializable{
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(new Scene(parent));
 			stage.show();
+			stage.getIcons().add(new Image("/image/logo.PNG"));
 			Main.primaryStage=stage;
 			stage.setOnHidden(ev->{
 				handleRefersh(e);
@@ -248,6 +252,7 @@ public class QuanLyTaiKhoanController implements Initializable{
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(new Scene(root));
 			Main.primaryStage=stage;
+			stage.getIcons().add(new Image("/image/logo.PNG"));
 			stage.show();
 			stage.setOnHidden(ev->{
 				handleRefersh(new ActionEvent());

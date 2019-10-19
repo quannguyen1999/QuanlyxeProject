@@ -1,12 +1,22 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import com.sun.javafx.application.LauncherImpl;
+
 import application.Main;
+import application.Loading;
+import dao.QuanLyHopDong;
+import dao.QuanLyKhachHang;
+import dao.QuanLyLoaiXe;
 import dao.QuanLyNhanVien;
+import dao.QuanLyPhieuXuat;
+import dao.QuanLyXe;
 import entities.NhanVien;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +31,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -31,26 +42,33 @@ public class KeToanController implements Initializable{
 	@FXML public BorderPane mainBd;
 	@FXML Label lblLogin;
 	@FXML MenuBar mnb;
-	private double x, y;
-    @FXML
-    private void draged(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setX(event.getScreenX() - x);
-        stage.setY(event.getScreenY() - y);
-    }
+	@FXML JFXButton styleQuanLyLoaiXe;
+	@FXML JFXButton styleQuanLyXe;
+	@FXML JFXButton styleQuanLyKhachHang;
+	@FXML JFXButton styleQuanLyXuatHang;
+	@FXML JFXButton styleQuanLyHopDong;
+	@FXML JFXButton styleQuanLyBaoCao;
 
-    @FXML
-    private void pressed(MouseEvent event) {
-        x = event.getSceneX();
-        y = event.getSceneY();
-    }
+	private double x, y;
+	@FXML
+	private void draged(MouseEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setX(event.getScreenX() - x);
+		stage.setY(event.getScreenY() - y);
+	}
+
+	@FXML
+	private void pressed(MouseEvent event) {
+		x = event.getSceneX();
+		y = event.getSceneY();
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
 			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/Welcome.fxml"));
 			mainBd.setCenter(root);
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,6 +97,7 @@ public class KeToanController implements Initializable{
 		primaryStage.setScene(scene);
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		Main.primaryStage=primaryStage;
+		primaryStage.getIcons().add(new Image("/image/logo.PNG"));
 		primaryStage.show();
 	}
 	public void thongBaoKieuLoi(ActionEvent e, String text) {
@@ -89,6 +108,17 @@ public class KeToanController implements Initializable{
 		alert.initOwner(((Node) (e.getSource())).getScene().getWindow());
 		alert.showAndWait();
 	}
+	private static String kiemTraChuoi(String text) {
+		String newTextResult="";
+		for(int i=0;i<=text.length()-1;i++) {
+			if((int)text.charAt(i)==92) {
+				newTextResult+="/";
+			}else {
+				newTextResult+=text.charAt(i);
+			}
+		}
+		return newTextResult;
+	}
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
 
@@ -97,8 +127,13 @@ public class KeToanController implements Initializable{
 				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
 				Parent root=loader.load();
 				ThongTinNguoiDung ctlThongTin=loader.getController();
-				System.out.println(lblLogin.getText().toString());
 				ctlThongTin.thietLapFormNguoiDung(nv);
+				File currentDirFile = new File("");
+				String helper = currentDirFile.getAbsolutePath();
+				String begin=kiemTraChuoi(helper);
+				System.out.println("file:///"+begin+"/"+nv.getHinhAnh());
+				Image image = new Image("file:///"+begin+"/src/"+nv.getHinhAnh());
+				ctlThongTin.img.setImage(image);
 				Stage stage=new Stage();
 				Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
 				stage.initOwner(stageCunrrent);
@@ -106,6 +141,7 @@ public class KeToanController implements Initializable{
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(new Scene(root));
 				Main.primaryStage=stage;
+				stage.getIcons().add(new Image("/image/logo.PNG"));
 				stage.show();
 			}else {
 				Alert alert = new Alert(AlertType.INFORMATION);
@@ -121,24 +157,48 @@ public class KeToanController implements Initializable{
 			System.out.println(e2.getMessage());
 		}
 	}
+	public void resetColorCLickQuanLy() {
+		styleQuanLyLoaiXe.setStyle("-fx-background-color: transparent");
+		styleQuanLyXe.setStyle("-fx-background-color: transparent");
+		styleQuanLyKhachHang.setStyle("-fx-background-color: transparent");
+		styleQuanLyXuatHang.setStyle("-fx-background-color: transparent");
+		styleQuanLyHopDong.setStyle("-fx-background-color: transparent");
+		styleQuanLyBaoCao.setStyle("-fx-background-color: transparent");
+	}
 	public void btnQuanLyXe(ActionEvent e) throws IOException {
+		resetColorCLickQuanLy();
+		styleQuanLyXe.setStyle("-fx-background-color: rgb(23,35,51)");
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyXe.fxml"));
 		mainBd.setCenter(root);
 	}
 	public void btnQuanLyKhachHang(ActionEvent e) throws IOException {
+		resetColorCLickQuanLy();
+		styleQuanLyKhachHang.setStyle("-fx-background-color: rgb(23,35,51)");
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyKhachHang.fxml"));
 		mainBd.setCenter(root);
 	}
 	public void btnQuanLyXuatHang(ActionEvent e) throws IOException {
+		resetColorCLickQuanLy();
+		styleQuanLyXuatHang.setStyle("-fx-background-color: rgb(23,35,51)");
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyXuatHang.fxml"));
 		mainBd.setCenter(root);
 	}
 	public void btnQuanLyHopDong(ActionEvent e) throws IOException {
+		resetColorCLickQuanLy();
+		styleQuanLyHopDong.setStyle("-fx-background-color: rgb(23,35,51)");
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyHopDong.fxml"));
 		mainBd.setCenter(root);
 	}
 	public void btnBaoCaoThongKe(ActionEvent e) throws IOException {
+		resetColorCLickQuanLy();
+		styleQuanLyBaoCao.setStyle("-fx-background-color: rgb(23,35,51)");
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/BaoCaoThongKe.fxml"));
+		mainBd.setCenter(root);
+	}
+	public void btnQuanLyLoaiXe(ActionEvent e) throws IOException {
+		resetColorCLickQuanLy();
+		styleQuanLyLoaiXe.setStyle("-fx-background-color: rgb(23,35,51)");
+		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyLoaiXe.fxml"));
 		mainBd.setCenter(root);
 	}
 

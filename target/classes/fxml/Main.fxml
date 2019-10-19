@@ -31,7 +31,7 @@
                </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <JFXButton alignment="BASELINE_LEFT" onAction="#btnQuanLyTaiKhoan" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Quản lý tài khoản" textFill="#c3baba">
+            <JFXButton fx:id="styleQuanLyTaiKhoan" alignment="BASELINE_LEFT" onAction="#btnQuanLyTaiKhoan" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Quản lý tài khoản" textFill="#c3baba">
                <padding>
                   <Insets left="40.0" />
                </padding>
@@ -39,7 +39,7 @@
                   <Font name="Calibri" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="BASELINE_LEFT" onAction="#btnQuanLyNhanVien" prefHeight="74.0" prefWidth="298.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Quản lý nhân viên" textFill="#c3baba">
+            <JFXButton fx:id="styleQuanLyNhanVien" alignment="BASELINE_LEFT" onAction="#btnQuanLyNhanVien" prefHeight="74.0" prefWidth="298.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Quản lý nhân viên" textFill="#c3baba">
                <padding>
                   <Insets left="40.0" />
                </padding>

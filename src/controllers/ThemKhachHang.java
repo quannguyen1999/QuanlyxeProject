@@ -2,8 +2,10 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Main;
@@ -26,9 +28,10 @@ public class ThemKhachHang implements Initializable{
 	@FXML Label lblTitle;
 	@FXML JFXTextField txtMa;
 	@FXML JFXTextField txtDiaChi;
-	@FXML JFXTextField txtEmail;
+	@FXML JFXTextField txtCMND;
 	@FXML JFXTextField txtDienThoai;
 	@FXML JFXTextField txtTenKH;
+	@FXML JFXDatePicker txtNgaySinh;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		makeStageDrageable();
@@ -80,9 +83,10 @@ public class ThemKhachHang implements Initializable{
 	public void CLickOK(ActionEvent e) {
 		String ma=txtMa.getText().toString();
 		String diaChi=txtDiaChi.getText().toString();
-		String Email=txtEmail.getText().toString();
+		String CMND=txtCMND.getText().toString();
 		String DienThoai=txtDienThoai.getText().toString();
 		String ten=txtTenKH.getText().toString();
+		LocalDate lc=txtNgaySinh.getValue();
 		boolean stillContunite=true;
 		if(kiemTraMa(ma)==true) {
 			stillContunite=true;
@@ -101,11 +105,11 @@ public class ThemKhachHang implements Initializable{
 			}
 		}
 		if(stillContunite==true) {
-			if(kiemTraEmail(Email)) {
+			if(kiemTraEmail(CMND)) {
 				stillContunite=true;
 			}else {
 				thongBaoKieuLoi(e, "yêu cầu nhập email");
-				txtEmail.requestFocus();
+				txtCMND.requestFocus();
 				stillContunite=false;
 			}
 		}
@@ -128,7 +132,7 @@ public class ThemKhachHang implements Initializable{
 			}
 		}
 		if(stillContunite==true) {
-			KhachHang kh=new KhachHang(Integer.parseInt(ma), diaChi, Email, DienThoai, ten);
+			KhachHang kh=new KhachHang(Integer.parseInt(ma), diaChi, CMND, DienThoai, ten,lc);
 			if(lblTitle.getText().toString().equals("Cập nhập khách hàng")) {
 				if(QuanLyKhachHang.suaKH(kh)==true) {
 					((Node)(e.getSource())).getScene().getWindow().hide();  
@@ -149,9 +153,10 @@ public class ThemKhachHang implements Initializable{
 	public void btnXoaRong(ActionEvent e) {
 		txtMa.setText("");
 		txtDiaChi.setText("");
-		txtEmail.setText("");
+		txtCMND.setText("");
 		txtDienThoai.setText("");
 		txtTenKH.setText("");
+		txtNgaySinh.setValue(LocalDate.of(1999, 11, 24));
 		
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {

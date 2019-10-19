@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="600.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemKhachHang">
+<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="600.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemKhachHang">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -78,7 +79,7 @@
             </HBox>
             <HBox prefHeight="31.0" prefWidth="600.0">
                <children>
-                  <Label prefHeight="27.0" prefWidth="616.0" text="Email:">
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Chứng minh nhân dân">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -90,7 +91,7 @@
             </HBox>
             <HBox prefHeight="33.0" prefWidth="600.0">
                <children>
-                  <JFXTextField fx:id="txtEmail" prefHeight="25.0" prefWidth="278.0" promptText="Nhập email..." style="-fx-prompt-text-fill: black; -fx-text-inner-color: black;">
+                  <JFXTextField fx:id="txtCMND" prefHeight="25.0" prefWidth="278.0" promptText="Nhập email..." style="-fx-prompt-text-fill: black; -fx-text-inner-color: black;">
                      <HBox.margin>
                         <Insets left="150.0" />
                      </HBox.margin>
@@ -142,6 +143,27 @@
                         <Insets left="150.0" />
                      </HBox.margin>
                   </JFXTextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="24.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="616.0" text="Ngày sinh">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="150.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXDatePicker fx:id="txtNgaySinh" prefHeight="28.0" prefWidth="275.0">
+                     <HBox.margin>
+                        <Insets left="150.0" />
+                     </HBox.margin>
+                  </JFXDatePicker>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">

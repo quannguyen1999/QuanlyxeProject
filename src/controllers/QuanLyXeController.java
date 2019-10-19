@@ -1,7 +1,10 @@
 package controllers;
 import javafx.scene.control.TextField;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -11,11 +14,14 @@ import com.jfoenix.controls.JFXRadioButton;
 
 import application.Main;
 import dao.QuanLyAccount;
+import dao.QuanLyLoaiXe;
 import dao.QuanLyNhanVien;
 import dao.QuanLyXe;
 import entities.Account;
+import entities.Loaixe;
 import entities.NhanVien;
 import entities.Xe;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -72,110 +78,84 @@ public class QuanLyXeController implements Initializable{
 		colMaXe=new TableColumn<Xe, String>("Mã xe");
 		colDonViTinh=new TableColumn<Xe, String>("Đơn vị tính");
 		colMoTa=new TableColumn<Xe, String>("Mô tả");
-		colNhaSX=new TableColumn<Xe, String>("Nhà sàn xuất");
+		colThongTinBaoHanh=new TableColumn<Xe, String>("Thông tin bảo hành");
+		colNhaSX=new TableColumn<Xe, String>("Nhà sản xuất");
 		colLoaiXe=new TableColumn<Xe, String>("Loại xe");
 		colTenXe=new TableColumn<Xe, String>("Tên xe");
-		colThongTinBaoHanh=new TableColumn<Xe, String>("Thông tin bảo hành");
 		colMauXe=new TableColumn<Xe, String>("Màu xe");
 
 
 		tbl_view.getColumns().addAll(colMaXe,colDonViTinh,colMoTa,colNhaSX,colLoaiXe,colTenXe,colThongTinBaoHanh,colMauXe);
-
+		
 		bd.setCenter(tbl_view);
-
+		
 		colMaXe.setCellValueFactory(new PropertyValueFactory<>("maXe"));
 		colDonViTinh.setCellValueFactory(new PropertyValueFactory<>("donViTinh"));
 		colMoTa.setCellValueFactory(new PropertyValueFactory<>("moTa"));
-		colNhaSX.setCellValueFactory(new PropertyValueFactory<>("nhaSX"));
-		colLoaiXe.setCellValueFactory(new PropertyValueFactory<>("loaiXe"));
-		colTenXe.setCellValueFactory(new PropertyValueFactory<>("tenXe"));
-		colMauXe.setCellValueFactory(new PropertyValueFactory<>("mauXe"));
 		colThongTinBaoHanh.setCellValueFactory(new PropertyValueFactory<>("thongTinBaoHanh"));
 
-		String listTayGa[]= {"SH-300c","Vision-110C"};
-		choiceBoxTenXe.getItems().add("SH-300c");
-		choiceBoxTenXe.getItems().add("Vision-110C");
-		choiceBoxTenXe.setValue("SH-300c");
-
-		String listMauTayGaSH[]= {"Trang","Den"};
-		String listMauTayGaVision[]= {"Xanh duong","Do","Vang"};
-		choiceBoxMauXe.getItems().add("Trang");
-		choiceBoxMauXe.getItems().add("Den");
-		choiceBoxMauXe.setValue("Den");
-
-		String st[] = { "Xe tay ga", "Xe so"};
-		choiceBoxLoaiXe.getItems().add("Xe tay ga");
-		choiceBoxLoaiXe.getItems().add("Xe so");
-		choiceBoxLoaiXe.setValue("Xe tay ga");
-
-		String listXeSo[]= {"SUPER-CUB","Blade-110C"};
-		String listMauXeSoSubCub[]= {"Xanh duong"};
-		String listMauXeBlade[]= {"Den","Xanh duong"};
-		choiceBoxLoaiXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
-			public void changed(ObservableValue ov, Number value, Number new_value) 
-			{ 
-				if(st[new_value.intValue()].contentEquals("Xe tay ga")) {
-					choiceBoxTenXe.getItems().clear();
-					String listTayGa[]= {"SH-300c","Vision-110C"};
-					choiceBoxTenXe.getItems().add("SH-300c");
-					choiceBoxTenXe.getItems().add("Vision-110C");
-					choiceBoxTenXe.setValue("SH-300c");
-
-					choiceBoxMauXe.getItems().clear();
-					String listMauTayGa[]= {"Trang","Den"};
-					choiceBoxMauXe.getItems().add("Trang");
-					choiceBoxMauXe.getItems().add("Den");
-					choiceBoxMauXe.setValue("Den");
-
-				}else{
-					choiceBoxTenXe.getItems().clear();
-					choiceBoxMauXe.getItems().clear();
-
-					choiceBoxTenXe.getItems().add("SUPER-CUB");
-					choiceBoxTenXe.getItems().add("Blade-110C");
-					choiceBoxTenXe.setValue("SUPER-CUB");
-
-
-					choiceBoxMauXe.getItems().add("Xanh duong");
-					choiceBoxMauXe.setValue("Xanh duong");
-
-
-				}
-			} 
-		}); 
-		choiceBoxTenXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
-			public void changed(ObservableValue ov, Number value, Number new_value) 
-			{ 
-				if(choiceBoxLoaiXe.getValue().contentEquals("Xe tay ga")) {
-					if(listTayGa[new_value.intValue()].contentEquals("SH-300c")) {
-						choiceBoxMauXe.getItems().clear();
-					}else{
-						choiceBoxMauXe.getItems().clear();
-						String listMauTayGaVision[]= {"Xanh duong","Do","Vang"};
-						choiceBoxMauXe.getItems().add("Xanh Duong");
-						choiceBoxMauXe.getItems().add("Do");
-						choiceBoxMauXe.getItems().add("Vang");
-						choiceBoxMauXe.setValue("Do");
-					}
-				}else{
-					if(listXeSo[new_value.intValue()].contentEquals("Blade-110C")) {
-						choiceBoxMauXe.getItems().clear();
-						choiceBoxMauXe.getItems().add("Den");
-						choiceBoxMauXe.getItems().add("Xanh duong");
-						choiceBoxMauXe.setValue("Den");
-					}else {
-						choiceBoxMauXe.getItems().clear();
-						choiceBoxMauXe.getItems().add("Xanh duong");
-						choiceBoxMauXe.setValue("Xanh duong");
-					}
-				}
-			}
-		});
+		colNhaSX.setCellValueFactory(cellData -> 
+        new SimpleStringProperty(cellData.getValue().getLx().getNuocSX()));
+		colLoaiXe.setCellValueFactory(cellData -> 
+        new SimpleStringProperty(cellData.getValue().getLx().getLoaixe()));
+		colTenXe.setCellValueFactory(cellData -> 
+        new SimpleStringProperty(cellData.getValue().getLx().getTenxe()));
+		colMauXe.setCellValueFactory(cellData -> 
+	        new SimpleStringProperty(cellData.getValue().getLx().getMauson()));
+		
 		
 		
 		choiceBoxLoaiXe.setDisable(true);
 		choiceBoxMauXe.setDisable(true);
 		choiceBoxTenXe.setDisable(true);
+		
+		List<String> lx=QuanLyLoaiXe.showLoaiXe();
+		lx.forEach(t->{
+			choiceBoxLoaiXe.getItems().add(t);
+		});
+		List<String> lxTenXe=new ArrayList<String>();
+		List<String> lxMauXe=new ArrayList<String>();
+		//loaixe
+		choiceBoxLoaiXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
+			public void changed(ObservableValue ov, Number value, Number new_value) 
+			{ 
+				choiceBoxTenXe.getItems().clear();
+				choiceBoxMauXe.getItems().clear();
+				List<String> ListTenXe=QuanLyLoaiXe.showTenXe(lx.get((int)new_value));
+				ListTenXe.forEach(t->{
+					choiceBoxTenXe.getItems().add(t);
+					//set ngoài
+					lxTenXe.add(t);
+				});
+				choiceBoxTenXe.setValue(ListTenXe.get(0).toString());
+				List<String> listMauXe=QuanLyLoaiXe.showMauXeCuaTenXe(lx.get((int) new_value),choiceBoxTenXe.getValue().toString());
+				listMauXe.forEach(t->{
+					choiceBoxMauXe.getItems().add(t);
+					//set ngoài 
+					lxMauXe.add(t);
+				});
+				choiceBoxMauXe.setValue(listMauXe.get(0).toString());
+			}
+		});
+		//tenxe
+		choiceBoxTenXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
+			public void changed(ObservableValue ov, Number value, Number new_value) 
+			{ 
+				choiceBoxMauXe.getItems().clear();
+				List<String> listMauXe=QuanLyLoaiXe.showMauXeCuaTenXe(choiceBoxLoaiXe.getValue(), lxTenXe.get((int)new_value));
+				listMauXe.forEach(t->{
+					choiceBoxMauXe.getItems().add(t);
+				});
+				choiceBoxMauXe.setValue(listMauXe.get(0).toString());
+			}
+		});
+		//mauxe
+		choiceBoxMauXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
+			public void changed(ObservableValue ov, Number value, Number new_value) 
+			{ 
+			}
+		});
+
 		
 		UploaderDuLieuLenBang();
 
@@ -199,22 +179,22 @@ public class QuanLyXeController implements Initializable{
 					String maXe=tbl_view.getItems().get(result).getMaXe();
 					String donViTinh=tbl_view.getItems().get(result).getDonViTinh();
 					String moTa=tbl_view.getItems().get(result).getMoTa();
-					String nhaSX=tbl_view.getItems().get(result).getNhaSX();
-					String LoaiXe=tbl_view.getItems().get(result).getLoaiXe();
-					String TenXe=tbl_view.getItems().get(result).getTenXe();
+					String nhaSX=tbl_view.getItems().get(result).getLx().getNuocSX();
+					String LoaiXe=tbl_view.getItems().get(result).getLx().getLoaixe();
+					String TenXe=tbl_view.getItems().get(result).getLx().getTenxe();
 					String thongTinBaoHanh=tbl_view.getItems().get(result).getThongTinBaoHanh();
-					String loaiXe=tbl_view.getItems().get(result).getLoaiXe();
-					String mauXe=tbl_view.getItems().get(result).getMauXe();
+					String mauXe=tbl_view.getItems().get(result).getLx().getMauson();
 					
 					ctlMain.txtMaXe.setText(maXe);
 					ctlMain.txtMaXe.setEditable(false);
 					ctlMain.txtDonViTinh.setText(donViTinh);
 					ctlMain.txtMoTa.setText(moTa);
 					ctlMain.txtNhaSX.setText(nhaSX);
-
-					ctlMain.choiceBoxLoaiXe.setValue(loaiXe);
+					ctlMain.txtThongTinBaoHanh.setText(thongTinBaoHanh);
+					ctlMain.choiceBoxLoaiXe.setValue(LoaiXe);
 					ctlMain.choiceBoxMauXe.setValue(mauXe);
 					ctlMain.choiceBoxTenXe.setValue(TenXe);
+					
 					if(btnThem.isDisabled()==true) {
 						System.out.println("nhân viên");
 						ctlMain.lblTitle.setText("thông tin xe");
@@ -225,55 +205,17 @@ public class QuanLyXeController implements Initializable{
 						ctlMain.choiceBoxMauXe.setDisable(true);
 						ctlMain.choiceBoxTenXe.setDisable(true);
 						ctlMain.txtThongTinBaoHanh.setEditable(false);
-						ctlMain.btnOK.setDisable(true);
-						ctlMain.btnXoaRong.setDisable(true);
+						ctlMain.btnXoa.setDisable(true);
 					}else {
-						System.out.println("ke toán");
 						ctlMain.lblTitle.setText("Cập nhập xe");
 					}
-					if(loaiXe.equals("Blade-110C")) {
-						if(mauXe.length()==10) {
-							Image image = new Image("/image/Blade-110C_XanhDuong.PNG");
-							ctlMain.img.setImage(image);
-
-						}else {
-							Image image = new Image("/image/Blade-110C_den.PNG");
-							ctlMain.img.setImage(image);
-						}
-					}else if(TenXe.equals("SUPER-CUB")) {
-						Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
-						ctlMain.img.setImage(image);
-					}else if(TenXe.equals("SH-300c")) {
-						if(mauXe.length()==3) {
-							System.out.println("ok");
-							Image image = new Image("/image/SH-300c_den.PNG");
-							ctlMain.img.setImage(image);
-						}else {
-							System.out.println("false");
-							Image image = new Image("/image/SH-300c_trang.PNG");
-							ctlMain.img.setImage(image);
-						}
-					}else if(TenXe.equals("Vision-110C")) {
-						if(mauXe.length()==2) {
-							Image image = new Image("/image/Vision-110C_do.PNG");
-							ctlMain.img.setImage(image);
-						}else if(mauXe.length()==10) {
-							Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
-							ctlMain.img.setImage(image);
-						}else {
-							Image image = new Image("/image/Vision-110C_Vang.PNG");
-							ctlMain.img.setImage(image);
-
-						}
-					}
-					ctlMain.txtThongTinBaoHanh.setText(thongTinBaoHanh);
-
 					Stage stage=new Stage();
 					stage.initOwner(btnThem.getScene().getWindow());
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.initModality(Modality.APPLICATION_MODAL);
 					stage.setScene(new Scene(root));
 					Main.primaryStage=stage;
+					stage.getIcons().add(new Image("/image/logo.PNG"));
 					stage.show();
 					stage.setOnHidden(evv->{
 						handleRefersh(new ActionEvent());
@@ -282,6 +224,17 @@ public class QuanLyXeController implements Initializable{
 			}
 		});
 
+	}
+	private static String kiemTraChuoi(String text) {
+		String newTextResult="";
+		for(int i=0;i<=text.length()-1;i++) {
+			if((int)text.charAt(i)==92) {
+				newTextResult+="/";
+			}else {
+				newTextResult+=text.charAt(i);
+			}
+		}
+		return newTextResult;
 	}
 	@FXML
 	private void btnClickTwo(ActionEvent e) {
@@ -311,86 +264,6 @@ public class QuanLyXeController implements Initializable{
 	private void handleRefersh(ActionEvent e) {
 		tbl_view.getItems().clear();
 		UploaderDuLieuLenBang();
-	}
-	public void btnSuaXe(ActionEvent e) throws IOException {
-		int result=tbl_view.getSelectionModel().getSelectedIndex();
-
-		if(result!=-1) {
-			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinXe.fxml"));
-
-			Parent root=loader.load();
-
-			ThemXe ctlMain=loader.getController();
-
-			String maXe=tbl_view.getItems().get(result).getMaXe();
-			String donViTinh=tbl_view.getItems().get(result).getDonViTinh();
-			String moTa=tbl_view.getItems().get(result).getMoTa();
-			String nhaSX=tbl_view.getItems().get(result).getNhaSX();
-			String LoaiXe=tbl_view.getItems().get(result).getLoaiXe();
-			String TenXe=tbl_view.getItems().get(result).getTenXe();
-			String thongTinBaoHanh=tbl_view.getItems().get(result).getThongTinBaoHanh();
-			String loaiXe=tbl_view.getItems().get(result).getLoaiXe();
-			String mauXe=tbl_view.getItems().get(result).getMauXe();
-			ctlMain.lblTitle.setText("Cập nhập xe");
-			ctlMain.txtMaXe.setText(maXe);
-			ctlMain.txtMaXe.setEditable(false);
-			ctlMain.txtDonViTinh.setText(donViTinh);
-			ctlMain.txtMoTa.setText(moTa);
-			ctlMain.txtNhaSX.setText(nhaSX);
-
-			ctlMain.choiceBoxLoaiXe.setValue(loaiXe);
-			ctlMain.choiceBoxMauXe.setValue(mauXe);
-			ctlMain.choiceBoxTenXe.setValue(TenXe);
-			if(loaiXe.equals("Blade-110C")) {
-				if(mauXe.length()==10) {
-					Image image = new Image("/image/Blade-110C_XanhDuong.PNG");
-					ctlMain.img.setImage(image);
-
-				}else {
-					Image image = new Image("/image/Blade-110C_den.PNG");
-					ctlMain.img.setImage(image);
-				}
-			}else if(TenXe.equals("SUPER-CUB")) {
-				Image image = new Image("/image/SUPER-CUB_XanhDuong.PNG");
-				ctlMain.img.setImage(image);
-			}else if(TenXe.equals("SH-300c")) {
-				if(mauXe.length()==3) {
-					System.out.println("ok");
-					Image image = new Image("/image/SH-300c_den.PNG");
-					ctlMain.img.setImage(image);
-				}else {
-					System.out.println("false");
-					Image image = new Image("/image/SH-300c_trang.PNG");
-					ctlMain.img.setImage(image);
-				}
-			}else if(TenXe.equals("Vision-110C")) {
-				if(mauXe.length()==2) {
-					Image image = new Image("/image/Vision-110C_do.PNG");
-					ctlMain.img.setImage(image);
-				}else if(mauXe.length()==10) {
-					Image image = new Image("/image/Vision-110C_xanhDuong.PNG");
-					ctlMain.img.setImage(image);
-				}else {
-					Image image = new Image("/image/Vision-110C_Vang.PNG");
-					ctlMain.img.setImage(image);
-
-				}
-			}
-			ctlMain.txtThongTinBaoHanh.setText(thongTinBaoHanh);
-
-			Stage stage=new Stage();
-			stage.initOwner(((Node)(e.getSource())).getScene().getWindow());
-			stage.initStyle(StageStyle.UNDECORATED);
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(new Scene(root));
-			Main.primaryStage=stage;
-			stage.show();
-			stage.setOnHidden(ev->{
-				handleRefersh(new ActionEvent());
-			});
-		}else {
-			thongBaoKieuLoi(e,"Bạn chưa chọn bảng cần sửa");
-		}
 	}
 
 	public void btnXoaXe(ActionEvent e) {
@@ -439,13 +312,18 @@ public class QuanLyXeController implements Initializable{
 				handleRefersh(e);
 			}
 		}else {
-			String loaiXe=choiceBoxLoaiXe.getValue();
-			String mauXe=choiceBoxMauXe.getValue();
-			String tenXe=choiceBoxTenXe.getValue();
-			List<Xe> list=(List<Xe>) QuanLyXe.timTheoLoai(loaiXe, mauXe, tenXe);
-			if(list!=null) {
+			String loaiXe=choiceBoxLoaiXe.getValue().toString();
+			String mauXe=choiceBoxMauXe.getValue().toString();
+			String tenXe=choiceBoxTenXe.getValue().toString();
+			System.out.println(loaiXe);
+			System.out.println(mauXe);
+			System.out.println(tenXe);
+			List<Loaixe> listLoaiXe=QuanLyLoaiXe.timMaTraVeLoaiXe(loaiXe, tenXe, mauXe);
+			List<Xe> listXe=QuanLyXe.timTheoLoai(listLoaiXe.get(0).getMaloai());
+			if(listXe!=null) {
+				
 				tbl_view.getItems().clear();
-				list.forEach(t->{
+				listXe.forEach(t->{
 					tbl_view.getItems().add(t);
 				});
 			
@@ -471,6 +349,7 @@ public class QuanLyXeController implements Initializable{
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.setScene(new Scene(parent));
 			stage.show();
+			stage.getIcons().add(new Image("/image/logo.PNG"));
 			Main.primaryStage=stage;
 			stage.setOnHidden(ev->{
 				handleRefersh(e);
