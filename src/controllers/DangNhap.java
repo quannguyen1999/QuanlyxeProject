@@ -87,26 +87,23 @@ public class DangNhap implements Initializable{
 		alert.showAndWait();
 	}
 	public Account kiemTraUserName(ActionEvent e,String userName,String passWord) {
-		//		Account acc=QuanLyAccount.timMa(userName);
-		//		System.out.println(acc);
-		//		if(acc!=null) {
-		//			if(passWord.equals(acc.getPassword())==true) {
-		//				return acc; 
-		//			}else {
-		////				System.out.println(passWord);
-		////				System.out.println(acc.getPassword());
-		//				thongBaoKieuLoi(e, "mật khẩu không hợp lệ");
-		//				txtPass.requestFocus();
-		//			}
-		//		}else {
-		//			thongBaoKieuLoi(e, "Tài khoản không tồn tại");
-		//			txtUser.requestFocus();
-		//		}
 		Account acc=null;
-		if(userName.isEmpty() || passWord.isEmpty()) {
-			thongBaoKieuLoi(e, "không được để trống mật khẩu hay tên đăng nhập");
+		boolean continuses=true;
+		if(userName.isEmpty()==true) {
+			continuses=false;
+			thongBaoKieuLoi(e, "UserName chưa nhập");
 			txtUser.requestFocus();
-		}else {
+		}
+
+		if(continuses==true) {
+			if(passWord.isEmpty()==true) {
+				continuses=false;
+				thongBaoKieuLoi(e, "Mật khẩu chưa nhập");
+				txtPass.requestFocus();
+			}
+		}
+
+		if(continuses==true) {
 			acc=QuanLyAccount.timMa(userName);
 			if(acc!=null) {
 				if(passWord.contentEquals(acc.getPassword())==true) {
@@ -121,8 +118,9 @@ public class DangNhap implements Initializable{
 				thongBaoKieuLoi(e, "tên người dùng không tồn tại");
 				acc=null;
 			}
-
 		}
+
+
 		return acc;
 	}
 	public void btnLogin(ActionEvent e) throws IOException {
@@ -138,27 +136,15 @@ public class DangNhap implements Initializable{
 				case "Ke toan truong":
 					break;
 				case "Kế toán":
-
-//					VBox loading = new VBox(20);
-//					loading.setMaxWidth(Region.USE_PREF_SIZE);
-//					loading.setMaxHeight(Region.USE_PREF_SIZE);
-//					loading.getChildren().add(new ProgressBar());
-//					loading.getChildren().add(new Label("Please wait..."));
-
-//					BorderPane root = new BorderPane(loading);
-
-					
 					((Node)(e.getSource())).getScene().getWindow().hide();  
 					loader=new FXMLLoader(getClass().getResource("/fxml/KeToan.fxml"));
 					root=loader.load();
 					KeToanController ctlKeToan=loader.getController();
 					ctlKeToan.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
-					
 					stage=new Stage();
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.getIcons().add(new Image("/image/logo.PNG"));
-//					LauncherImpl.launchApplication(KeToanController.class, MainClass.class, root.toString());
 					stage.show();
 					break;
 				case "Kế toán trưởng":

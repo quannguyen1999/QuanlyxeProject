@@ -24,7 +24,6 @@ public class Loading  extends Preloader {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.preloaderStage = primaryStage;
-
 		VBox loading = new VBox(20);
 		loading.setMaxWidth(Region.USE_PREF_SIZE);
 		loading.setMaxHeight(Region.USE_PREF_SIZE);
