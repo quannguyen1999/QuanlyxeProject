@@ -36,7 +36,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import javafx.scene.input.KeyCode;
 public class DangNhap implements Initializable{
 	private double xOffset = 0;
 	private double yOffset = 0;
@@ -47,6 +47,11 @@ public class DangNhap implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
+			txtPass.setOnKeyPressed(e->{
+				if(e.getCode()==KeyCode.ENTER) {
+					
+				}
+			});
 			makeStageDrageable();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -124,6 +129,7 @@ public class DangNhap implements Initializable{
 		return acc;
 	}
 	public void btnLogin(ActionEvent e) throws IOException {
+		
 		FXMLLoader loader;
 		Parent root;
 		Stage stage;

@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<ScrollPane prefHeight="590.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BanHopDongBuonBanXeMayController">
+   <content>
+      <BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1048.0" prefWidth="732.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <HBox prefHeight="26.0" prefWidth="726.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="681.0" text="CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM">
+                                 <padding>
+                                    <Insets left="70.0" />
+                                 </padding>
+                              </Label>
+                              <HBox alignment="CENTER" prefHeight="26.0" prefWidth="78.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#btnCLoseWindow" prefHeight="26.0" prefWidth="30.0" text="X" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="23.0" prefWidth="600.0">
+                     <children>
+                        <Label contentDisplay="CENTER" text="Độc lập - tự do - hạnh phúc" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="10.0" prefWidth="600.0">
+                     <children>
+                        <Label alignment="CENTER" text="................................" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="600.0">
+                     <children>
+                        <Label contentDisplay="CENTER" text="HỢP ĐỒNG MUA BÁN XE MÁY">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="Biển kiểm soát:" />
+                        <Label fx:id="txtMaHD" text="........................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="22.0" prefWidth="590.0">
+                     <children>
+                        <Label text="Hôm nay, ngày" />
+                        <Label fx:id="txtNgayLap" text=".........." />
+                        <Label text="tháng" />
+                        <Label fx:id="txtThangLap" text="......." />
+                        <Label text="năm" />
+                        <Label fx:id="txtNamLap" text="...........," />
+                        <Label text=",chúng tôi gồm có:" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="20.0" prefWidth="600.0">
+                     <children>
+                        <Label text="BÊN BÁN:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="Ông (Bà):">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="txtTenBenBan" text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="CMND số:">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="txtCMNDBenBan" text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="Ông (Bà) có hộ khẩu thường trú tại:">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="txtDiaChiBenBan" text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="BÊN MUA:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="Ông (Bà):">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="txtTenBenMua" text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="CMND số:">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="txtCMNDBenMua" text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="Ông (Bà) có hộ khẩu thường trú tại:">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="txtDiaChiBenMua" text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="35.0" prefWidth="626.0">
+                     <children>
+                        <VBox prefHeight="35.0" prefWidth="722.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="700.0" text="Chúng tôi tự nguyện cùng nhau lập và ký bản hợp đồng này để thực hiện việc mua bán xe máy/xe môtô " />
+                              <Label prefHeight="18.0" prefWidth="628.0" text="với những điều khoản đã được hai bên bàn bạc và thoả thuận như sau:" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="22.0" prefWidth="600.0">
+                     <children>
+                        <Label text="ĐIỀU 1: ĐẶC ĐIỂM XE MUA BÁN">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="7.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="Bên bán là chủ sở hữu của chiếc xe máy/xe môtô nhãn hiệu: ">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="Loại xe">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="....................." />
+                        <Label text="tên xe" />
+                        <Label text="....................." />
+                        <Label text="màu sơn" />
+                        <Label text="....................." />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="22.0" prefWidth="600.0">
+                     <children>
+                        <Label text="ĐIỀU 2: SỰ THỎA THUẬN MUA BÁN">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="35.0" prefWidth="600.0">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="13.0" prefWidth="590.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="586.0" text="2.1. Bên bán đồng ý bán và Bên mua đồng ý mua chiếc xe nói trên như hiện trạng với giá là:" />
+                              <Label fx:id="txtGia" text="................................." />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="18.0" prefWidth="590.0">
+                           <children>
+                              <Label text="đồng và không thay đổi vì bất kỳ lý do gì." />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="35.0" prefWidth="600.0">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="13.0" prefWidth="590.0">
+                           <children>
+                              <Label text="2.2. Bên bán đã nhận đủ tiền do Bên mua trả và đã giao xe đúng như hiện trạng cho Bên mua cùng toàn bộ" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="18.0" prefWidth="590.0">
+                           <children>
+                              <Label text="giấy tờ có liên quan đến chiếc xe này. Việc giao nhận không có gì vướng mắc. Việc giao tiền, giao xe được" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="18.0" prefWidth="590.0">
+                           <children>
+                              <Label text="hai bên thực hiện bằng việc ký vào biên bàn bàn giao hoặc thực hiện đồng thời bằng việc ký vào hợp đồng" />
+                           </children>
+                        </HBox>
+                        <Label text="này." />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="20.0" prefWidth="600.0">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="13.0" prefWidth="590.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="716.0" text="2.3. Hai bên thoả thuận: Bên mua nộp toàn bộ các loại lệ phí, thuế liên quan đến việc mua bán ô tô." />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="22.0" prefWidth="600.0">
+                     <children>
+                        <Label text="ĐIỀU 3: CAM ĐOAN">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="3.1. Bên bán cam đoan:">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <VBox prefHeight="35.0" prefWidth="723.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="714.0" text="Khi đem bán theo bản hợp đồng này, chiếc xe nói trên thuộc quyền sở hữu và sử dụng hợp pháp của Bên" />
+                              <Label prefHeight="18.0" prefWidth="590.0" text="bán chưa đem cầm cố, thế chấp hoặc dùng để đảm bảo cho bất kỳ nghĩa vụ tài sản nào.">
+                                 <padding>
+                                    <Insets left="-5.0" />
+                                 </padding>
+                                 <VBox.margin>
+                                    <Insets left="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="600.0">
+                     <children>
+                        <Label text="3.2. Bên mua cam đoan:">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets top="7.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="26.0" prefWidth="597.0">
+                     <children>
+                        <Label text="Bên mua đã tự mình xem xét kỹ, biết rõ về nguồn gốc sở hữu và hiện trạng chiếc xe nói trên của Bên bán" />
+                        <Label prefHeight="18.0" prefWidth="458.0" text="bằng lòng mua và không có điều gì thắc mắc.">
+                           <padding>
+                              <Insets left="1.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="7.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <HBox prefHeight="22.0" prefWidth="600.0">
+                     <children>
+                        <Label text="ĐIỀU 4: ĐIỀU KHOẢN CUỐI CÙNG">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="7.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <VBox prefHeight="26.0" prefWidth="597.0">
+                     <children>
+                        <Label text="Hai bên đã tự đọc lại nguyên văn bản hợp đồng này, đều hiểu và chấp thuận toàn bộ nội dung của hợp" />
+                        <Label prefHeight="18.0" prefWidth="674.0" text="đồng, không có điều gì vướng mắc. Hai bên cùng ký tên dưới đây để làm bằng chứng.">
+                           <padding>
+                              <Insets left="1.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="89.0" prefWidth="600.0">
+                     <children>
+                        <Label text="BÊN BÁN (BÊN A)">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label text="BÊN MUA (BÊN B)">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets left="150.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="83.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="400.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="59.0" prefWidth="600.0">
+                     <children>
+                        <JFXButton onAction="#btnCLoseWindow" styleClass="btnLogin" stylesheets="@../css/application.css" text="Thoát">
+                           <HBox.margin>
+                              <Insets left="480.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton styleClass="btnLogin" stylesheets="@../css/application.css" text="In bản hợp đồng">
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </content>
+</ScrollPane>

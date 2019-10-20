@@ -69,7 +69,7 @@ public class QuanLyHopDongController implements Initializable{
 			if(e.getClickCount()==2) {
 				int result=tbl_view.getSelectionModel().getSelectedIndex();
 				if(result!=-1) {
-					FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinHopDong.fxml"));
+					FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/BanHopDongMuaBanXeMay.fxml"));
 
 					Parent root = null;
 					try {
@@ -79,40 +79,21 @@ public class QuanLyHopDongController implements Initializable{
 						e1.printStackTrace();
 					}
 
-					ThemHopDong ctlMain=loader.getController();
-
+					BanHopDongBuonBanXeMayController ctlMain=loader.getController();
 					int maHD=tbl_view.getItems().get(result).getMaHopDong();
 					HopDong hd=QuanLyHopDong.timMaHopDong(maHD);
-					System.out.println(hd);
-					ctlMain.txtMaHD.setText(String.valueOf(maHD));
-					ctlMain.txtMaHD.setEditable(false);
-					ctlMain.boxMaNV.setValue(hd.getMaNV());
-					ctlMain.boxMaNV.setDisable(true);
-					ctlMain.txtTenNV.setText(hd.getTenNguoiBan());
-					ctlMain.txtTenNV.setEditable(false);
-					ctlMain.txtCMNDNhanVien.setText(hd.getCMNDNB());
-					ctlMain.txtNoiONV.setText(hd.getNoiONB());
-					ctlMain.txtNoiONV.setEditable(false);
-					ctlMain.txtSDTNV.setText(hd.getSoDTNB());
-					ctlMain.txtSDTNV.setEditable(false);
-					ctlMain.txtTienPhaiDat.setText(String.valueOf(hd.getTienDatThanhToan()));
-					ctlMain.txtTienPhaiDat.setEditable(false);
+					ctlMain.txtMaHD.setText(" "+String.valueOf(hd.getMaHopDong()));
+					ctlMain.txtNgayLap.setText(" "+String.valueOf(hd.getNgayLap().getDayOfMonth()+" "));
+					ctlMain.txtThangLap.setText(" "+String.valueOf(hd.getNgayLap().getMonthValue()+" "));
+					ctlMain.txtNamLap.setText(" "+String.valueOf(hd.getNgayLap().getYear()));
+					ctlMain.txtTenBenBan.setText(" "+hd.getTenNguoiBan());
+					ctlMain.txtCMNDBenBan.setText(" "+hd.getCMNDNB());
+					ctlMain.txtDiaChiBenBan.setText(" "+hd.getNoiONB());
+					ctlMain.txtTenBenMua.setText(" "+hd.getTenNguoiMua());
+					ctlMain.txtCMNDBenMua.setText(" "+hd.getCMNDNM());
+					ctlMain.txtDiaChiBenMua.setText(" "+hd.getNoiONM());
 					
-					ctlMain.txtTenKH.setText(hd.getTenNguoiMua());
-					ctlMain.txtTenKH.setEditable(false);
-					ctlMain.boxMaKH.setValue(hd.getMaKH());
-					ctlMain.boxMaKH.setDisable(true);
-					ctlMain.txtDiaChiKH.setText(hd.getNoiONM());
-					ctlMain.txtDiaChiKH.setEditable(false);
-					ctlMain.txtSoDTKH.setText(hd.getSoDTNM());
-					ctlMain.txtSoDTKH.setEditable(false);
-					ctlMain.txtNoiOKH.setText(hd.getNoiONM());
-					ctlMain.txtNoiOKH.setEditable(false);
-					ctlMain.txtCMNDKH.setText(hd.getCMNDNM());
-					ctlMain.txtCMNDKH.setEditable(false);
-					ctlMain.btnThem.setDisable(true);
-					ctlMain.btnXoa.setDisable(true);
-
+					
 					Stage stage=new Stage();
 					stage.initOwner(btnThem.getScene().getWindow());
 					stage.setScene(new Scene(root));
