@@ -19,21 +19,21 @@ import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 public class Main extends Application {
-//	@Override
-//	public void init() throws Exception {
-//		QuanLyLoaiXe.showTatCaLoaiXe();
-//		QuanLyXe.showTatCaXe();
-//		QuanLyKhachHang.showTatCaKhachHang();
-//		QuanLyPhieuXuat.showTatCaPhieuXuat();
-//		QuanLyHopDong.showTatCaHopDong();
-//		QuanLyAccount.showTatCaAccount();
-//		QuanLyNhanVien.showTatCaNhanVien();
-//		QuanLyHopDong.showTatCaHopDong();
-//	}
+	@Override
+	public void init() throws Exception {
+		QuanLyLoaiXe.showTatCaLoaiXe();
+		QuanLyXe.showTatCaXe();
+		QuanLyKhachHang.showTatCaKhachHang();
+		QuanLyPhieuXuat.showTatCaPhieuXuat();
+		QuanLyHopDong.showTatCaHopDong();
+		QuanLyAccount.showTatCaAccount();
+		QuanLyNhanVien.showTatCaNhanVien();
+		QuanLyHopDong.showTatCaHopDong();
+	}
 	public static Stage primaryStage=null;
 	public void start(Stage primaryStage) {
 		try {
-			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/KeToan.fxml"));
+			Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/FormLogin.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			primaryStage.setScene(scene);
