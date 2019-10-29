@@ -22,7 +22,6 @@ public class BanPhieuXuatXeMay implements Initializable{
 //			String noiONM, String soDTNM, Double tienDatThanhToan) {
 	@FXML BorderPane bd;
 	TableView<PhieuXuat> tbl_view;
-	@FXML TableView<String> tblTT=new TableView<String>();
 	TableColumn<PhieuXuat, String> colMaPX;
 	TableColumn<PhieuXuat, String> colSLXuat;
 	TableColumn<PhieuXuat, String> colDonGiaXuat;
@@ -35,7 +34,8 @@ public class BanPhieuXuatXeMay implements Initializable{
 	@FXML Label txtSDT;
 	@FXML Label txtDiaChi;
 	
-
+	TableView<HopDong> tbl_viewHD;
+	TableColumn<HopDong, String> colMaHD;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
@@ -61,7 +61,21 @@ public class BanPhieuXuatXeMay implements Initializable{
 		colSLXuat.setMinWidth(140);
 		colDonGiaXuat.setMinWidth(140);
 		
-		tblTT.getItems().add("asd");
+		
+		
+		////
+		
+		tbl_viewHD=new TableView<HopDong>();
+		tbl_viewHD.setMaxHeight(100);
+		colMaHD=new TableColumn<HopDong, String>("Tổng tiền");
+
+		tbl_viewHD.getColumns().addAll(colMaHD);
+
+		bd.setBottom(tbl_viewHD);
+
+		
+		colMaHD.setCellValueFactory(cellData -> 
+		new SimpleStringProperty(String.valueOf(cellData.getValue().getTienDatThanhToan())));
 		
 		
 	}

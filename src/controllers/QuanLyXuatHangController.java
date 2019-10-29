@@ -88,8 +88,6 @@ public class QuanLyXuatHangController implements Initializable{
 		colDonGiaXuat.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(String.format("%.0f", cellData.getValue().getDonGiaXuat())));
 		
-//		colSpeedProgress.setCellValueFactory(new PropertyValueFactory<TableDisplayData, Double>("progressBar"));
-//		colDonGiaXuat.setCellFactory(ProgressBarTableCell.<TableDisplayData> forTableColumn());
 		
 		colSLX.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(String.valueOf(cellData.getValue().getsLXuat())));
@@ -121,9 +119,7 @@ public class QuanLyXuatHangController implements Initializable{
 					PhieuXuat x=tbl_view.getItems().get(result);
 					
 					ctlMain.tbl_view.getItems().add(x);
-					double resultx=x.getsLXuat()*x.getDonGiaXuat();
-					ctlMain.tblTT.getItems().add(String.format("%.0f",resultx));
-					
+					ctlMain.tbl_viewHD.getItems().add(x.getHopDong());
 					Stage stage=new Stage();
 					stage.initOwner(btnThem.getScene().getWindow());
 					stage.setScene(new Scene(root));
