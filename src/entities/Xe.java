@@ -2,7 +2,6 @@ package entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,31 +11,37 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Xe {
-	@Id 
+	@Id
 	private String maXe;
-	@ManyToOne 
+
+	@ManyToOne
 	@JoinColumn(name = "maloai")
 	private Loaixe lx;
+	@Column(columnDefinition = "nvarchar(50)")
 	private String donViTinh;
 	@Column(columnDefinition = "nvarchar(100)")
 	private String moTa;
 	private String thongTinBaoHanh;
-	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "xe")
-	private List<CTPhieuXuat> cTPhieuXuat;
+	private int soLuongLap;
+	private double donGia;
 
-	
+	@OneToMany(mappedBy = "xe")
+	private List<HopDong> dshd;
+
 	public Xe() {
 		super();
 	}
 
-	public Xe(String maXe, Loaixe lx, String donViTinh, String moTa, String thongTinBaoHanh) {
+	public Xe(String maXe, Loaixe lx, String donViTinh, String moTa, String thongTinBaoHanh, int soLuongLap,
+			double donGia) {
 		super();
 		this.maXe = maXe;
 		this.lx = lx;
 		this.donViTinh = donViTinh;
 		this.moTa = moTa;
 		this.thongTinBaoHanh = thongTinBaoHanh;
+		this.soLuongLap = soLuongLap;
+		this.donGia = donGia;
 	}
 
 	public String getMaXe() {
@@ -79,37 +84,35 @@ public class Xe {
 		this.thongTinBaoHanh = thongTinBaoHanh;
 	}
 
-	public List<CTPhieuXuat> getcTPhieuXuat() {
-		return cTPhieuXuat;
+	public int getSoLuongLap() {
+		return soLuongLap;
 	}
 
-	public void setcTPhieuXuat(List<CTPhieuXuat> cTPhieuXuat) {
-		this.cTPhieuXuat = cTPhieuXuat;
+	public void setSoLuongLap(int soLuongLap) {
+		this.soLuongLap = soLuongLap;
+	}
+
+	public double getDonGia() {
+		return donGia;
+	}
+
+	public void setDonGia(double donGia) {
+		this.donGia = donGia;
+	}
+
+	public List<HopDong> getDshd() {
+		return dshd;
+	}
+
+	public void setDshd(List<HopDong> dshd) {
+		this.dshd = dshd;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Xe [maXe=");
-		builder.append(maXe);
-		builder.append(", lx=");
-		builder.append(lx);
-		builder.append(", donViTinh=");
-		builder.append(donViTinh);
-		builder.append(", moTa=");
-		builder.append(moTa);
-		builder.append(", thongTinBaoHanh=");
-		builder.append(thongTinBaoHanh);
-		builder.append("]");
-		return builder.toString();
+		return "Xe [maXe=" + maXe + ", lx=" + lx + ", donViTinh=" + donViTinh + ", moTa=" + moTa + ", thongTinBaoHanh="
+				+ thongTinBaoHanh + ", soLuongLap=" + soLuongLap + ", donGia=" + donGia + ", dshd=" + dshd + "]";
 	}
 
-	
-
-	
-	
-	
-	
-	
 	
 }

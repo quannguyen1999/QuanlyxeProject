@@ -179,19 +179,31 @@ public class QuanLyKhachHangController implements Initializable{
 	public void btnXoaRong(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
-	
+		handleRefersh(e);
+
 	}
 	@FXML 
 	public void btnTim(ActionEvent e) {
 		String text=txtMa.getText().trim().toString();
 		if (text.isEmpty()==false) {
-			KhachHang acc=QuanLyKhachHang.timMa(Integer.parseInt(text));
-			if(acc!=null) {
+			KhachHang acc=null;
+			try {
+				acc=QuanLyKhachHang.timMa(Integer.parseInt(text));
+				if(acc!=null) {
+					tbl_view.getItems().clear();
+					tbl_view.getItems().add(acc);
+				}else {
+					tbl_view.getItems().clear();
+					thongBaoKieuLoi(e, "không tìm thấy");
+				}
+			} catch (Exception e2) {
+				// TODO: handle exception
 				tbl_view.getItems().clear();
-				tbl_view.getItems().add(acc);
-			}else {
 				thongBaoKieuLoi(e, "không tìm thấy");
+
 			}
+
+
 		}else {
 			handleRefersh(e);
 		}

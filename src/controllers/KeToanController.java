@@ -39,6 +39,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class KeToanController implements Initializable{
+	String userName="";
 	@FXML public BorderPane mainBd;
 	@FXML Label lblLogin;
 	@FXML MenuBar mnb;
@@ -122,7 +123,7 @@ public class KeToanController implements Initializable{
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
 
-			NhanVien nv=QuanLyNhanVien.timMa2(lblLogin.getText().toString());
+			NhanVien nv=QuanLyNhanVien.timMa2(userName);
 			if(nv!=null) {
 				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
 				Parent root=loader.load();
@@ -187,6 +188,11 @@ public class KeToanController implements Initializable{
 		resetColorCLickQuanLy();
 		styleQuanLyHopDong.setStyle("-fx-background-color: rgb(23,35,51)");
 		Parent root=(Parent) FXMLLoader.load(getClass().getResource("/fxml/QuanLyHopDong.fxml"));
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/QuanLyHopDong.fxml"));
+		root=loader.load();
+//		NhanVien nv=QuanLyNhanVien.timMa2(userName);
+		QuanLyHopDongController ctlMain=loader.getController();
+		ctlMain.UserName=userName;
 		mainBd.setCenter(root);
 	}
 	public void btnBaoCaoThongKe(ActionEvent e) throws IOException {

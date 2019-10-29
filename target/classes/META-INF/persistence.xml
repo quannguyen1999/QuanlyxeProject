@@ -5,15 +5,12 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="DeAnQuanLyXeFix">
 		<class>entities.Account</class>
-		<class>entities.CTPhieuXuat</class>
-		<class>entities.CTPhieuXuatPK</class>
 		<class>entities.HopDong</class>
 		<class>entities.KhachHang</class>
+		<class>entities.Loaixe</class>
 		<class>entities.NhanVien</class>
 		<class>entities.PhieuXuat</class>
 		<class>entities.Xe</class>
-		<class>entities.Loaixe</class>
-		
 		<properties>
 			<property name="hibernate.generate_statistics" value="true" />
 			<property name="hibernate.dialect"

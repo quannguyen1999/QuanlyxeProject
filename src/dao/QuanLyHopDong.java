@@ -156,4 +156,23 @@ public class QuanLyHopDong {
 		}
 		return accs;
 	}
+	public static boolean capNhapHD(HopDong acc) {
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			manager.merge(acc);
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+			return false;
+		} finally {
+			manager.close();
+		}
+		return true;
+	}
 }

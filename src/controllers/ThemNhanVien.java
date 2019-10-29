@@ -142,7 +142,7 @@ public class ThemNhanVien implements Initializable{
 	public boolean kiemTraDiaChi(ActionEvent e,String ma) {
 		String MaKT=ma.trim();
 		if(MaKT.isEmpty()==false) {
-			if(MaKT.matches("^[A-Za-z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$")==true) {
+			if(MaKT.matches("^[A-Za-z/,\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$")==true) {
 				return true;
 			}else {
 				thongBaoKieuLoi(e, "địa chỉ không được nhập ký tự đặc biệt");

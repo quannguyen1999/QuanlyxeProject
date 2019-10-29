@@ -154,6 +154,7 @@ public class QuanLyLoaiXeController implements Initializable{
 	private void btnXoaRong(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
+		handleRefersh(e);
 	}
 	public void thongBaoKieuLoi(ActionEvent e, String text) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -246,10 +247,12 @@ public class QuanLyLoaiXeController implements Initializable{
 				tbl_view.getItems().clear();
 				tbl_view.getItems().add(acc);
 			}else {
+				tbl_view.getItems().clear();
 				thongBaoKieuLoi(e, "không tìm thấy");
 			}
 		}else {
-			handleRefersh(e);
+			thongBaoKieuLoi(e, "Bạn chưa nhập tìm kiếm");
+			txtMa.requestFocus();
 		}
 
 	}

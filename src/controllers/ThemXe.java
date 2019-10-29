@@ -49,6 +49,8 @@ public class ThemXe implements Initializable{
 	@FXML JFXTextField txtDonViTinh;
 	@FXML JFXTextField txtMoTa;
 	@FXML JFXTextField txtNhaSX;
+	@FXML JFXTextField txtSL;
+	@FXML JFXTextField txtDG;
 	@FXML ChoiceBox<String> choiceBoxTenXe = new ChoiceBox<String>(); 
 	@FXML ChoiceBox<String> choiceBoxLoaiXe = new ChoiceBox<String>(); 
 	@FXML ChoiceBox<String> choiceBoxMauXe = new ChoiceBox<String>(); 
@@ -200,6 +202,19 @@ public class ThemXe implements Initializable{
 		String loaiXe=choiceBoxLoaiXe.getValue();
 		String mauXe=choiceBoxMauXe.getValue();
 		String thongTinBaoHanh=txtThongTinBaoHanh.getText().toString();
+		int soLuong=1;
+		try {
+			soLuong=Integer.parseInt(txtSL.getText().toString());
+		} catch (Exception e2) {
+			// TODO: handle exception
+			System.out.println(e2.getMessage());
+		}
+		double donGia=1;
+		try {
+			donGia=Double.parseDouble(txtDG.getText().toString());
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
 		if(maXe.isEmpty()==false
 				&& donViTinh.isEmpty()==false
 				&& moTa.isEmpty()==false 
@@ -209,7 +224,7 @@ public class ThemXe implements Initializable{
 			if(lblTitle.getText().toString().equals("Cập nhập xe")) {
 				List<Loaixe> ListLx=QuanLyLoaiXe.timMaTraVeLoaiXe(loaiXe, tenXe, mauXe);
 				Loaixe lx=ListLx.get(0);
-				Xe xe1=new Xe(maXe, lx, donViTinh, moTa, thongTinBaoHanh);
+				Xe xe1=new Xe(maXe, lx, donViTinh, moTa, thongTinBaoHanh, soLuong, donGia);
 				if(QuanLyXe.suaXe(xe1)==true) {
 					((Node) (e.getSource())).getScene().getWindow().hide();
 				}else {
@@ -219,7 +234,7 @@ public class ThemXe implements Initializable{
 			}else {
 				List<Loaixe> ListLx=QuanLyLoaiXe.timMaTraVeLoaiXe(loaiXe, tenXe, mauXe);
 				Loaixe lx=ListLx.get(0);
-				Xe xe1=new Xe(maXe, lx, donViTinh, moTa, thongTinBaoHanh);
+				Xe xe1=new Xe(maXe, lx, donViTinh, moTa, thongTinBaoHanh, soLuong, donGia);
 				if(QuanLyXe.themXe(xe1)==true) {
 					((Node) (e.getSource())).getScene().getWindow().hide();
 				}else {

@@ -14,6 +14,7 @@ import application.Loading;
 import dao.QuanLyAccount;
 import dao.QuanLyNhanVien;
 import entities.Account;
+import entities.NhanVien;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -45,6 +46,9 @@ public class DangNhap implements Initializable{
 	@FXML VBox mainBd;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		txtUser.setText("ThanhTung99");
+		txtPass.setText("123406");
+		
 		// TODO Auto-generated method stub
 		try {
 			txtPass.setOnKeyPressed(e->{
@@ -139,38 +143,28 @@ public class DangNhap implements Initializable{
 			Account acc=kiemTraUserName(e, userName, passWord);
 			if(acc!=null) {
 				switch (acc.getLoaiTK()) {
-				case "Ke toan truong":
-					break;
-				case "Kế toán":
+				case "Nhân viên":
 					((Node)(e.getSource())).getScene().getWindow().hide();  
 					loader=new FXMLLoader(getClass().getResource("/fxml/KeToan.fxml"));
 					root=loader.load();
 					KeToanController ctlKeToan=loader.getController();
-					ctlKeToan.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
+					NhanVien nv=QuanLyNhanVien.timMa2(txtUser.getText().toString());
+					ctlKeToan.ThietLapTenNguoiDangNhap(nv.getTenNV());
+					ctlKeToan.userName=txtUser.getText().toString();
 					stage=new Stage();
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));
 					stage.getIcons().add(new Image("/image/logo.PNG"));
 					stage.show();
 					break;
-				case "Kế toán trưởng":
+				case "admin":
 					((Node)(e.getSource())).getScene().getWindow().hide();  
 					loader=new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 					root=loader.load();
 					AdminController ctlAdmin=loader.getController();
-					ctlAdmin.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
-					stage=new Stage();
-					stage.initStyle(StageStyle.UNDECORATED);
-					stage.setScene(new Scene(root));
-					stage.getIcons().add(new Image("/image/logo.PNG"));
-					stage.show();
-					break;
-				case "Nhân viên":
-					((Node)(e.getSource())).getScene().getWindow().hide();  
-					loader=new FXMLLoader(getClass().getResource("/fxml/NhanVien.fxml"));
-					root=loader.load();
-					NhanVienController ctlNhanVien=loader.getController();
-					ctlNhanVien.ThietLapTenNguoiDangNhap(txtUser.getText().toString());
+					NhanVien nv1=QuanLyNhanVien.timMa2(txtUser.getText().toString());
+					ctlAdmin.ThietLapTenNguoiDangNhap(nv1.getTenNV());
+					ctlAdmin.userName=txtUser.getText().toString();
 					stage=new Stage();
 					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setScene(new Scene(root));

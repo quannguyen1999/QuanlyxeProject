@@ -22,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 public class ThemKhachHang implements Initializable{
+	String username="";
 	private double xOffset = 0;
 	private double yOffset = 0;
 	@FXML public BorderPane mainBd;
@@ -130,51 +131,51 @@ public class ThemKhachHang implements Initializable{
 		String ten=txtTenKH.getText().toString();
 		LocalDate lc=txtNgaySinh.getValue();
 		boolean stillContunite=true;
-		if(kiemTraMa(e, ma)==true) {
-			stillContunite=true;
-		}else {
-			txtMa.requestFocus();
-			stillContunite=false;
-		}
-		if(stillContunite==true) {
-			if(kiemTraDiaChi(e,diaChi)) {
-				stillContunite=true;
-			}else {
-				txtDiaChi.requestFocus();
-				stillContunite=false;
-			}
-		}
-		if(stillContunite==true) {
-			if(kiemTraCMND(e,CMND)) {
-				stillContunite=true;
-			}else {
-				txtCMND.requestFocus();
-				stillContunite=false;
-			}
-		}
-		if(stillContunite==true) {
-			if(kiemTraDienThoai(e,DienThoai)) {
-				stillContunite=true;
-			}else {
-				txtDienThoai.requestFocus();
-				stillContunite=false;
-			}
-		}
-		if(stillContunite==true) {
-			if(kiemTraTenKhachHang(e,ten)) {
-				stillContunite=true;
-			}else {
-				txtTenKH.requestFocus();
-				stillContunite=false;
-			}
-		}
-		if(stillContunite==true) {
-			if(txtNgaySinh.getValue()==null) {
-				stillContunite=false;
-				thongBaoKieuLoi(e, "Ngày sinh chưa chọn");
-				txtNgaySinh.requestFocus();
-			}
-		}
+//		if(kiemTraMa(e, ma)==true) {
+//			stillContunite=true;
+//		}else {
+//			txtMa.requestFocus();
+//			stillContunite=false;
+//		}
+//		if(stillContunite==true) {
+//			if(kiemTraDiaChi(e,diaChi)) {
+//				stillContunite=true;
+//			}else {
+//				txtDiaChi.requestFocus();
+//				stillContunite=false;
+//			}
+//		}
+//		if(stillContunite==true) {
+//			if(kiemTraCMND(e,CMND)) {
+//				stillContunite=true;
+//			}else {
+//				txtCMND.requestFocus();
+//				stillContunite=false;
+//			}
+//		}
+//		if(stillContunite==true) {
+//			if(kiemTraDienThoai(e,DienThoai)) {
+//				stillContunite=true;
+//			}else {
+//				txtDienThoai.requestFocus();
+//				stillContunite=false;
+//			}
+//		}
+//		if(stillContunite==true) {
+//			if(kiemTraTenKhachHang(e,ten)) {
+//				stillContunite=true;
+//			}else {
+//				txtTenKH.requestFocus();
+//				stillContunite=false;
+//			}
+//		}
+//		if(stillContunite==true) {
+//			if(txtNgaySinh.getValue()==null) {
+//				stillContunite=false;
+//				thongBaoKieuLoi(e, "Ngày sinh chưa chọn");
+//				txtNgaySinh.requestFocus();
+//			}
+//		}
 		if(stillContunite==true) {
 			KhachHang kh=new KhachHang(Integer.parseInt(ma), diaChi, CMND, DienThoai, ten,lc);
 			if(lblTitle.getText().toString().equals("Cập nhập khách hàng")) {

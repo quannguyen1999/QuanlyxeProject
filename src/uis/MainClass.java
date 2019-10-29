@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
@@ -23,7 +24,6 @@ import dao.QuanLyNhanVien;
 import dao.QuanLyPhieuXuat;
 import dao.QuanLyXe;
 import entities.Account;
-import entities.CTPhieuXuat;
 import entities.HopDong;
 import entities.KhachHang;
 import entities.Loaixe;
@@ -34,11 +34,42 @@ import javafx.scene.image.Image;
 
 
 public class MainClass {
-	
+	private final static int PREFIX_OFFSET = 5;
+	private final static String[] PREFIX_ARRAY = {"f", "p", "n", "µ", "m", "", "k", "M", "G", "T"};
+
+	public static String convert(double val, int dp)
+	{
+	   // If the value is zero, then simply return 0 with the correct number of dp
+	   if (val == 0) return String.format("%." + dp + "f", 0.0);
+
+	   // If the value is negative, make it positive so the log10 works
+	   double posVal = (val<0) ? -val : val;
+	   double log10 = Math.log10(posVal);
+
+	   // Determine how many orders of 3 magnitudes the value is
+	   int count = (int) Math.floor(log10/3);
+
+	   // Calculate the index of the prefix symbol
+	   int index = count + PREFIX_OFFSET;
+
+	   // Scale the value into the range 1<=val<1000
+	   val /= Math.pow(10, count * 3);
+
+	   if (index >= 0 && index < PREFIX_ARRAY.length)
+	   {
+	      // If a prefix exists use it to create the correct string
+	      return String.format("%." + dp + "f%s", val, PREFIX_ARRAY[index]);
+	   }
+	   else
+	   {
+	      // If no prefix exists just make a string of the form 000e000
+	      return String.format("%." + dp + "fe%d", val, count * 3);
+	   }
+	}
 	public static void main(String[] args) throws IOException {
-		Account ad=new Account("admin", "123456", "Kế toán trưởng");
-		Account nv=new Account("nhanvien", "123486", "Nhân viên");
-		Account kt=new Account("ketoan", "123406", "Kế toán");
+		Account ad=new Account("AnhQuan99", "123456", "admin");
+		Account nv=new Account("ViNam99", "123486", "Nhân viên");
+		Account kt=new Account("ThanhTung99", "123406", "Nhân viên");
 		
 		QuanLyAccount.themAcc(ad);
 		QuanLyAccount.themAcc(nv);
@@ -87,10 +118,9 @@ public class MainClass {
 			copyFileUsingStream(new File(begin+"/src/image/backup/"+"X0003.PNG"),new File("src/image/"+"X0003"+".PNG"));
 		}
 		
-		
-		Xe xe1=new Xe("HX001", lx1, "456", "Lái bằng tay", "12");
-		Xe xe2=new Xe("HX002", lx2, "456", "Lái bằng chân", "12");
-		Xe xe3=new Xe("HX003", lx3, "456", "Lái", "12");
+		Xe xe1=new Xe("HX000", lx1,"Chiếc", "Lái", "12 tháng", 50, Double.parseDouble(String.valueOf("800000")));
+		Xe xe2=new Xe("HX001", lx2,"Chiếc", "Lái", "12 tháng", 50, Double.parseDouble(String.valueOf("800000")));
+		Xe xe3=new Xe("HX002", lx3,"Chiếc", "Lái", "12 tháng", 50, Double.parseDouble(String.valueOf("800000")));
 		
 		if(QuanLyXe.themXe(xe1)==true) {
 			System.out.println("thêm xe1 thành công");
@@ -111,27 +141,27 @@ public class MainClass {
 			System.out.println("Thêm khách hàng không thành công");
 		}
 		
-		HopDong hd1=new HopDong(56789,LocalDate.of(2019, 10, 11),String.valueOf(nv_kt.getMaNV()),nv_kt.getTenNV(),nv_kt.getCMND(), nv_kt.getDiaChi(), nv_kt.getDienThoai(),String.valueOf(kh1.getMaKH()),
-				kh1.getTenKH(), kh1.getCMND(), kh1.getDiaChi(), kh1.getSoDT(), Double.parseDouble("123333"));
-		
-		if(QuanLyHopDong.themHopDong(hd1)==true) {
-			System.out.println("Thêm hợp đồng hàng thành công");
-		}else {
-			System.out.println("Thêm hợp đồng không thành công");
-		}
-		
-		
-		PhieuXuat px=new PhieuXuat(890, nv_kt, kh1, hd1, LocalDate.of(2019, 11, 11));
-		
-		if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
-			System.out.println("Thêm phiếu xuất thành công");
-			CTPhieuXuat ctpx=new CTPhieuXuat(px, xe1, Double.parseDouble("123"), 12, 12);
-			if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctpx)==false) {
-				System.out.println("Lỗi chi tiết phiếu xuất");
-			}
-		}else {
-			System.out.println("Thêm phiếu xuất không thành công");
-		}
+//		HopDong hd1=new HopDong(56789,LocalDate.of(2019, 10, 11),String.valueOf(nv_kt.getMaNV()),nv_kt.getTenNV(),nv_kt.getCMND(), nv_kt.getDiaChi(), nv_kt.getDienThoai(),String.valueOf(kh1.getMaKH()),
+//				kh1.getTenKH(), kh1.getCMND(), kh1.getDiaChi(), kh1.getSoDT(), Double.parseDouble("123333"));
+//		
+//		if(QuanLyHopDong.themHopDong(hd1)==true) {
+//			System.out.println("Thêm hợp đồng hàng thành công");
+//		}else {
+//			System.out.println("Thêm hợp đồng không thành công");
+//		}
+//		
+//		
+//		PhieuXuat px=new PhieuXuat(890, nv_kt, kh1, hd1, LocalDate.of(2019, 11, 11));
+//		
+//		if(QuanLyPhieuXuat.themPhieuXuat(px)==true) {
+//			System.out.println("Thêm phiếu xuất thành công");
+//			CTPhieuXuat ctpx=new CTPhieuXuat(px, xe1, Double.parseDouble("123"), 12, 12);
+//			if(QuanLyPhieuXuat.themChiTietPhieuXuat(ctpx)==false) {
+//				System.out.println("Lỗi chi tiết phiếu xuất");
+//			}
+//		}else {
+//			System.out.println("Thêm phiếu xuất không thành công");
+//		}
 	}
 	
 	private static String kiemTraChuoi(String text) {

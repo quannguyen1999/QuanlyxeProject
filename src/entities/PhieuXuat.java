@@ -1,15 +1,12 @@
 package entities;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class PhieuXuat {
@@ -17,25 +14,21 @@ public class PhieuXuat {
 	private int maPX;
 
 	@ManyToOne
-	@JoinColumn(name = "maNV",foreignKey = @ForeignKey)
+	@JoinColumn(name = "maNV", foreignKey = @ForeignKey)
 	private NhanVien nhanVien;
 
 	@ManyToOne
-	@JoinColumn(name = "maKH",foreignKey = @ForeignKey)
+	@JoinColumn(name = "maKH", foreignKey = @ForeignKey)
 	private KhachHang khachHang;
 
 	@ManyToOne
-	@JoinColumn(name = "maHopDong",foreignKey = @ForeignKey)
+	@JoinColumn(name = "maHopDong", foreignKey = @ForeignKey)
 	private HopDong hopDong;
 
 	private LocalDate ngayXuat;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "phieuXuat")
-	private List<CTPhieuXuat> cTPhieuXuat;
-
-	
-	
-	
+	private double donGiaXuat;
+	private int sLXuat;
+	private double thue;
 
 	public int getMaPX() {
 		return maPX;
@@ -77,23 +70,41 @@ public class PhieuXuat {
 		this.ngayXuat = ngayXuat;
 	}
 
-	public List<CTPhieuXuat> getcTPhieuXuat() {
-		return cTPhieuXuat;
+	public double getDonGiaXuat() {
+		return donGiaXuat;
 	}
 
-	public void setcTPhieuXuat(List<CTPhieuXuat> cTPhieuXuat) {
-		this.cTPhieuXuat = cTPhieuXuat;
+	public void setDonGiaXuat(double donGiaXuat) {
+		this.donGiaXuat = donGiaXuat;
 	}
 
-	
+	public int getsLXuat() {
+		return sLXuat;
+	}
 
-	public PhieuXuat(int maPX, NhanVien nhanVien, KhachHang khachHang, HopDong hopDong, LocalDate ngayXuat) {
+	public void setsLXuat(int sLXuat) {
+		this.sLXuat = sLXuat;
+	}
+
+	public double getThue() {
+		return thue;
+	}
+
+	public void setThue(double thue) {
+		this.thue = thue;
+	}
+
+	public PhieuXuat(int maPX, NhanVien nhanVien, KhachHang khachHang, HopDong hopDong, LocalDate ngayXuat,
+			double donGiaXuat, int sLXuat, double thue) {
 		super();
 		this.maPX = maPX;
 		this.nhanVien = nhanVien;
 		this.khachHang = khachHang;
 		this.hopDong = hopDong;
 		this.ngayXuat = ngayXuat;
+		this.donGiaXuat = donGiaXuat;
+		this.sLXuat = sLXuat;
+		this.thue = thue;
 	}
 
 	public PhieuXuat() {
@@ -102,8 +113,12 @@ public class PhieuXuat {
 
 	@Override
 	public String toString() {
-		return "PhieuXuat [maPX=" + maPX + ", nhanVien=" + nhanVien + ", khachHang=" + khachHang + ", hopDong="
-				+ hopDong + ", ngayXuat=" + ngayXuat + ", cTPhieuXuat=" + cTPhieuXuat + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append(", donGiaXuat=");
+		builder.append(donGiaXuat);
+		return builder.toString();
 	}
 
+	
+	
 }

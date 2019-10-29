@@ -11,6 +11,7 @@ import javax.persistence.Id;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Main;
@@ -18,11 +19,13 @@ import dao.QuanLyAccount;
 import dao.QuanLyHopDong;
 import dao.QuanLyKhachHang;
 import dao.QuanLyNhanVien;
+import dao.QuanLyPhieuXuat;
 import dao.QuanLyXe;
 import entities.Account;
 import entities.HopDong;
 import entities.KhachHang;
 import entities.NhanVien;
+import entities.PhieuXuat;
 import entities.Xe;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -48,6 +51,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.control.Label;
 public class ThemHopDong implements Initializable{
+	String username="";
 	private double xOffset = 0;
 	private double yOffset = 0;
 	@FXML Label lblTitle;
@@ -60,7 +64,6 @@ public class ThemHopDong implements Initializable{
 	@FXML JFXTextField txtCMNDNhanVien;
 	@FXML JFXTextField txtNoiONV;
 	@FXML JFXTextField txtSDTNV;
-	@FXML JFXTextField txtTienPhaiDat;
 
 	@FXML JFXTextField txtTenKH;
 	@FXML ComboBox<String> boxMaKH;
@@ -68,10 +71,15 @@ public class ThemHopDong implements Initializable{
 	@FXML JFXTextField txtSoDTKH;
 	@FXML JFXTextField txtNoiOKH;
 	@FXML JFXTextField txtCMNDKH;
+	@FXML JFXTextField txtSL;
+
+	@FXML ComboBox<String> boxMaXe;
+	@FXML JFXRadioButton rdXN;
+	@FXML JFXRadioButton rdCXN;
+	//	@FXML JFXButton btnInPhieuXuat;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		makeStageDrageable();
 		txtTenNV.setEditable(false);
 		txtCMNDNhanVien.setEditable(false);
@@ -86,9 +94,7 @@ public class ThemHopDong implements Initializable{
 		//box MaNV
 		loadDuLieuMaKH();
 		loadDuLieuMaNV();
-
-
-
+		loadDuLieuMaXe();
 	}
 	@FXML 
 	private void btnXoaRong(ActionEvent e) {
@@ -98,7 +104,6 @@ public class ThemHopDong implements Initializable{
 		txtCMNDNhanVien.setText("");
 		txtNoiONV.setText("");
 		txtSDTNV.setText("");
-		txtTienPhaiDat.setText("");
 
 		txtTenKH.setText("");
 		txtDiaChiKH.setText("");
@@ -107,12 +112,11 @@ public class ThemHopDong implements Initializable{
 		txtCMNDKH.setText("");
 
 		boxMaNV.setValue("");
-		txtTienPhaiDat.setText("");
 		boxMaKH.setValue("");
 	}
 	private void handleRefersh(ActionEvent e) {
 		try {
-			btnXoaRong(e);
+			boxMaKH.setValue("");
 			ObservableList<String> items1 = FXCollections.observableArrayList();
 			List<KhachHang> kh1=QuanLyKhachHang.showTatCaKhachHang();
 			kh1.forEach(t->{
@@ -121,6 +125,23 @@ public class ThemHopDong implements Initializable{
 			FilteredList<String> filteredItems1 = new FilteredList<String>(items1);
 			boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
 			boxMaKH.setItems(filteredItems1);
+			
+			boxMaKH.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
+				public void changed(ObservableValue ov, Number value, Number new_value) 
+				{ 
+					KhachHang nv=QuanLyKhachHang.timMa(Integer.parseInt(items1.get((int) new_value)));
+					txtTenKH.setText("");
+					txtDiaChiKH.setText("");
+					txtSoDTKH.setText("");
+					txtNoiOKH.setText("");
+					txtCMNDKH.setText("");
+					txtTenKH.setText(nv.getTenKH());
+					txtDiaChiKH.setText(nv.getDiaChi());
+					txtSoDTKH.setText(nv.getSoDT());
+					txtNoiOKH.setText(nv.getDiaChi());
+					txtCMNDKH.setText(nv.getCMND());
+				}
+			});
 
 		} catch (Exception e2) {
 			e2.printStackTrace();
@@ -149,10 +170,8 @@ public class ThemHopDong implements Initializable{
 	public void loadDuLieuMaNV() {
 		ObservableList<String> items = FXCollections.observableArrayList();
 
-		List<NhanVien> accs=QuanLyNhanVien.showTatCaNhanVien();
-		accs.forEach(t->{
-			items.add(String.valueOf(t.getMaNV()));
-		});
+		NhanVien accs=QuanLyNhanVien.timMa2(username);
+		items.add(String.valueOf(accs.getMaNV()));
 		FilteredList<String> filteredItems = new FilteredList<String>(items);
 
 		boxMaNV.getEditor().textProperty().addListener(new InputFilter(boxMaNV, filteredItems, false));
@@ -209,6 +228,28 @@ public class ThemHopDong implements Initializable{
 			}
 		});
 	}
+
+	public void loadDuLieuMaXe() {
+		ObservableList<String> items = FXCollections.observableArrayList();
+
+		List<Xe> accs=QuanLyXe.showTatCaXe(); //.showTatCaKhachHang();
+		accs.forEach(t->{
+			items.add(String.valueOf(t.getMaXe()));
+		});
+		FilteredList<String> filteredItems = new FilteredList<String>(items);
+
+		boxMaXe.getEditor().textProperty().addListener(new InputFilter(boxMaXe, filteredItems, false));
+
+		boxMaXe.setItems(filteredItems);
+
+		boxMaXe.setEditable(true);
+
+		boxMaXe.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
+			public void changed(ObservableValue ov, Number value, Number new_value) 
+			{ 
+			}
+		});
+	}
 	public void thongBaoKieuLoi(ActionEvent e, String text) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
@@ -253,8 +294,11 @@ public class ThemHopDong implements Initializable{
 		String cMNDNM=txtCMNDKH.getText().toString();
 		String noiONM=txtNoiOKH.getText().toString();
 		String soDTNM=txtSoDTKH.getText().toString();
-		String tienDatThanhToan=txtTienPhaiDat.getText().toString();
 		String maKH="";
+		String maXe=boxMaXe.getValue();
+		int soLuong=0;
+		
+		
 		if(continues==true) {
 			if(boxMaNV.getValue()==null) {
 				thongBaoKieuLoi(e, "Mã nhân viên chưa nhập");
@@ -288,20 +332,45 @@ public class ThemHopDong implements Initializable{
 				boxMaKH.requestFocus();
 			}
 		}
+		try {
+			soLuong=Integer.parseInt(txtSL.getText().toString());
+		} catch (Exception e2) {
+			// TODO: handle exception
+			thongBaoKieuLoi(e, "Số lượng chỉ nhập số");
+			continues=false;
+			txtSL.requestFocus();
+		}
+		Xe xe=QuanLyXe.timMa(maXe);
 		if(continues==true) {
-			if(kiemTraSoTien(e, tienDatThanhToan)==false) {
+			if(xe==null) {
 				continues=false;
-				txtTienPhaiDat.requestFocus();
+			}
+
+		}
+		if(continues==true) {
+			if(xe.getSoLuongLap()<soLuong) {
+				continues=false;
+				thongBaoKieuLoi(e, "Số lượng xe không đủ");
 			}
 		}
 		if(continues==true) {
-			HopDong hd=new HopDong(maHopDong, ngayLap, maNV, tenNguoiBan, cMNDNB, noiONB, soDTNB, maKH, tenNguoiMua, cMNDNM, noiONM, soDTNM, Double.parseDouble(tienDatThanhToan));
+			PhieuXuat px=null;
+			HopDong hd=new HopDong(maHopDong, xe, ngayLap, maNV, tenNguoiBan, cMNDNB, noiONB, soDTNB,"Chưa xác nhận", maKH, tenNguoiMua, cMNDNM, noiONM, soDTNM, Double.parseDouble(String.valueOf(xe.getDonGia()*soLuong)),soLuong);
+			if(rdXN.isSelected()==true) {
+				KhachHang kh=QuanLyKhachHang.timMa(Integer.parseInt(hd.getMaKH()));
+				px=new PhieuXuat(maHopDong,QuanLyNhanVien.timMa(Integer.parseInt(hd.getMaNV())),kh,hd,ngayLap, xe.getDonGia(),Integer.parseInt(txtSL.getText().toString()), 10);
+				hd.setTrangThai("Xác nhận");
+			}
 			if(QuanLyHopDong.themHopDong(hd)==true) {
+				QuanLyPhieuXuat.themPhieuXuat(px);
+				xe.setSoLuongLap(xe.getSoLuongLap()-soLuong);
+				QuanLyXe.capNhapXe(xe);
 				((Node)(e.getSource())).getScene().getWindow().hide();  
 			}else {
 				thongBaoKieuLoi(e, "Mã hợp đồng đã tồn tại");
 			}
 		}
+
 
 	}
 	public void btnCLoseWindow(ActionEvent e) throws IOException {

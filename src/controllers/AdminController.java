@@ -35,6 +35,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class AdminController implements Initializable{
+	String userName="";
 	QuanLyNhanVien qlNV=new QuanLyNhanVien();
 	QuanLyAccount qlACC=new QuanLyAccount();
 	@FXML BorderPane bd;
@@ -129,7 +130,7 @@ public class AdminController implements Initializable{
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
 
-			NhanVien nv=QuanLyNhanVien.timMa2(lblLogin.getText().toString());
+			NhanVien nv=QuanLyNhanVien.timMa2(userName);
 			if(nv!=null) {
 				FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormUser.fxml"));
 				Parent root=loader.load();

@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class NhanVienController implements Initializable{
+	String userName="";
 	@FXML public BorderPane mainBd;
 	@FXML Label lblLogin;
 	@FXML MenuBar mnb;

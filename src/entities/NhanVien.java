@@ -78,8 +78,6 @@ public class NhanVien {
 		this.gioiTinh = gioiTinh;
 	}
 
-	
-
 	public String getHinhAnh() {
 		return hinhAnh;
 	}
@@ -127,8 +125,7 @@ public class NhanVien {
 	public void setDspx(List<PhieuXuat> dspx) {
 		this.dspx = dspx;
 	}
-	
-	
+
 	public String getCMND() {
 		return CMND;
 	}
@@ -140,9 +137,9 @@ public class NhanVien {
 	public NhanVien() {
 		super();
 	}
-	
-	public NhanVien(int maNV, String chucVu, String diaChi, String dienThoai, String gioiTinh,
-			double luongCoBan, LocalDate namSinh, String tenNV, Account account, String hinhAnh, String CMND) {
+
+	public NhanVien(int maNV, String chucVu, String diaChi, String dienThoai, String gioiTinh, double luongCoBan,
+			LocalDate namSinh, String tenNV, Account account, String hinhAnh, String CMND) {
 		super();
 		this.maNV = maNV;
 		this.chucVu = chucVu;
@@ -181,10 +178,5 @@ public class NhanVien {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 
-	
-	
-	
 }

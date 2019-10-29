@@ -63,6 +63,8 @@ public class QuanLyXeController implements Initializable{
 	TableColumn<Xe, String> colTenXe;
 	TableColumn<Xe, String> colMauXe;
 	TableColumn<Xe, String> colThongTinBaoHanh;
+	TableColumn<Xe, String> colSoLuong;
+	TableColumn<Xe, String> colDonGia;
 	@FXML ChoiceBox<String> choiceBoxLoaiXe = new ChoiceBox<String>(); 
 	@FXML ChoiceBox<String> choiceBoxMauXe = new ChoiceBox<String>(); 
 	@FXML ChoiceBox<String> choiceBoxTenXe = new ChoiceBox<String>(); 
@@ -83,9 +85,11 @@ public class QuanLyXeController implements Initializable{
 		colLoaiXe=new TableColumn<Xe, String>("Loại xe");
 		colTenXe=new TableColumn<Xe, String>("Tên xe");
 		colMauXe=new TableColumn<Xe, String>("Màu xe");
+		colSoLuong=new TableColumn<Xe, String>("Số lượng");
+		colDonGia=new TableColumn<Xe, String>("Đơn giá");
 
 
-		tbl_view.getColumns().addAll(colMaXe,colDonViTinh,colMoTa,colNhaSX,colLoaiXe,colTenXe,colThongTinBaoHanh,colMauXe);
+		tbl_view.getColumns().addAll(colMaXe,colDonViTinh,colMoTa,colNhaSX,colLoaiXe,colTenXe,colThongTinBaoHanh,colMauXe,colSoLuong,colDonGia);
 
 		bd.setCenter(tbl_view);
 
@@ -102,8 +106,12 @@ public class QuanLyXeController implements Initializable{
 		new SimpleStringProperty(cellData.getValue().getLx().getTenxe()));
 		colMauXe.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(cellData.getValue().getLx().getMauson()));
-
-
+		
+		colSoLuong.setCellValueFactory(cellData -> 
+		new SimpleStringProperty(String.valueOf(cellData.getValue().getSoLuongLap())));
+		
+		colDonGia.setCellValueFactory(cellData -> 
+		new SimpleStringProperty(String.valueOf(cellData.getValue().getDonGia())));
 
 		choiceBoxLoaiXe.setDisable(true);
 		choiceBoxMauXe.setDisable(true);
@@ -267,6 +275,7 @@ public class QuanLyXeController implements Initializable{
 	private void handleRefersh(ActionEvent e) {
 		tbl_view.getItems().clear();
 		UploaderDuLieuLenBang();
+		
 	}
 
 	public void btnXoaXe(ActionEvent e) {
@@ -309,10 +318,12 @@ public class QuanLyXeController implements Initializable{
 					tbl_view.getItems().clear();
 					tbl_view.getItems().add(acc);
 				}else {
+					tbl_view.getItems().clear();
 					thongBaoKieuLoi(e, "không tìm thấy");
 				}
 			}else {
-				handleRefersh(e);
+				thongBaoKieuLoi(e, "Bạn chưa nhập tìm kiếm");
+				txtMa.requestFocus();
 			}
 		}else {
 			String loaiXe=choiceBoxLoaiXe.getValue().toString();
@@ -341,6 +352,7 @@ public class QuanLyXeController implements Initializable{
 	public void btnXoaRong(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
+		handleRefersh(e);
 	}
 	public void btnNhapThongTinXe(ActionEvent e) throws IOException {
 		try {

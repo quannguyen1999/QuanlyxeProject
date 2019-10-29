@@ -6,15 +6,21 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class HopDong {
 	@Id
 	private int maHopDong;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "maXe")
+	private Xe xe;
+
 	private LocalDate ngayLap;
-	//bên bán 
+	// bên bán
 	@Column(columnDefinition = "nvarchar(50)")
 	private String maNV;
 	@Column(columnDefinition = "nvarchar(50)")
@@ -25,8 +31,11 @@ public class HopDong {
 	private String NoiONB;
 	@Column(columnDefinition = "nvarchar(50)")
 	private String soDTNB;
-	
-	//bên mua
+
+	@Column(columnDefinition = "nvarchar(50)")
+	private String trangThai;
+
+	// bên mua
 	@Column(columnDefinition = "nvarchar(50)")
 	private String maKH;
 	@Column(columnDefinition = "nvarchar(50)")
@@ -39,29 +48,63 @@ public class HopDong {
 	private String soDTNM;
 	private Double tienDatThanhToan;
 
+	private int SoLuongMua;
+	
 	@OneToMany(mappedBy = "hopDong")
 	private List<PhieuXuat> dspx;
 
 	
+	
+	
+	
 
-	public HopDong(int maHopDong, LocalDate ngayLap, String maNV, String tenNguoiBan, String cMNDNB, String noiONB,
-			String soDTNB, String maKH, String tenNguoiMua, String cMNDNM, String noiONM, String soDTNM,
-			Double tienDatThanhToan) {
+	public HopDong(int maHopDong, Xe xe, LocalDate ngayLap, String maNV, String tenNguoiBan, String cMNDNB,
+			String noiONB, String soDTNB, String trangThai, String maKH, String tenNguoiMua, String cMNDNM,
+			String noiONM, String soDTNM, Double tienDatThanhToan, int soLuongMua) {
 		super();
 		this.maHopDong = maHopDong;
+		this.xe = xe;
 		this.ngayLap = ngayLap;
 		this.maNV = maNV;
 		this.tenNguoiBan = tenNguoiBan;
 		CMNDNB = cMNDNB;
 		NoiONB = noiONB;
 		this.soDTNB = soDTNB;
+		this.trangThai = trangThai;
 		this.maKH = maKH;
 		this.tenNguoiMua = tenNguoiMua;
 		CMNDNM = cMNDNM;
 		NoiONM = noiONM;
 		this.soDTNM = soDTNM;
 		this.tienDatThanhToan = tienDatThanhToan;
+		SoLuongMua = soLuongMua;
 	}
+
+
+
+	public String getTrangThai() {
+		return trangThai;
+	}
+
+
+
+	public int getSoLuongMua() {
+		return SoLuongMua;
+	}
+
+
+
+	public void setSoLuongMua(int soLuongMua) {
+		SoLuongMua = soLuongMua;
+	}
+
+
+
+	public void setTrangThai(String trangThai) {
+		this.trangThai = trangThai;
+	}
+
+
 
 	public HopDong() {
 		super();
@@ -74,7 +117,7 @@ public class HopDong {
 	public void setMaHopDong(int maHopDong) {
 		this.maHopDong = maHopDong;
 	}
-	
+
 	public String getMaNV() {
 		return maNV;
 	}
@@ -107,7 +150,6 @@ public class HopDong {
 		this.tenNguoiBan = tenNguoiBan;
 	}
 
-
 	public String getCMNDNB() {
 		return CMNDNB;
 	}
@@ -139,7 +181,6 @@ public class HopDong {
 	public void setTenNguoiMua(String tenNguoiMua) {
 		this.tenNguoiMua = tenNguoiMua;
 	}
-
 
 	public String getCMNDNM() {
 		return CMNDNM;
@@ -181,39 +222,20 @@ public class HopDong {
 		this.dspx = dspx;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("HopDong [maHopDong=");
-		builder.append(maHopDong);
-		builder.append(", ngayLap=");
-		builder.append(ngayLap);
-		builder.append(", tenNguoiBan=");
-		builder.append(tenNguoiBan);
-		builder.append(", CMNDNB=");
-		builder.append(CMNDNB);
-		builder.append(", NoiONB=");
-		builder.append(NoiONB);
-		builder.append(", soDTNB=");
-		builder.append(soDTNB);
-		builder.append(", tenNguoiMua=");
-		builder.append(tenNguoiMua);
-		builder.append(", CMNDNM=");
-		builder.append(CMNDNM);
-		builder.append(", NoiONM=");
-		builder.append(NoiONM);
-		builder.append(", soDTNM=");
-		builder.append(soDTNM);
-		builder.append(", tienDatThanhToan=");
-		builder.append(tienDatThanhToan);
-		builder.append("]");
-		return builder.toString();
+	public Xe getXe() {
+		return xe;
 	}
 
-	
+	public void setXe(Xe xe) {
+		this.xe = xe;
+	}
 
-	
-
-	
+	@Override
+	public String toString() {
+		return "HopDong [maHopDong=" + maHopDong + ", xe=" + xe + ", ngayLap=" + ngayLap + ", maNV=" + maNV
+				+ ", tenNguoiBan=" + tenNguoiBan + ", CMNDNB=" + CMNDNB + ", NoiONB=" + NoiONB + ", soDTNB=" + soDTNB
+				+ ", maKH=" + maKH + ", tenNguoiMua=" + tenNguoiMua + ", CMNDNM=" + CMNDNM + ", NoiONM=" + NoiONM
+				+ ", soDTNM=" + soDTNM + ", tienDatThanhToan=" + tienDatThanhToan + "]";
+	}
 
 }

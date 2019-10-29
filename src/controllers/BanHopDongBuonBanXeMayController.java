@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
@@ -35,6 +36,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class BanHopDongBuonBanXeMayController implements Initializable{
+	String username="";
 	private double xOffset = 0;
 	private double yOffset = 0;
 	@FXML BorderPane mainBd;
@@ -48,6 +50,15 @@ public class BanHopDongBuonBanXeMayController implements Initializable{
 	@FXML Label txtTenBenMua;
 	@FXML Label txtCMNDBenMua;
 	@FXML Label txtDiaChiBenMua;
+	
+	
+	@FXML Label txtNhanHieu;
+	@FXML Label txtLoaiXe;
+	@FXML Label txtTenXe;
+	@FXML Label txtMau;
+	@FXML Label txtGia;
+	
+	@FXML JFXButton btnInPhieuXuat;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
