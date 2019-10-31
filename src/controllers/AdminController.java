@@ -127,6 +127,24 @@ public class AdminController implements Initializable{
 		}
 		return newTextResult;
 	}
+	public void btnLienHe(ActionEvent e) throws IOException {
+		try {
+			FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinLienHe.fxml"));
+			Parent root=loader.load();
+			Stage stage=new Stage();
+			Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
+			stage.initOwner(stageCunrrent);
+			stage.setResizable(false);
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.setScene(new Scene(root));
+			Main.primaryStage=stage;
+			stage.getIcons().add(new Image("/image/logo.PNG"));
+			stage.show();
+		} catch (Exception e2) {
+			// TODO: handle exception
+			System.out.println(e2.getMessage());
+		}
+	}
 	public void btnThongTinNguoiDung(ActionEvent e) throws IOException {
 		try {
 
@@ -145,7 +163,8 @@ public class AdminController implements Initializable{
 				Stage stage=new Stage();
 				Stage stageCunrrent = (Stage) mnb.getScene().getWindow();
 				stage.initOwner(stageCunrrent);
-				stage.initStyle(StageStyle.UNDECORATED);
+//				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setResizable(false);
 				stage.initModality(Modality.APPLICATION_MODAL);
 				stage.setScene(new Scene(root));
 				stage.getIcons().add(new Image("/image/logo.PNG"));

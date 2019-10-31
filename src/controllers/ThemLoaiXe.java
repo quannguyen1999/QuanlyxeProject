@@ -38,6 +38,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ThemLoaiXe implements Initializable{
@@ -49,9 +50,23 @@ public class ThemLoaiXe implements Initializable{
 	@FXML public BorderPane mainBd;
 	@FXML ImageView img;
 	@FXML JFXTextField txtMaLoai;
-	@FXML JFXTextField txtLoaiXe;
+	@FXML ComboBox<String> chkLoaiXe;
 	@FXML JFXTextField txtNhanHieu;
 	@FXML JFXTextField txtTenXe;
+
+	private double x, y;
+	@FXML
+	private void draged(MouseEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setX(event.getScreenX() - x);
+		stage.setY(event.getScreenY() - y);
+	}
+
+	@FXML
+	private void pressed(MouseEvent event) {
+		x = event.getSceneX();
+		y = event.getSceneY();
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -59,6 +74,7 @@ public class ThemLoaiXe implements Initializable{
 		chkMauXe.setEditable(true);
 		loadDuLieuNuocSanXuat();
 		loadDuLieuMauXe();
+		loadDuLieuLoaiXe();
 
 	}
 	String fileHinhCapNhap="";
@@ -106,6 +122,23 @@ public class ThemLoaiXe implements Initializable{
 
 
 	}
+	public void loadDuLieuLoaiXe() {
+		ObservableList<String> items = FXCollections.observableArrayList();
+
+		List<String> listLoaiXe= Arrays.asList("Xe tay ga","Xe số","Xe côn tay","Xe mô tô");
+
+		listLoaiXe.forEach(t->{
+			items.add(t);
+		});
+
+		FilteredList<String> filteredItems = new FilteredList<String>(items);
+
+		chkLoaiXe.getEditor().textProperty().addListener(new InputFilter(chkLoaiXe, filteredItems, false));
+
+		chkLoaiXe.setItems(filteredItems);
+		
+		chkLoaiXe.setValue("Xe tay ga");
+	}
 	private void makeStageDrageable() {
 		mainBd.setOnMousePressed(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -134,7 +167,7 @@ public class ThemLoaiXe implements Initializable{
 	}
 	public void btnXoaRong(ActionEvent e) {
 		txtMaLoai.setText("");;
-		txtLoaiXe.setText("");;
+		chkLoaiXe.setValue("Xe tay ga");
 		txtNhanHieu.setText("");;
 		txtTenXe.setText("");;
 		fileHinh="";
@@ -166,62 +199,136 @@ public class ThemLoaiXe implements Initializable{
 			os.close();
 		}
 	}
-	public void clickOk(ActionEvent e) throws IOException {
-		String maloai=txtMaLoai.getText().toString();
-		String loaixe=txtLoaiXe.getText().toString();
-		String tenxe=txtTenXe.getText().toString();
-		String mauson=chkMauXe.getValue();
-		String nuocSX=chkNSX.getValue();
-		String nhanhieu=txtNhanHieu.getText().toString();
-		Loaixe lx=new Loaixe(maloai, loaixe, tenxe, mauson, nuocSX, "image/"+maloai+".PNG", nhanhieu);
-		//		System.out.println("alo:"+fileHinh);
-		if(maloai.isEmpty()==false
-				&& loaixe.isEmpty()==false
-				&& tenxe.isEmpty()==false 
-				&& mauson.isEmpty()==false
-				&& nuocSX.isEmpty()==false 
-				&& nhanhieu.isEmpty()==false) {
-			if(lblTitle.getText().toString().equals("Cập nhập loại xe")) {
-				if(fileHinhCapNhap.contentEquals(fileHinh)) {
-				}else if(fileHinh.isEmpty()==false){
-					copyFileUsingStream(new File(fileHinh),new File("src/image/"+maloai+".PNG"));
-				}
-				Loaixe lxe=new Loaixe(maloai, loaixe, tenxe, mauson, nuocSX, "image/"+maloai+".PNG", nhanhieu);
-				List<String> kiemTraTonTai=QuanLyLoaiXe.timMa(lxe.getLoaixe(), lxe.getTenxe(), lxe.getMauson());
-				if(kiemTraTonTai.toString().toString()=="[]") {
-					if(QuanLyLoaiXe.suaLoaiXe(lxe)==true) {
-						((Node) (e.getSource())).getScene().getWindow().hide();
-					}else {
-						thongBaoKieuLoi(e, "sửa không thành công");
-					}
-				}else {
-					thongBaoKieuLoi(e, "xe đã tồn tại");
-				}
-				
+	public boolean kiemTraMaLoai(ActionEvent e,String text) {
+		String textSearch=text.trim();
+		if(textSearch.isEmpty()==false) {
+			if(text.matches("^H[0-9]+")==true) {
+				return true;
 			}else {
-				if(fileHinh.isEmpty()==false) {
-					Loaixe lxe=new Loaixe(maloai, loaixe, tenxe, mauson, nuocSX, "image/"+maloai+".PNG", nhanhieu);
-					if(lxe!=null) {
-						List<String> kiemTraTonTai=QuanLyLoaiXe.timMa(lxe.getLoaixe(), lxe.getTenxe(), lxe.getMauson());
-						if(kiemTraTonTai.toString().toString()=="[]") {
-							if(QuanLyLoaiXe.themXe(lxe)==true) {
-								copyFileUsingStream(new File(fileHinh),new File("src/image/"+maloai+".PNG"));
-								((Node) (e.getSource())).getScene().getWindow().hide();
-							}else {
-								thongBaoKieuLoi(e, "thêm không thành công");
-							}
-						}else {
-							thongBaoKieuLoi(e, "xe đã tồn tại");
-						}
-					}
-				}else {
-					thongBaoKieuLoi(e, "vui lòng chọn hình");
-
-				}
+				thongBaoKieuLoi(e, "Mã loại xe không hợp lệ, yêu cầu kí tự đầu phải có H,sau là ký số, vd:H0001");
 			}
 		}else {
-			thongBaoKieuLoi(e, "yêu cầu nhập đầy đủ và hợp lệ");
+			thongBaoKieuLoi(e, "Mã loại không được để trống");
 		}
+		return false;
+	}
+	public boolean kiemTraNhanHieu(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("^[A-Za-z\\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ]+$")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "Nhãn hiệu không được nhập ký tự đặc biệt");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Nhẵn hiệu không được để trống");
+			return false;
+		}
+	}
+	public boolean kiemTraTenXe(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			return true;
+		}else {
+			thongBaoKieuLoi(e, "Tên xe không được để trống");
+			return false;
+		}
+	}
+	
+	public void clickOk(ActionEvent e) throws IOException {
+		try {
+			String maloai=txtMaLoai.getText().toString();
+			String loaixe=chkLoaiXe.getValue();
+			String tenxe=txtTenXe.getText().toString();
+			String mauson=chkMauXe.getValue();
+			String nuocSX=chkNSX.getValue();
+			String nhanhieu=txtNhanHieu.getText().toString();
+			Loaixe lx=new Loaixe(maloai, loaixe, tenxe, mauson, nuocSX, "image/"+maloai+".PNG", nhanhieu);
+			boolean continues=true;
+			System.out.println(mauson);
+			if(kiemTraMaLoai(e, maloai)==false) {
+				continues=false;
+				txtMaLoai.requestFocus();
+			}
+			if(continues==true) {
+				//kiem tra mau xe
+				if(mauson==null) {
+					thongBaoKieuLoi(e, "màu xe không được để trống");
+					continues=false;
+					chkMauXe.requestFocus();
+				}
+			}
+			if(continues==true) {
+				if(kiemTraNhanHieu(e, nhanhieu)==false) {
+					continues=false;
+					txtNhanHieu.requestFocus();
+				}
+			}
+			if(continues==true) {
+				if(kiemTraTenXe(e, tenxe)==false) {
+					continues=false;
+					txtTenXe.requestFocus();
+				}
+			}
+			if(continues==true) {
+				if(nuocSX==null) {
+					thongBaoKieuLoi(e, "Nước sản xuất không được để trống");
+					continues=false;
+					chkNSX.requestFocus();
+				}
+			}
+			if(continues==true && maloai.isEmpty()==false
+					&& loaixe.isEmpty()==false
+					&& tenxe.isEmpty()==false 
+					&& mauson.isEmpty()==false
+					&& nuocSX.isEmpty()==false 
+					&& nhanhieu.isEmpty()==false) {
+				if(lblTitle.getText().toString().equals("Cập nhập loại xe")) {
+					if(fileHinhCapNhap.contentEquals(fileHinh)) {
+					}else if(fileHinh.isEmpty()==false){
+						copyFileUsingStream(new File(fileHinh),new File("src/image/"+maloai+".PNG"));
+					}
+					Loaixe lxe=new Loaixe(maloai, loaixe, tenxe, mauson, nuocSX, "image/"+maloai+".PNG", nhanhieu);
+					List<String> kiemTraTonTai=QuanLyLoaiXe.timMa(lxe.getLoaixe(), lxe.getTenxe(), lxe.getMauson());
+					if(kiemTraTonTai.toString().toString()=="[]") {
+						if(QuanLyLoaiXe.suaLoaiXe(lxe)==true) {
+							((Node) (e.getSource())).getScene().getWindow().hide();
+						}else {
+							thongBaoKieuLoi(e, "sửa không thành công");
+						}
+					}else {
+						thongBaoKieuLoi(e, "xe đã tồn tại");
+					}
+
+				}else {
+					if(fileHinh.isEmpty()==false) {
+						Loaixe lxe=new Loaixe(maloai, loaixe, tenxe, mauson, nuocSX, "image/"+maloai+".PNG", nhanhieu);
+						if(lxe!=null) {
+							List<String> kiemTraTonTai=QuanLyLoaiXe.timMa(lxe.getLoaixe(), lxe.getTenxe(), lxe.getMauson());
+							if(kiemTraTonTai.toString().toString()=="[]") {
+								if(QuanLyLoaiXe.themXe(lxe)==true) {
+									copyFileUsingStream(new File(fileHinh),new File("src/image/"+maloai+".PNG"));
+									((Node) (e.getSource())).getScene().getWindow().hide();
+								}else {
+									thongBaoKieuLoi(e, "thêm không thành công");
+								}
+							}else {
+								thongBaoKieuLoi(e, "xe đã tồn tại");
+							}
+						}
+					}else {
+						thongBaoKieuLoi(e, "vui lòng chọn hình");
+
+					}
+				}
+			}
+		} catch (Exception e2) {
+			// TODO: handle exception
+			e2.printStackTrace();
+			System.out.println(e2.getMessage());
+		}
+
 
 	}
 }

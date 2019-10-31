@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import entities.Account;
 import entities.KhachHang;
+import entities.Loaixe;
 
 public class QuanLyKhachHang {
 	public static List<KhachHang> showTatCaKhachHang() {
@@ -86,6 +87,27 @@ public class QuanLyKhachHang {
 			manager.close();
 		}
 		return accs;
+	}
+	public static List<KhachHang> timTheoTen(String ma) {
+		List<KhachHang> listKH = null;
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			javax.persistence.Query query = manager.createQuery("from KhachHang where tenKH like '%"+ma+"%'");
+//			query.setParameter("tenKH", ma);
+			listKH=query.getResultList();
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		return  listKH;
 	}
 	public static boolean suaKH(KhachHang acc) {
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();

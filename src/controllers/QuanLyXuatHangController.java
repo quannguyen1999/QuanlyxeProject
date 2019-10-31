@@ -45,7 +45,7 @@ import javafx.stage.StageStyle;
 
 public class QuanLyXuatHangController implements Initializable{
 	@FXML TextField txtMaPX;
-	
+
 	@FXML 
 	private BorderPane bd;
 	@FXML JFXButton btnThem;
@@ -73,25 +73,33 @@ public class QuanLyXuatHangController implements Initializable{
 		bd.setCenter(tbl_view);
 
 		colMaPX.setCellValueFactory(new PropertyValueFactory<>("maPX"));
-		
+
 		colMaNV.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(String.valueOf(cellData.getValue().getNhanVien().getMaNV())));
-		
+
 		colMaKH.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(String.valueOf(cellData.getValue().getKhachHang().getMaKH())));
-		
+
 		colMaHD.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(String.valueOf(cellData.getValue().getHopDong().getMaHopDong())));
-		
+
 		colNgayXuat.setCellValueFactory(new PropertyValueFactory<>("ngayXuat"));
-		
+
 		colDonGiaXuat.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(String.format("%.0f", cellData.getValue().getDonGiaXuat())));
-		
-		
+
+
 		colSLX.setCellValueFactory(cellData -> 
 		new SimpleStringProperty(String.valueOf(cellData.getValue().getsLXuat())));
-		
+
+		colMaPX.setMinWidth(100);;
+		colMaNV.setMinWidth(150);;
+		colMaKH.setMinWidth(125);;
+		colMaHD.setMinWidth(125);;
+		colNgayXuat.setMinWidth(150);;
+		colDonGiaXuat.setMinWidth(150);;
+		colSLX.setMinWidth(100);;
+
 		tbl_view.setOnMouseClicked(e->{
 			if(e.getClickCount()==2) {
 				int result=tbl_view.getSelectionModel().getSelectedIndex();
@@ -110,20 +118,20 @@ public class QuanLyXuatHangController implements Initializable{
 					ctlMain.txtNgay.setText(" "+String.valueOf(tbl_view.getItems().get(result).getNgayXuat().getDayOfMonth()));
 					ctlMain.txtThang.setText(" "+String.valueOf(tbl_view.getItems().get(result).getNgayXuat().getMonthValue()));
 					ctlMain.txtNam.setText(" "+String.valueOf(tbl_view.getItems().get(result).getNgayXuat().getYear()));
-					
+
 					ctlMain.txtHoTenNV.setText(" "+tbl_view.getItems().get(result).getNhanVien().getTenNV());
 					ctlMain.txtHoTenKH.setText(" "+tbl_view.getItems().get(result).getKhachHang().getTenKH());
 					ctlMain.txtSDT.setText(" "+tbl_view.getItems().get(result).getKhachHang().getSoDT());
 					ctlMain.txtDiaChi.setText(" "+tbl_view.getItems().get(result).getKhachHang().getDiaChi());
-					
+
 					PhieuXuat x=tbl_view.getItems().get(result);
-					
+
 					ctlMain.tbl_view.getItems().add(x);
 					ctlMain.tbl_viewHD.getItems().add(x.getHopDong());
 					Stage stage=new Stage();
 					stage.initOwner(btnThem.getScene().getWindow());
 					stage.setScene(new Scene(root));
-//					stage.initStyle(StageStyle.UNDECORATED);
+					//					stage.initStyle(StageStyle.UNDECORATED);
 					stage.setResizable(false);
 					stage.initModality(Modality.APPLICATION_MODAL);
 					Main.primaryStage=stage;
@@ -135,7 +143,7 @@ public class QuanLyXuatHangController implements Initializable{
 				}
 			}
 		});
-		
+
 		UploaderDuLieuLenBang();
 	}
 	@SuppressWarnings("unused")
@@ -165,16 +173,16 @@ public class QuanLyXuatHangController implements Initializable{
 	}
 	@FXML
 	public void btnXoaPhieuXuat(ActionEvent e) {
-		
+
 	}
-	
+
 	@FXML
 	public void btnXoaRong(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
 		txtMaPX.setText("");
 		handleRefersh(e);
 	}
-	
+
 	@FXML
 	public void btnTim(ActionEvent e) {
 		String text=txtMaPX.getText().trim().toString();
@@ -202,8 +210,8 @@ public class QuanLyXuatHangController implements Initializable{
 			txtMaPX.requestFocus();
 		}
 	}
-	
-	
+
+
 
 
 }

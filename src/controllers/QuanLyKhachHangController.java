@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
 
 import application.Main;
 import dao.QuanLyAccount;
@@ -58,20 +59,24 @@ public class QuanLyKhachHangController implements Initializable{
 	TableColumn<KhachHang, String> colTenKH;
 	TableColumn<KhachHang, String> colNgaySinh;
 
-	@FXML 
-	TextField txtMa;
+	@FXML JFXRadioButton rdMa;
+	@FXML JFXRadioButton rdTen;
+	
+	@FXML TextField txtMa;
+	@FXML TextField txtTen;
 
 	@FXML JFXButton btnThem;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		txtTen.setEditable(false);
 		// TODO Auto-generated method stub
 		tbl_view=new TableView<KhachHang>();
 		colMaKH=new TableColumn<KhachHang, String>("Mã KH");
 		colDiaChi=new TableColumn<KhachHang, String>("Địa chỉ");
 		colCMND=new TableColumn<KhachHang, String>("CMND");
 		colSoDT=new TableColumn<KhachHang, String>("Số điện thoại");
-		colTenKH=new TableColumn<KhachHang, String>("Tên KH");
+		colTenKH=new TableColumn<KhachHang, String>("Tên khách hàng");
 		colNgaySinh=new TableColumn<KhachHang, String>("Ngày sinh");
 
 		tbl_view.getColumns().addAll(colMaKH,colDiaChi,colCMND,colSoDT,colTenKH,colNgaySinh);
@@ -83,6 +88,14 @@ public class QuanLyKhachHangController implements Initializable{
 		colSoDT.setCellValueFactory(new PropertyValueFactory<>("soDT"));
 		colTenKH.setCellValueFactory(new PropertyValueFactory<>("tenKH"));
 		colNgaySinh.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
+		
+		
+		colMaKH.setMinWidth(100);// .setCellValueFactory(new PropertyValueFactory<>("maKH"));
+		colDiaChi.setMinWidth(180);//.setCellValueFactory(new PropertyValueFactory<>("diaChi"));
+		colCMND.setMinWidth(120);//.setCellValueFactory(new PropertyValueFactory<>("CMND"));
+		colSoDT.setMinWidth(100);//.setCellValueFactory(new PropertyValueFactory<>("soDT"));
+		colTenKH.setMinWidth(150);//.setCellValueFactory(new PropertyValueFactory<>("tenKH"));
+		colNgaySinh.setMinWidth(100);//.setCellValueFactory(new PropertyValueFactory<>("ngaySinh"));
 
 		UploaderDuLieuLenBang();
 
@@ -133,6 +146,22 @@ public class QuanLyKhachHangController implements Initializable{
 		});
 
 	}
+	@FXML
+	public void clickTimTheoMa(ActionEvent e) {
+		txtTen.setEditable(false);
+		txtMa.setEditable(true);
+
+		txtTen.setText("");
+		txtMa.setText("");
+	}
+	@FXML 
+	public void clickTimTheoTen(ActionEvent e) {
+		txtMa.setEditable(false);
+		txtTen.setEditable(true);
+
+		txtTen.setText("");
+		txtMa.setText("");
+	}
 	ObservableList<KhachHang> list = null;
 	@SuppressWarnings("unused")
 	private void UploaderDuLieuLenBang(){
@@ -179,34 +208,67 @@ public class QuanLyKhachHangController implements Initializable{
 	public void btnXoaRong(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
+		txtMa.setEditable(true);
 		handleRefersh(e);
+		txtTen.setText("");
+		rdMa.setSelected(true);
+		txtTen.setEditable(false);
 
 	}
 	@FXML 
 	public void btnTim(ActionEvent e) {
-		String text=txtMa.getText().trim().toString();
-		if (text.isEmpty()==false) {
-			KhachHang acc=null;
-			try {
-				acc=QuanLyKhachHang.timMa(Integer.parseInt(text));
-				if(acc!=null) {
-					tbl_view.getItems().clear();
-					tbl_view.getItems().add(acc);
-				}else {
+		if(rdMa.isSelected()==true) {
+			String text=txtMa.getText().trim().toString();
+			if (text.isEmpty()==false) {
+				KhachHang acc=null;
+				try {
+					acc=QuanLyKhachHang.timMa(Integer.parseInt(text));
+					if(acc!=null) {
+						tbl_view.getItems().clear();
+						tbl_view.getItems().add(acc);
+					}else {
+						tbl_view.getItems().clear();
+						thongBaoKieuLoi(e, "không tìm thấy");
+					}
+				} catch (Exception e2) {
+					// TODO: handle exception
 					tbl_view.getItems().clear();
 					thongBaoKieuLoi(e, "không tìm thấy");
+
 				}
-			} catch (Exception e2) {
-				// TODO: handle exception
-				tbl_view.getItems().clear();
-				thongBaoKieuLoi(e, "không tìm thấy");
 
+
+			}else {
+				handleRefersh(e);
 			}
+		}else if(rdTen.isSelected()==true) {
+			String text=txtTen.getText().trim().toString();
+			if (text.isEmpty()==false) {
+				List<KhachHang> ListAcc=null;
+				try {
+					ListAcc=QuanLyKhachHang.timTheoTen(text);
+					if(ListAcc!=null) {
+						tbl_view.getItems().clear();
+						ListAcc.forEach(t->{
+							tbl_view.getItems().add(t);
+						});
+					}else {
+						tbl_view.getItems().clear();
+						thongBaoKieuLoi(e, "không tìm thấy");
+					}
+				} catch (Exception e2) {
+					// TODO: handle exception
+					tbl_view.getItems().clear();
+					thongBaoKieuLoi(e, "không tìm thấy");
+
+				}
 
 
-		}else {
-			handleRefersh(e);
+			}else {
+				handleRefersh(e);
+			}
 		}
+		
 
 	}
 	public void btnNhapThongTinKhachHang(ActionEvent e) throws IOException {

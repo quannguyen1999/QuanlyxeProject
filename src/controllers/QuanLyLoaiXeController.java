@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
 
 import application.Main;
 import dao.QuanLyAccount;
@@ -50,10 +51,9 @@ import javafx.stage.StageStyle;
 
 
 public class QuanLyLoaiXeController implements Initializable{
-	@FXML 
-	TextField txtMa;
-	@FXML 
-	private BorderPane bd;
+	@FXML TextField txtMa;
+	@FXML TextField txtTenXe;
+	@FXML private BorderPane bd;
 	@FXML JFXButton btnThem;
 	private TableView<Loaixe> tbl_view;
 	TableColumn<Loaixe, String> colMaLoai;
@@ -62,21 +62,27 @@ public class QuanLyLoaiXeController implements Initializable{
 	TableColumn<Loaixe, String> colNhanHieu;
 	TableColumn<Loaixe, String> colNuocSanXuat;
 	TableColumn<Loaixe, String> colTenXe;
+	@FXML JFXRadioButton rdMaXe;
+	@FXML JFXRadioButton rdTenXe;
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		//
+		txtTenXe.setEditable(false);
+
 		tbl_view=new TableView<Loaixe>();
 		colMaLoai=new TableColumn<Loaixe, String>("Mã loại");
 		colLoaiXe=new TableColumn<Loaixe, String>("Loại xe");
 		colMauSon=new TableColumn<Loaixe, String>("Màu xe");
-		colNhanHieu=new TableColumn<Loaixe, String>("Nhẵn hiệu");
+		colNhanHieu=new TableColumn<Loaixe, String>("Nhãn hiệu");
 		colNuocSanXuat=new TableColumn<Loaixe, String>("Nước sản xuất");
 		colTenXe=new TableColumn<Loaixe, String>("Tên xe");
-		
+
 
 		tbl_view.getColumns().addAll(colMaLoai,colLoaiXe,colMauSon,colNhanHieu,colNuocSanXuat,colTenXe);
-		
+
 
 		bd.setCenter(tbl_view);
-		
+
 
 		colMaLoai.setCellValueFactory(new PropertyValueFactory<>("maloai"));
 		colLoaiXe.setCellValueFactory(new PropertyValueFactory<>("loaixe"));
@@ -85,14 +91,23 @@ public class QuanLyLoaiXeController implements Initializable{
 		colNuocSanXuat.setCellValueFactory(new PropertyValueFactory<>("nuocSX"));
 		colTenXe.setCellValueFactory(new PropertyValueFactory<>("tenxe"));
 		
-		UploaderDuLieuLenBang();
 		
+		colMaLoai.setMinWidth(100);
+		colLoaiXe.setMinWidth(100);// .setCellValueFactory(new PropertyValueFactory<>("loaixe"));
+		colMauSon.setMinWidth(100);//.setCellValueFactory(new PropertyValueFactory<>("mauson"));
+		colNhanHieu.setMinWidth(100);//.setCellValueFactory(new PropertyValueFactory<>("nhanhieu"));
+		colNuocSanXuat.setMinWidth(100);//.setCellValueFactory(new PropertyValueFactory<>("nuocSX"));
+		colTenXe.setMinWidth(100);//.setCellValueFactory(new PropertyValueFactory<>("tenxe"));
+		
+
+		UploaderDuLieuLenBang();
+
 		tbl_view.setOnMouseClicked(ev->{
 			if(ev.getClickCount()==2) {
 				int result=tbl_view.getSelectionModel().getSelectedIndex();
 				if(result!=-1) {
 					FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/FormThongTinLoaiXe.fxml"));
-	
+
 					Parent root = null;
 					try {
 						root = loader.load();
@@ -100,22 +115,22 @@ public class QuanLyLoaiXeController implements Initializable{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	
+
 					ThemLoaiXe ctlMain=loader.getController();
-	
+
 					String maloai=tbl_view.getItems().get(result).getMaloai();
 					String loaixe=tbl_view.getItems().get(result).getLoaixe();
 					String mauson=tbl_view.getItems().get(result).getMauson();
 					String nhanhieu=tbl_view.getItems().get(result).getNhanhieu();
 					String nuocSX=tbl_view.getItems().get(result).getNuocSX();
 					String tenxe=tbl_view.getItems().get(result).getTenxe();
-					
-	
+
+
 					Loaixe xe=QuanLyLoaiXe.timMa(maloai);
 					ctlMain.lblTitle.setText("Cập nhập loại xe");
 					ctlMain.txtMaLoai.setText(maloai);
 					ctlMain.txtMaLoai.setEditable(false);
-					ctlMain.txtLoaiXe.setText(loaixe);
+					ctlMain.chkLoaiXe.setValue(loaixe);
 					ctlMain.chkMauXe.setValue(mauson);
 					ctlMain.txtNhanHieu.setText(nhanhieu);
 					ctlMain.txtTenXe.setText(tenxe);
@@ -127,7 +142,7 @@ public class QuanLyLoaiXeController implements Initializable{
 					Image image = new Image("file:///"+begin+"/src/"+xe.getHinhanh());
 					ctlMain.fileHinhCapNhap=begin+"/src/"+xe.getHinhanh();
 					ctlMain.img.setImage(image);
-					
+
 					Stage stage=new Stage();
 					stage.initOwner(btnThem.getScene().getWindow());
 					stage.setScene(new Scene(root));
@@ -143,6 +158,22 @@ public class QuanLyLoaiXeController implements Initializable{
 			}
 		});
 	}
+	@FXML
+	public void clickTimTheoMa(ActionEvent e) {
+		txtTenXe.setEditable(false);
+		txtMa.setEditable(true);
+
+		txtTenXe.setText("");
+		txtMa.setText("");
+	}
+	@FXML 
+	public void clickTimTheoTen(ActionEvent e) {
+		txtMa.setEditable(false);
+		txtTenXe.setEditable(true);
+
+		txtTenXe.setText("");
+		txtMa.setText("");
+	}
 	@SuppressWarnings("unused")
 	private void UploaderDuLieuLenBang(){
 		List<Loaixe> accs=QuanLyLoaiXe.showTatCaLoaiXe();
@@ -153,7 +184,9 @@ public class QuanLyLoaiXeController implements Initializable{
 	@FXML
 	private void btnXoaRong(ActionEvent e) {
 		tbl_view.getSelectionModel().clearSelection();
+		rdMaXe.setSelected(true);
 		txtMa.setText("");
+		txtTenXe.setText("");
 		handleRefersh(e);
 	}
 	public void thongBaoKieuLoi(ActionEvent e, String text) {
@@ -207,16 +240,16 @@ public class QuanLyLoaiXeController implements Initializable{
 	}
 	private static void xoaFile(String File) {
 		System.out.println(File);
-        File file = new File(File); 
-          
-        if(file.delete()) 
-        { 
-            System.out.println("File deleted successfully"); 
-        } 
-        else
-        { 
-            System.out.println("Failed to delete the file"); 
-        } 
+		File file = new File(File); 
+
+		if(file.delete()) 
+		{ 
+			System.out.println("File deleted successfully"); 
+		} 
+		else
+		{ 
+			System.out.println("Failed to delete the file"); 
+		} 
 	}
 	public void btnNhapThongTinLoaiXe(ActionEvent e) throws IOException {
 		try {
@@ -240,21 +273,41 @@ public class QuanLyLoaiXeController implements Initializable{
 	}
 	@FXML 
 	public void btnTim(ActionEvent e) {
-		String text=txtMa.getText().trim().toString();
-		if (text.isEmpty()==false) {
-			Loaixe acc=QuanLyLoaiXe.timMa(text);
-			if(acc!=null) {
-				tbl_view.getItems().clear();
-				tbl_view.getItems().add(acc);
+		if(rdMaXe.isSelected()==true) {
+			String text=txtMa.getText().trim().toString();
+			if (text.isEmpty()==false) {
+				Loaixe acc=QuanLyLoaiXe.timMa(text);
+				if(acc!=null) {
+					tbl_view.getItems().clear();
+					tbl_view.getItems().add(acc);
+				}else {
+					tbl_view.getItems().clear();
+					thongBaoKieuLoi(e, "không tìm thấy");
+				}
 			}else {
-				tbl_view.getItems().clear();
-				thongBaoKieuLoi(e, "không tìm thấy");
+				thongBaoKieuLoi(e, "Bạn chưa nhập tìm kiếm");
+				txtMa.requestFocus();
 			}
-		}else {
-			thongBaoKieuLoi(e, "Bạn chưa nhập tìm kiếm");
-			txtMa.requestFocus();
+		}else if(rdTenXe.isSelected()==true) {
+			String text=txtTenXe.getText().trim().toString();
+			if (text.isEmpty()==false) {
+				List<Loaixe> listLoaiXe=QuanLyLoaiXe.timTheoTen(text);
+				if(listLoaiXe!=null) {
+					tbl_view.getItems().clear();
+					listLoaiXe.forEach(t->{
+						tbl_view.getItems().add(t);
+					});
+				}else {
+					tbl_view.getItems().clear();
+					thongBaoKieuLoi(e, "không tìm thấy");
+				}
+			}else {
+				thongBaoKieuLoi(e, "Bạn chưa nhập tìm kiếm");
+				txtTenXe.requestFocus();
+			}
 		}
 
+
 	}
-	
+
 }

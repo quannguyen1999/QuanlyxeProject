@@ -35,7 +35,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Trợ giúp">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#btnLienHe" text="Liên hệ" />
                   </items>
                 </Menu>
               </menus>
@@ -75,7 +75,7 @@
                   <Insets left="35.0" />
                </padding>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
@@ -131,14 +131,6 @@
                </padding>
             </Label>
             <Separator prefWidth="200.0" />
-            <JFXButton fx:id="styleQuanLyBaoCao" alignment="BASELINE_LEFT" onAction="#btnBaoCaoThongKe" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Báo cáo thống kê" textFill="#c3baba">
-               <padding>
-                  <Insets left="40.0" />
-               </padding>
-               <font>
-                  <Font name="Calibri" size="18.0" />
-               </font>
-            </JFXButton>
             <JFXButton alignment="BASELINE_LEFT" onAction="#btnDangXuat" prefHeight="74.0" prefWidth="294.0" styleClass="sidebar-btn" stylesheets="@../css/application.css" text="Đăng xuất" textFill="#c3baba">
                <padding>
                   <Insets left="40.0" />

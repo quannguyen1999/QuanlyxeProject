@@ -64,7 +64,7 @@ public class QuanLyHopDongController implements Initializable{
 		tbl_view=new TableView<HopDong>();
 		colMaHopDong=new TableColumn<HopDong, String>("Mã Hợp đồng");
 		colNgayLap=new TableColumn<HopDong, String>("Ngày lập");
-		colSoDTKH=new TableColumn<HopDong, String>("Số điện thoại khách hàng");
+		colSoDTKH=new TableColumn<HopDong, String>("Số điện thoại");
 		colTenNguoiMua=new TableColumn<HopDong, String>("Tên người mua");
 		colMaXe=new TableColumn<HopDong, String>("Mã xe");
 		colGiaXe=new TableColumn<HopDong, String>("Giá xe");
@@ -87,6 +87,14 @@ public class QuanLyHopDongController implements Initializable{
 		new SimpleStringProperty(String.valueOf(cellData.getValue().getXe().getDonGia())));
 
 		colTrangThai.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
+
+		colMaHopDong.setMinWidth(120);;
+		colNgayLap.setMinWidth(100);;
+		colSoDTKH.setMinWidth(100);;
+		colTenNguoiMua.setMinWidth(150);;
+		colMaXe.setMinWidth(80);;
+		colGiaXe.setMinWidth(100);;
+		colTrangThai.setMinWidth(120);;
 
 		tbl_view.setOnMouseClicked(e->{
 			if(e.getClickCount()==2) {
@@ -136,6 +144,7 @@ public class QuanLyHopDongController implements Initializable{
 					Main.primaryStage=stage;
 					stage.show();
 					stage.getIcons().add(new Image("/image/logo.PNG"));
+					stage.setResizable(false);
 					stage.setOnHidden(evv->{
 						handleRefersh(new ActionEvent());
 					});
@@ -217,7 +226,7 @@ public class QuanLyHopDongController implements Initializable{
 				}else {
 					thongBaoKieuLoi(e, "Phiếu xuất bị lỗi");
 				}
-							}
+			}
 
 		}else {
 			thongBaoKieuLoi(e, "bạn chưa chọn bảng cần xóa");
@@ -286,6 +295,7 @@ public class QuanLyHopDongController implements Initializable{
 			stage.setScene(new Scene(root));
 			Main.primaryStage=stage;
 			stage.getIcons().add(new Image("/image/logo.PNG"));
+			stage.setResizable(false);
 			stage.show();
 			stage.setOnHidden(ev->{
 				handleRefersh(new ActionEvent());

@@ -78,6 +78,19 @@ public class ThemHopDong implements Initializable{
 	@FXML JFXRadioButton rdCXN;
 	//	@FXML JFXButton btnInPhieuXuat;
 
+	private double x, y;
+	@FXML
+	private void draged(MouseEvent event) {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setX(event.getScreenX() - x);
+		stage.setY(event.getScreenY() - y);
+	}
+
+	@FXML
+	private void pressed(MouseEvent event) {
+		x = event.getSceneX();
+		y = event.getSceneY();
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		makeStageDrageable();
@@ -125,23 +138,6 @@ public class ThemHopDong implements Initializable{
 			FilteredList<String> filteredItems1 = new FilteredList<String>(items1);
 			boxMaKH.getEditor().textProperty().addListener(new InputFilter(boxMaKH, filteredItems1, false));
 			boxMaKH.setItems(filteredItems1);
-			
-			boxMaKH.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() { 
-				public void changed(ObservableValue ov, Number value, Number new_value) 
-				{ 
-					KhachHang nv=QuanLyKhachHang.timMa(Integer.parseInt(items1.get((int) new_value)));
-					txtTenKH.setText("");
-					txtDiaChiKH.setText("");
-					txtSoDTKH.setText("");
-					txtNoiOKH.setText("");
-					txtCMNDKH.setText("");
-					txtTenKH.setText(nv.getTenKH());
-					txtDiaChiKH.setText(nv.getDiaChi());
-					txtSoDTKH.setText(nv.getSoDT());
-					txtNoiOKH.setText(nv.getDiaChi());
-					txtCMNDKH.setText(nv.getCMND());
-				}
-			});
 
 		} catch (Exception e2) {
 			e2.printStackTrace();
@@ -162,6 +158,7 @@ public class ThemHopDong implements Initializable{
 			Main.primaryStage=stage;
 			stage.setOnHidden(ev->{
 				handleRefersh(e);
+				boxMaKH.setValue("");
 			});
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
@@ -220,11 +217,14 @@ public class ThemHopDong implements Initializable{
 				txtSoDTKH.setText("");
 				txtNoiOKH.setText("");
 				txtCMNDKH.setText("");
-				txtTenKH.setText(nv.getTenKH());
-				txtDiaChiKH.setText(nv.getDiaChi());
-				txtSoDTKH.setText(nv.getSoDT());
-				txtNoiOKH.setText(nv.getDiaChi());
-				txtCMNDKH.setText(nv.getCMND());
+				if(nv!=null) {
+					txtTenKH.setText(nv.getTenKH());
+					txtDiaChiKH.setText(nv.getDiaChi());
+					txtSoDTKH.setText(nv.getSoDT());
+					txtNoiOKH.setText(nv.getDiaChi());
+					txtCMNDKH.setText(nv.getCMND());
+				}
+
 			}
 		});
 	}
@@ -272,18 +272,37 @@ public class ThemHopDong implements Initializable{
 			return false;
 		}
 	}
+	public boolean kiemTraMaHopDong(ActionEvent e,String text) {
+		String textSearch=text.trim();
+		if(textSearch.isEmpty()==false) {
+			if(textSearch.matches("^[0-9]+")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "Mã hợp đồng chỉ nhập số");
+			}
+		}else {
+			thongBaoKieuLoi(e, "Mã hợp đồng chưa nhập");
+		}
+		return false;
+	}
+	public boolean kiemTraSoLuong(ActionEvent e,String ma) {
+		String MaKT=ma.trim();
+		if(MaKT.isEmpty()==false) {
+			if(MaKT.matches("^[0-9]+")==true) {
+				return true;
+			}else {
+				thongBaoKieuLoi(e, "Số lượng chỉ nhập số");
+				return false;
+			}
+		}else {
+			thongBaoKieuLoi(e, "Số lượng không được để trống");
+			return false;
+		}
+	}
 	@FXML
 	public void btnThemHopDong(ActionEvent e) {
 		boolean continues=true;
-		int maHopDong=0;
-		try {
-			maHopDong=Integer.parseInt(txtMaHD.getText().toString());
-		} catch (Exception e2) {
-			continues=false;
-			thongBaoKieuLoi(e, "mã hợp đồng không được để trống");
-			txtMaHD.requestFocus();
-			// TODO: handle exception
-		}
+
 		LocalDate ngayLap = LocalDate.now();
 		String tenNguoiBan=txtTenNV.getText().toString();
 		String cMNDNB=txtCMNDNhanVien.getText().toString();
@@ -297,8 +316,23 @@ public class ThemHopDong implements Initializable{
 		String maKH="";
 		String maXe=boxMaXe.getValue();
 		int soLuong=0;
-		
-		
+		int maHopDong=0;
+
+		if(kiemTraMaHopDong(e, txtMaHD.getText().toString())==false) {
+			continues=false;
+			txtMaHD.requestFocus();
+		}
+
+		if(continues=true) {
+			try {
+				maHopDong=Integer.parseInt(txtMaHD.getText().toString());
+			} catch (Exception e2) {
+				continues=false;
+				txtMaHD.requestFocus();
+				// TODO: handle exception
+			}
+		}
+
 		if(continues==true) {
 			if(boxMaNV.getValue()==null) {
 				thongBaoKieuLoi(e, "Mã nhân viên chưa nhập");
@@ -332,27 +366,49 @@ public class ThemHopDong implements Initializable{
 				boxMaKH.requestFocus();
 			}
 		}
-		try {
-			soLuong=Integer.parseInt(txtSL.getText().toString());
-		} catch (Exception e2) {
-			// TODO: handle exception
-			thongBaoKieuLoi(e, "Số lượng chỉ nhập số");
-			continues=false;
-			txtSL.requestFocus();
-		}
-		Xe xe=QuanLyXe.timMa(maXe);
 		if(continues==true) {
-			if(xe==null) {
+			if(txtSL.getText().isEmpty()==false) {
+				try {
+					soLuong=Integer.parseInt(txtSL.getText().toString());
+				} catch (Exception e2) {
+					// TODO: handle exception
+					thongBaoKieuLoi(e, "Số lượng chỉ nhập số");
+					continues=false;
+					txtSL.requestFocus();
+				}
+			}else {
+				thongBaoKieuLoi(e, "Số lượng chưa nhập");
 				continues=false;
+				txtSL.requestFocus();
 			}
+			
+		}
+		if(continues==true) {
+			if(maXe==null) {
+				thongBaoKieuLoi(e, "Mã xe chưa nhập");
+				continues=false;
+				boxMaXe.requestFocus();
+			}
+		}
+		Xe xe=null;
+		if(continues==true) {
+			xe=QuanLyXe.timMa(maXe);
+			if(continues==true) {
+				if(xe==null) {
+					continues=false;
+					thongBaoKieuLoi(e, "Mã xe không tồn tại");
+					boxMaXe.requestFocus();
+				}
 
-		}
-		if(continues==true) {
-			if(xe.getSoLuongLap()<soLuong) {
-				continues=false;
-				thongBaoKieuLoi(e, "Số lượng xe không đủ");
+			}
+			if(continues==true) {
+				if(xe.getSoLuongLap()<soLuong) {
+					continues=false;
+					thongBaoKieuLoi(e, "Số lượng xe không đủ (Chỉ còn "+xe.getSoLuongLap()+" chiếc)");
+				}
 			}
 		}
+		
 		if(continues==true) {
 			PhieuXuat px=null;
 			HopDong hd=new HopDong(maHopDong, xe, ngayLap, maNV, tenNguoiBan, cMNDNB, noiONB, soDTNB,"Chưa xác nhận", maKH, tenNguoiMua, cMNDNM, noiONM, soDTNM, Double.parseDouble(String.valueOf(xe.getDonGia()*soLuong)),soLuong);

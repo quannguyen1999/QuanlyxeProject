@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
@@ -21,16 +24,19 @@
             <AnchorPane prefHeight="104.0" prefWidth="1005.0" style="-fx-background-color: #979292;" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="txtMa" layoutX="75.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
-                  <Label layoutX="75.0" layoutY="14.0" text="TÌm theo mã khách hàng">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
                   <JFXButton layoutX="927.0" layoutY="-4.0" onAction="#btnTim" prefHeight="115.0" prefWidth="100.0" style="-fx-background-color: rgb(23,35,51);" text="Tìm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Italic" size="18.0" />
                      </font>
                   </JFXButton>
+                  <Slider layoutX="317.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="116.0" prefWidth="14.0" />
+                  <JFXRadioButton fx:id="rdMa" layoutX="75.0" layoutY="14.0" onAction="#clickTimTheoMa" selected="true" text="Tìm theo mã khách hàng:">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="TT" />
+                     </toggleGroup>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="rdTen" layoutX="350.0" layoutY="14.0" onAction="#clickTimTheoTen" text="Tìm theo tên khách hàng" toggleGroup="$TT" />
+                  <TextField fx:id="txtTen" layoutX="350.0" layoutY="45.0" prefHeight="25.0" prefWidth="210.0" />
                </children>
             </AnchorPane>
          </bottom>

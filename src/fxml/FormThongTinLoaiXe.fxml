@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="597.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemLoaiXe">
+<BorderPane fx:id="mainBd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#draged" onMousePressed="#pressed" prefHeight="522.0" prefWidth="597.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ThemLoaiXe">
    <left>
       <VBox prefHeight="668.0" prefWidth="232.0" BorderPane.alignment="CENTER">
          <children>
@@ -49,11 +49,11 @@
                   </Label>
                </children>
             </HBox>
-            <JFXTextField fx:id="txtLoaiXe" focusColor="#6c779a" prefHeight="34.0" prefWidth="212.0" promptText="Nhập đơn vị tính" style="-fx-text-inner-color: black; -fx-prompt-text-fill: black;" unFocusColor="BLACK">
+            <ComboBox fx:id="chkLoaiXe" prefHeight="25.0" prefWidth="216.0">
                <VBox.margin>
                   <Insets left="20.0" />
                </VBox.margin>
-            </JFXTextField>
+            </ComboBox>
             <HBox prefHeight="0.0" prefWidth="232.0">
                <children>
                   <Label alignment="CENTER" text="Màu xe" textFill="#190404">
@@ -76,7 +76,7 @@
             </ComboBox>
             <HBox prefHeight="42.0" prefWidth="242.0">
                <children>
-                  <Label alignment="CENTER" text="Nhẵn hiệu" textFill="#190404">
+                  <Label alignment="CENTER" text="Nhãn hiệu" textFill="#190404">
                      <font>
                         <Font size="18.0" />
                      </font>

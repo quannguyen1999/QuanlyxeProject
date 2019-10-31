@@ -39,6 +39,28 @@ public class QuanLyLoaiXe {
 		}
 		return list;
 	}
+	public static List<Loaixe> timTheoTen(String tenxe){
+		List<Loaixe> list = null;
+		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();
+		EntityTransaction transaction = null;
+		try {
+			transaction = manager.getTransaction();
+			transaction.begin();
+			javax.persistence.Query query = manager.createQuery("from Loaixe where tenxe=:tenxe");
+			query.setParameter("tenxe", tenxe);
+			list=query.getResultList();
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		return list;
+	}
+
 	public static List<String> timMa(String loaixe,String tenxe,String mauson){
 		List<String> list = null;
 		EntityManager manager = Persistence.createEntityManagerFactory("DeAnQuanLyXeFix").createEntityManager();

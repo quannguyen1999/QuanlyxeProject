@@ -104,7 +104,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Trợ giúp">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#btnLienHe" text="Liên hệ" />
                   </items>
                 </Menu>
               </menus>

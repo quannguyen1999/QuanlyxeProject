@@ -195,6 +195,8 @@ public class QuanLyXeController implements Initializable{
 					String TenXe=tbl_view.getItems().get(result).getLx().getTenxe();
 					String thongTinBaoHanh=tbl_view.getItems().get(result).getThongTinBaoHanh();
 					String mauXe=tbl_view.getItems().get(result).getLx().getMauson();
+					String soLuong=String.valueOf(tbl_view.getItems().get(result).getSoLuongLap());
+					String donGia=String.valueOf(tbl_view.getItems().get(result).getDonGia());
 
 					ctlMain.txtMaXe.setText(maXe);
 					ctlMain.txtMaXe.setEditable(false);
@@ -205,6 +207,8 @@ public class QuanLyXeController implements Initializable{
 					ctlMain.choiceBoxLoaiXe.setValue(LoaiXe);
 					ctlMain.choiceBoxMauXe.setValue(mauXe);
 					ctlMain.choiceBoxTenXe.setValue(TenXe);
+					ctlMain.txtSL.setText(soLuong);
+					ctlMain.txtDG.setText(donGia);
 
 					if(btnThem.isDisabled()==true) {
 						System.out.println("nhân viên");
@@ -350,8 +354,13 @@ public class QuanLyXeController implements Initializable{
 	}
 	@FXML
 	public void btnXoaRong(ActionEvent e) {
+		rdOne.setSelected(true);
+		choiceBoxLoaiXe.setValue("");
+		choiceBoxMauXe.setValue("");
+		choiceBoxTenXe.setValue("");
 		tbl_view.getSelectionModel().clearSelection();
 		txtMa.setText("");
+		txtMa.setEditable(true);
 		handleRefersh(e);
 	}
 	public void btnNhapThongTinXe(ActionEvent e) throws IOException {
